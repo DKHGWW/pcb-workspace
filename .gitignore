@@ -26,3 +26,6 @@ messages.json
 *.sqlite
 *.db
 *.sqlite3
+
+# WorkBuddy 内部数据（项目记忆/配置，勿入仓库）
+.workbuddy/
