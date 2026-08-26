@@ -84,4 +84,13 @@ cd website && npm install && npm start   # 默认端口 4000
 
 详见 `website/README.md`。
 
+### 用 Render 一键部署（海外 PaaS）
+仓库根目录已带 `render.yaml`，Render 部署时：
+1. 在 Render Dashboard 选择 **Use a Blueprint** 或直接把 GitHub 仓库连到 Render。
+2. 确认服务类型为 **Web Service**、Runtime 为 **Node**、启动目录为 `website/`。
+3. 在环境变量里设置 `ADMIN_PASSWORD`（后台登录密码，切勿使用默认 `admin123`）。
+4. 点击部署；Render 会自动注入 `PORT` 环境变量，应用会以该端口启动。
+
+> ⚠️ Render 免费实例磁盘是**临时**的：后台修改的 `config.json` 和访客留言 `messages.json` 会在每次重新部署或实例休眠后丢失。如需持久保存，请升级到付费 Disk 或改用国内云服务器方案（见 `deploy.sh` / `nginx-pcb.conf`）。
+
 > 注意：官网默认端口设为 **4000** 是为了与任务管理系统的 **3000** 错开，本地可同时运行。上传到云服务器单独部署时，nginx 会将 80/443 反代到 4000，对外无感。

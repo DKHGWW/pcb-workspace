@@ -1,0 +1,13 @@
+services:
+  - type: web
+    name: pcb-website
+    runtime: node
+    plan: free
+    branch: main
+    rootDir: website
+    buildCommand: npm install
+    startCommand: npm start
+    envVars:
+      - key: ADMIN_PASSWORD
+        sync: false
+    autoDeploy: true
