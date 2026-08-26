@@ -1,0 +1,13 @@
+{
+  "langText": {
+    "zh": { ... },
+    "en": { ... }
+  },
+  "carouselData": {
+    "about": { "zh": [...], "en": [...] },
+    ...
+  },
+  "company": {
+    "address": { "zh": "...", "en": "..." }
+  }
+}

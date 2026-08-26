@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>后台管理系统</title>
+  <link rel="stylesheet" href="admin.css">
+</head>
+<body class="admin-body">
+
+  <div class="admin-layout">
+
+    <!-- ====== 侧边栏 ====== -->
+    <aside class="sidebar">
+      <div class="sidebar-logo">
+        <span class="logo-icon">🛠️</span>
+        <span class="logo-text">管理后台</span>
+      </div>
+
+      <nav class="sidebar-nav">
+        <a class="nav-item active" data-page="dashboard" onclick="switchPage('dashboard')">
+          <span class="nav-icon">📊</span> 数据看板
+        </a>
+        <a class="nav-item" data-page="tasks" onclick="switchPage('tasks')">
+          <span class="nav-icon">📋</span> 任务管理
+        </a>
+        <a class="nav-item" data-page="system" onclick="switchPage('system')">
+          <span class="nav-icon">⚙️</span> 系统状态
+        </a>
+      </nav>
+
+      <div class="sidebar-footer">
+        <a class="nav-item" href="/" title="返回前台">
+          <span class="nav-icon">🏠</span> 返回前台
+        </a>
+      </div>
+    </aside>
+
+    <!-- ====== 主内容区 ====== -->
+    <main class="main-content">
+
+      <!-- 顶部栏 -->
+      <header class="topbar">
+        <h1 id="page-title">数据看板</h1>
+        <div class="topbar-right">
+          <span class="server-status" id="server-status">
+            <span class="status-dot"></span> 服务运行中
+          </span>
+          <button class="btn-refresh" onclick="refreshAll()">🔄 刷新数据</button>
+        </div>
+      </header>
+
+      <!-- ========== 页面一：数据看板 ========== -->
+      <section class="page" id="page-dashboard">
+
+        <!-- 统计卡片 -->
+        <div class="stats-row">
+          <div class="admin-stat-card">
+            <div class="stat-icon-box total">📊</div>
+            <div class="stat-text">
+              <span class="stat-number" id="admin-total">0</span>
+              <span class="stat-label">总任务数</span>
+            </div>
+          </div>
+          <div class="admin-stat-card">
+            <div class="stat-icon-box pending">⏳</div>
+            <div class="stat-text">
+              <span class="stat-number" id="admin-pending">0</span>
+              <span class="stat-label">待处理</span>
+            </div>
+          </div>
+          <div class="admin-stat-card">
+            <div class="stat-icon-box progress">🚀</div>
+            <div class="stat-text">
+              <span class="stat-number" id="admin-progress">0</span>
+              <span class="stat-label">进行中</span>
+            </div>
+          </div>
+          <div class="admin-stat-card">
+            <div class="stat-icon-box completed">✅</div>
+            <div class="stat-text">
+              <span class="stat-number" id="admin-completed">0</span>
+              <span class="stat-label">已完成</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- 完成率 + 状态分布 -->
+        <div class="dashboard-grid">
+          <div class="admin-card">
+            <h3 class="card-header">任务完成率</h3>
+            <div class="progress-ring-wrap">
+              <svg class="progress-ring" width="160" height="160">
+                <circle class="ring-bg" cx="80" cy="80" r="65"></circle>
+                <circle class="ring-value" cx="80" cy="80" r="65" id="progress-ring"></circle>
+              </svg>
+              <div class="ring-text">
+                <span class="ring-percent" id="progress-percent">0%</span>
+                <span class="ring-caption">完成率</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="admin-card">
+            <h3 class="card-header">状态分布</h3>
+            <div class="bar-chart" id="bar-chart">
+              <div class="bar-row">
+                <span class="bar-label">待处理</span>
+                <div class="bar-track"><div class="bar-fill pending" id="bar-pending"></div></div>
+                <span class="bar-value" id="bar-value-pending">0</span>
+              </div>
+              <div class="bar-row">
+                <span class="bar-label">进行中</span>
+                <div class="bar-track"><div class="bar-fill progress" id="bar-progress"></div></div>
+                <span class="bar-value" id="bar-value-progress">0</span>
+              </div>
+              <div class="bar-row">
+                <span class="bar-label">已完成</span>
+                <div class="bar-track"><div class="bar-fill completed" id="bar-completed"></div></div>
+                <span class="bar-value" id="bar-value-completed">0</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- 最近任务 -->
+        <div class="admin-card">
+          <h3 class="card-header">最近任务</h3>
+          <div id="recent-tasks" class="recent-list">加载中...</div>
+        </div>
+      </section>
+
+      <!-- ========== 页面二：任务管理 ========== -->
+      <section class="page hidden" id="page-tasks">
+        <div class="admin-card">
+
+          <!-- 工具栏 -->
+          <div class="table-toolbar">
+            <div class="search-box">
+              <input type="text" id="search-input" placeholder="🔍 搜索任务..." oninput="renderTaskTable()">
+            </div>
+            <select id="status-filter" class="select-filter" onchange="renderTaskTable()">
+              <option value="all">全部状态</option>
+              <option value="pending">待处理</option>
+              <option value="in_progress">进行中</option>
+              <option value="completed">已完成</option>
+            </select>
+            <button class="btn-admin primary" onclick="adminOpenCreate()">＋ 新建任务</button>
+          </div>
+
+          <!-- 任务表格 -->
+          <div class="table-wrap">
+            <table class="admin-table">
+              <thead>
+                <tr>
+                  <th>ID</th>
+                  <th>任务标题</th>
+                  <th>描述</th>
+                  <th>状态</th>
+                  <th>创建时间</th>
+                  <th>操作</th>
+                </tr>
+              </thead>
+              <tbody id="task-table-body">
+                <tr><td colspan="6" class="table-empty">加载中...</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </section>
+
+      <!-- ========== 页面三：系统状态 ========== -->
+      <section class="page hidden" id="page-system">
+        <div class="admin-card">
+          <h3 class="card-header">服务器信息</h3>
+          <div class="info-grid" id="system-info">加载中...</div>
+        </div>
+
+        <div class="admin-card">
+          <h3 class="card-header">API 接口列表</h3>
+          <div class="table-wrap">
+            <table class="admin-table">
+              <thead>
+                <tr><th>接口</th><th>方法</th><th>说明</th><th>状态</th></tr>
+              </thead>
+              <tbody id="api-table-body">
+                <tr>
+                  <td><code>/api/health</code></td><td><span class="method get">GET</span></td>
+                  <td>健康检查</td><td><span class="api-status ok">✓ 正常</span></td>
+                </tr>
+                <tr>
+                  <td><code>/api/tasks</code></td><td><span class="method get">GET</span></td>
+                  <td>获取任务列表</td><td><span class="api-status ok">✓ 正常</span></td>
+                </tr>
+                <tr>
+                  <td><code>/api/tasks</code></td><td><span class="method post">POST</span></td>
+                  <td>创建任务</td><td><span class="api-status ok">✓ 正常</span></td>
+                </tr>
+                <tr>
+                  <td><code>/api/tasks/:id</code></td><td><span class="method put">PUT</span></td>
+                  <td>更新任务</td><td><span class="api-status ok">✓ 正常</span></td>
+                </tr>
+                <tr>
+                  <td><code>/api/tasks/:id</code></td><td><span class="method delete">DELETE</span></td>
+                  <td>删除任务</td><td><span class="api-status ok">✓ 正常</span></td>
+                </tr>
+                <tr>
+                  <td><code>/api/stats</code></td><td><span class="method get">GET</span></td>
+                  <td>统计信息</td><td><span class="api-status ok">✓ 正常</span></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </section>
+
+    </main>
+  </div>
+
+  <!-- ====== 新建/编辑模态框 ====== -->
+  <div class="modal-overlay" id="admin-modal" onclick="adminCloseModal(event)">
+    <div class="modal" onclick="event.stopPropagation()">
+      <div class="modal-header">
+        <h3 id="modal-title">新建任务</h3>
+        <button class="btn-close" onclick="adminCloseModal()">✕</button>
+      </div>
+      <div class="modal-body">
+        <div class="form-group">
+          <label>任务标题 *</label>
+          <input type="text" id="admin-task-title" class="input" placeholder="输入标题">
+        </div>
+        <div class="form-group">
+          <label>任务描述</label>
+          <textarea id="admin-task-desc" class="input" rows="3" placeholder="输入描述（可选）"></textarea>
+        </div>
+        <div class="form-group">
+          <label>状态</label>
+          <select id="admin-task-status" class="input">
+            <option value="pending">待处理</option>
+            <option value="in_progress">进行中</option>
+            <option value="completed">已完成</option>
+          </select>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button class="btn-admin cancel" onclick="adminCloseModal()">取消</button>
+        <button class="btn-admin primary" onclick="adminSaveTask()">保存</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Toast -->
+  <div class="toast" id="admin-toast"></div>
+
+  <script src="admin.js"></script>
+</body>
+</html>

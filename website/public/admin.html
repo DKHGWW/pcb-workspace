@@ -1,0 +1,1570 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>井明电子 · 后台管理</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: 'Inter', sans-serif;
+            background: #f1f5f9;
+            color: #0f172a;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+        .admin-container {
+            max-width: 1400px;
+            width: 100%;
+            background: #ffffff;
+            border-radius: 32px;
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            min-height: 90vh;
+        }
+        /* 登录遮罩 */
+        .login-overlay {
+            display: none;
+            position: fixed;
+            inset: 0;
+            background: rgba(15, 23, 42, 0.6);
+            backdrop-filter: blur(8px);
+            z-index: 999;
+            align-items: center;
+            justify-content: center;
+        }
+        .login-overlay.show {
+            display: flex;
+        }
+        .login-card {
+            background: #fff;
+            padding: 40px 48px;
+            border-radius: 32px;
+            max-width: 400px;
+            width: 100%;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
+        }
+        .login-card h2 {
+            font-size: 1.6rem;
+            font-weight: 700;
+            margin-bottom: 8px;
+            color: #0f2b5e;
+        }
+        .login-card p {
+            color: #64748b;
+            margin-bottom: 24px;
+            font-size: 0.9rem;
+        }
+        .login-card input {
+            width: 100%;
+            padding: 14px 18px;
+            border: 1px solid #d1d9e6;
+            border-radius: 40px;
+            font-size: 0.95rem;
+            margin-bottom: 16px;
+            transition: 0.2s;
+        }
+        .login-card input:focus {
+            outline: none;
+            border-color: #2563eb;
+            box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.15);
+        }
+        .login-card button {
+            width: 100%;
+            padding: 14px;
+            background: #2563eb;
+            color: #fff;
+            border: none;
+            border-radius: 40px;
+            font-weight: 600;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: 0.2s;
+        }
+        .login-card button:hover {
+            background: #1e4a7a;
+        }
+        .login-error {
+            color: #dc2626;
+            font-size: 0.85rem;
+            margin-top: -8px;
+            margin-bottom: 12px;
+            display: none;
+        }
+        /* 头部 */
+        .admin-header {
+            background: #0f172a;
+            padding: 16px 32px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            color: #fff;
+            flex-wrap: wrap;
+            gap: 12px;
+        }
+        .admin-header h1 {
+            font-size: 1.2rem;
+            font-weight: 600;
+            letter-spacing: 0.5px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .admin-header h1 i {
+            color: #60a5fa;
+        }
+        .admin-header .header-actions {
+            display: flex;
+            gap: 12px;
+            align-items: center;
+        }
+        .admin-header .header-actions span {
+            color: #94a3b8;
+            font-size: 0.85rem;
+        }
+        .btn-sm {
+            padding: 6px 18px;
+            border-radius: 40px;
+            border: none;
+            font-weight: 500;
+            font-size: 0.8rem;
+            cursor: pointer;
+            transition: 0.2s;
+        }
+        .btn-sm-outline {
+            background: transparent;
+            border: 1px solid #475569;
+            color: #e2e8f0;
+        }
+        .btn-sm-outline:hover {
+            border-color: #94a3b8;
+            color: #fff;
+        }
+        .btn-sm-danger {
+            background: #dc2626;
+            color: #fff;
+        }
+        .btn-sm-danger:hover {
+            background: #b91c1c;
+        }
+        .btn-sm-success {
+            background: #16a34a;
+            color: #fff;
+        }
+        .btn-sm-success:hover {
+            background: #15803d;
+        }
+        /* 主体布局 */
+        .admin-body {
+            display: flex;
+            flex: 1;
+            overflow: hidden;
+        }
+        .admin-sidebar {
+            width: 220px;
+            background: #f8fafc;
+            border-right: 1px solid #e9edf3;
+            padding: 20px 0;
+            flex-shrink: 0;
+            overflow-y: auto;
+        }
+        .admin-sidebar .menu-label {
+            font-size: 0.65rem;
+            text-transform: uppercase;
+            letter-spacing: 0.8px;
+            color: #94a3b8;
+            padding: 8px 24px 4px;
+            font-weight: 600;
+        }
+        .admin-sidebar a {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 10px 24px;
+            color: #334155;
+            text-decoration: none;
+            font-size: 0.85rem;
+            font-weight: 500;
+            transition: 0.15s;
+            border-left: 3px solid transparent;
+            cursor: pointer;
+        }
+        .admin-sidebar a:hover {
+            background: #eef2f8;
+            color: #0f172a;
+        }
+        .admin-sidebar a.active {
+            background: #eef2ff;
+            color: #2563eb;
+            border-left-color: #2563eb;
+        }
+        .admin-sidebar a i {
+            width: 20px;
+            text-align: center;
+            color: #64748b;
+        }
+        .admin-sidebar a.active i {
+            color: #2563eb;
+        }
+        /* 内容区 */
+        .admin-content {
+            flex: 1;
+            padding: 32px 36px;
+            overflow-y: auto;
+            max-height: 75vh;
+        }
+        .admin-content .page-title {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: #0f2b5e;
+            margin-bottom: 6px;
+        }
+        .admin-content .page-desc {
+            color: #64748b;
+            font-size: 0.9rem;
+            margin-bottom: 28px;
+        }
+        .admin-content .section-card {
+            background: #fff;
+            border: 1px solid #e9edf3;
+            border-radius: 20px;
+            padding: 24px 28px;
+            margin-bottom: 24px;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04);
+        }
+        .section-card .section-title {
+            font-weight: 600;
+            font-size: 1.05rem;
+            color: #0f172a;
+            margin-bottom: 16px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .section-card .section-title i {
+            color: #2563eb;
+        }
+        .form-group {
+            margin-bottom: 16px;
+        }
+        .form-group label {
+            display: block;
+            font-weight: 500;
+            font-size: 0.8rem;
+            color: #475569;
+            margin-bottom: 4px;
+        }
+        .form-group input,
+        .form-group textarea,
+        .form-group select {
+            width: 100%;
+            padding: 10px 14px;
+            border: 1px solid #d1d9e6;
+            border-radius: 12px;
+            font-size: 0.9rem;
+            font-family: inherit;
+            transition: 0.2s;
+            background: #fafcff;
+        }
+        .form-group input:focus,
+        .form-group textarea:focus,
+        .form-group select:focus {
+            outline: none;
+            border-color: #2563eb;
+            box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.08);
+        }
+        .form-group textarea {
+            min-height: 70px;
+            resize: vertical;
+        }
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 16px;
+        }
+        .form-row-3 {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            gap: 16px;
+        }
+        .lang-tabs {
+            display: flex;
+            gap: 4px;
+            margin-bottom: 12px;
+            background: #f1f5f9;
+            border-radius: 40px;
+            padding: 4px;
+            width: fit-content;
+        }
+        .lang-tabs button {
+            padding: 6px 20px;
+            border: none;
+            border-radius: 40px;
+            font-weight: 500;
+            font-size: 0.8rem;
+            background: transparent;
+            color: #64748b;
+            cursor: pointer;
+            transition: 0.15s;
+        }
+        .lang-tabs button.active {
+            background: #fff;
+            color: #0f172a;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+        }
+        .lang-tabs button:hover:not(.active) {
+            color: #0f172a;
+        }
+        .lang-content {
+            display: none;
+        }
+        .lang-content.active {
+            display: block;
+        }
+        .carousel-item-editor {
+            background: #f8fafc;
+            border-radius: 16px;
+            padding: 16px 18px;
+            margin-bottom: 12px;
+            border: 1px solid #e9edf3;
+            position: relative;
+        }
+        .carousel-item-editor .remove-item {
+            position: absolute;
+            top: 8px;
+            right: 12px;
+            background: none;
+            border: none;
+            color: #94a3b8;
+            cursor: pointer;
+            font-size: 1rem;
+            transition: 0.2s;
+        }
+        .carousel-item-editor .remove-item:hover {
+            color: #dc2626;
+        }
+        .btn-add {
+            padding: 8px 20px;
+            border: 1px dashed #2563eb;
+            border-radius: 40px;
+            background: transparent;
+            color: #2563eb;
+            font-weight: 500;
+            font-size: 0.85rem;
+            cursor: pointer;
+            transition: 0.2s;
+        }
+        .btn-add:hover {
+            background: #eef2ff;
+        }
+        .btn-save {
+            padding: 12px 36px;
+            background: #2563eb;
+            color: #fff;
+            border: none;
+            border-radius: 40px;
+            font-weight: 600;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: 0.2s;
+            margin-top: 8px;
+        }
+        .btn-save:hover {
+            background: #1e4a7a;
+            transform: translateY(-1px);
+            box-shadow: 0 8px 20px -8px rgba(37, 99, 235, 0.4);
+        }
+        .toast {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            background: #0f172a;
+            color: #fff;
+            padding: 14px 28px;
+            border-radius: 40px;
+            font-weight: 500;
+            font-size: 0.9rem;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+            transform: translateY(80px);
+            opacity: 0;
+            transition: all 0.3s ease;
+            z-index: 1000;
+        }
+        .toast.show {
+            transform: translateY(0);
+            opacity: 1;
+        }
+        .toast.success {
+            background: #16a34a;
+        }
+        .toast.error {
+            background: #dc2626;
+        }
+        .empty-state {
+            color: #94a3b8;
+            font-size: 0.85rem;
+            padding: 12px 0;
+        }
+        @media (max-width: 900px) {
+            .admin-body {
+                flex-direction: column;
+            }
+            .admin-sidebar {
+                width: 100%;
+                border-right: none;
+                border-bottom: 1px solid #e9edf3;
+                display: flex;
+                flex-wrap: wrap;
+                padding: 8px 16px;
+                gap: 4px;
+            }
+            .admin-sidebar .menu-label {
+                display: none;
+            }
+            .admin-sidebar a {
+                padding: 6px 14px;
+                border-left: none;
+                border-bottom: 2px solid transparent;
+                font-size: 0.8rem;
+                gap: 6px;
+            }
+            .admin-sidebar a.active {
+                border-left: none;
+                border-bottom-color: #2563eb;
+            }
+            .admin-content {
+                padding: 20px;
+                max-height: none;
+            }
+            .form-row,
+            .form-row-3 {
+                grid-template-columns: 1fr;
+            }
+            .login-card {
+                padding: 28px 24px;
+                margin: 16px;
+            }
+        }
+        @media (max-width: 600px) {
+            .admin-header {
+                padding: 12px 16px;
+                flex-direction: column;
+                align-items: stretch;
+                gap: 8px;
+            }
+            .admin-header h1 {
+                font-size: 1rem;
+            }
+            .admin-content {
+                padding: 16px;
+            }
+            .section-card {
+                padding: 16px;
+            }
+            .carousel-item-editor {
+                padding: 12px 14px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- ================= 登录遮罩 ================= -->
+    <div class="login-overlay show" id="loginOverlay">
+        <div class="login-card">
+            <h2><i class="fas fa-shield-alt" style="color:#2563eb;"></i> 管理后台</h2>
+            <p>请输入密码以管理网站内容</p>
+            <div class="login-error" id="loginError">密码错误，请重试</div>
+            <input type="password" id="passwordInput" placeholder="请输入管理密码" />
+            <button id="loginBtn">登 录</button>
+            <div style="margin-top:16px;text-align:center;font-size:0.75rem;color:#94a3b8;">默认密码: admin123</div>
+        </div>
+    </div>
+
+    <!-- ================= 主容器 ================= -->
+    <div class="admin-container" id="adminApp" style="display:none;">
+
+        <!-- 头部 -->
+        <header class="admin-header">
+            <h1><i class="fas fa-pen-fancy"></i> 井明电子 · 内容管理</h1>
+            <div class="header-actions">
+                <span id="statusIndicator"><i class="fas fa-circle" style="color:#22c55e;font-size:0.6rem;"></i> 已加载</span>
+                <button class="btn-sm btn-sm-outline" id="previewBtn"><i class="fas fa-eye"></i> 预览网站</button>
+                <button class="btn-sm btn-sm-danger" id="logoutBtn"><i class="fas fa-sign-out-alt"></i> 退出</button>
+            </div>
+        </header>
+
+        <!-- 主体 -->
+        <div class="admin-body">
+            <!-- 侧栏 -->
+            <nav class="admin-sidebar" id="sidebarNav">
+                <div class="menu-label">内容管理</div>
+                <a data-tab="texts" class="active"><i class="fas fa-font"></i> 文本内容</a>
+                <a data-tab="carousel"><i class="fas fa-images"></i> 轮播图</a>
+                <a data-tab="company"><i class="fas fa-building"></i> 公司信息</a>
+                <div class="menu-label" style="margin-top:16px;">工具</div>
+                <a data-tab="export"><i class="fas fa-download"></i> 导出备份</a>
+                <a data-tab="import"><i class="fas fa-upload"></i> 导入备份</a>
+                <a data-tab="messages"><i class="fas fa-envelope"></i> 留言管理</a>
+            </nav>
+
+            <!-- 内容 -->
+            <main class="admin-content" id="adminContent">
+                <!-- 由JS动态渲染 -->
+            </main>
+        </div>
+    </div>
+
+    <!-- Toast 通知 -->
+    <div class="toast" id="toast"></div>
+
+    <script>
+        // ============================================================
+        //  1. 默认数据（与前台保持一致，作为初始模板）
+        // ============================================================
+        const DEFAULT_CONFIG = {
+            langText: {
+                zh: {
+                    nav_about: "关于井明",
+                    nav_industry: "市场",
+                    nav_products: "产品与服务",
+                    nav_news: "新闻",
+                    nav_social: "供应链",
+                    nav_contact: "联系我们",
+                    footer_address: "地址：四川省遂宁市经济技术开发区渠河南路188号电子电路标准厂房一期3号楼 | 通过ISO9001 & IATF16949",
+                    statement_title: "🌿 践行绿色制造，共创可持续未来",
+                    statement_content: "井明电子始终将环境保护与社会责任融入企业发展战略。我们严格遵守 RoHS、REACH 等国际环保指令，投资建设先进的废水处理与中水回用系统，厂区光伏发电覆盖率已达30%。同时，我们积极参与社区公益，关爱员工成长，致力于成为负责任、有温度的行业标杆。未来，我们将持续加大环保投入，推动低碳生产，与合作伙伴共同守护绿水青山。",
+                    form_title: "获取宣传册/报价",
+                    form_desc: "“以客户为中心”是井明的核心价值观之一，我们致力于为客户提供高质高效的服务。请填写您的姓名和电子邮件地址以获取宣传册/报价。",
+                    name_placeholder: "姓名*",
+                    email_placeholder: "邮箱*",
+                    company_placeholder: "公司名/网址/留言",
+                    phone_placeholder: "电话",
+                    submit: "提交",
+                    thank_you: "感谢您的留言，我们会尽快联系您。",
+                    overview: {
+                        industry: "市场",
+                        industry_desc: "井明电子深度服务多个战略行业，提供高可靠性PCB解决方案。请从上方下拉菜单中选择具体细分市场，查看详细产品信息。",
+                        products: "产品与服务",
+                        products_desc: "我们提供从常规电路板到高精密HDI、高多层板、金属基板等全系列PCB产品。请从下拉菜单中选择具体产品类别，了解制程能力与设备信息。",
+                        news: "新闻中心",
+                        news_desc: "了解井明电子最新动态、行业资讯及技术突破。请从下拉菜单中选择“公司新闻”或“行业动态”。",
+                        social: "供应链",
+                        social_desc: "井明电子积极履行社会责任，坚持绿色制造与可持续发展。请从下拉菜单查看“环境保护”详细举措。",
+                        contact: "联系我们",
+                        contact_desc: "如您有任何需求或疑问，欢迎通过“服务据点”查找离您最近的办事处，或使用“在线留言”功能与我们取得联系。"
+                    },
+                    dropdown: {
+                        about: ["公司简介", "制程能力", "管理体系", "井明荣誉", "组织架构", "品质保证"],
+                        industry: ["网络通信", "汽车电子", "智能终端", "工控医疗", "电源", "消费电子"],
+                        products: ["常规电路板", "高密度互联板", "高多层电路板", "金属基板", "制程能力", "生产设备", "检测设备"],
+                        news: ["公司新闻", "行业动态"],
+                        social: ["环境保护"],
+                        contact: ["服务据点", "在线留言"]
+                    },
+                    footerLinks: {
+                        about: { title: "关于井明", items: ["公司简介", "制程能力", "管理体系", "井明荣誉", "组织架构",
+                                "品质保证"
+                            ] },
+                        industry: { title: "市场", items: ["网络通信", "汽车电子", "智能终端", "工控医疗", "电源", "消费电子"] },
+                        products: { title: "产品与服务", items: ["常规电路板", "高密度互联板", "高多层电路板", "金属基板", "制程能力",
+                                "生产设备", "检测设备"
+                            ] },
+                        news: { title: "新闻", items: ["公司新闻", "行业动态"] },
+                        social: { title: "供应链", items: ["环境保护"] },
+                        contact: { title: "联系我们", items: ["服务据点", "在线留言"] }
+                    },
+                    about_detail: {
+                        intro: "公司简介",
+                        intro_text: "四川井明电子有限公司始创于2012年，前身为遂宁豪尔思电子科技有限公司，坐落于遂宁经开区电子电路产业园，现有员工500余人，是一家专业从事PCB电路板研发、设计、精密生产与配套服务的综合性制造企业。公司深耕线路板行业十余年，主营多层板、高精密HDI板、高多层板、金属基板、IC载板，产品广泛应用于汽车电子、网络通信、工控医疗、军工配套、智能终端等领域，可提供一站式定制量产解决方案。企业资质齐全，拥有IATF16949、ISO9001、ISO14001、UL、CQC权威认证，产品符合RoHS环保标准，全程严格品控，满足工业、汽车及高端精密设备使用要求。公司持续深耕高端PCB领域，以精工品质与稳定交付，致力打造为全国优质线路板制造品牌。",
+                        capability: "制程能力",
+                        capability_table: { headers: ["核心技术项", "井明标准能力", "特级能力"], rows: [
+                                ["最大生产层数", "24层", "30层"],
+                                ["最小线宽/线距", "75/75μm", "60/60μm"],
+                                ["最小机械孔径", "0.2mm", "0.15mm"],
+                                ["最大纵横比", "20:1", "25:1"],
+                                ["阻抗控制公差", "±10%", "±7%"],
+                                ["板翘控制", "<0.75%", "<0.5%"]
+                            ] },
+                        management: "管理体系",
+                        management_text: "通过IATF16949、ISO9001、ISO14001、UL、CQC等权威认证，实施全流程数字化质量管控。",
+                        honor: "井明荣誉",
+                        honor_list: ["国家高新技术企业", "四川省专精特新企业", "遂宁市PCB工程技术研究中心", "中国电子电路行业协会理事单位"],
+                        structure: "组织架构",
+                        structure_text: "设有市场中心、研发中心、制造中心、品控中心、供应链管理部及海外事业部。",
+                        quality: "品质保证",
+                        quality_text: "从IQC进料检验到成品可靠性测试，全程SPC监控，配备AOI、飞针测试、X-ray、显微镜等先进设备。"
+                    },
+                    industry_detail: {
+                        network: "网络通信",
+                        network_desc: "高速光模块、路由器、基站天线PCB，低损耗材料，精准阻抗控制。",
+                        auto: "汽车电子",
+                        auto_desc: "车规级PCB，满足IATF16949，应用于BMS、ECU、车载娱乐系统。",
+                        smart: "智能终端",
+                        smart_desc: "智能手机、平板、可穿戴设备高密度互连板，薄型化设计。",
+                        medical: "工控医疗",
+                        medical_desc: "工业控制主板、医疗影像设备PCB，高可靠性长寿命。",
+                        power: "电源",
+                        power_desc: "厚铜电源板、金属基板，优异散热性能。",
+                        consumer: "消费电子",
+                        consumer_desc: "提供高集成度HDI板，满足轻薄化需求。"
+                    },
+                    products_detail: {
+                        std_pcb: "常规电路板",
+                        std_pcb_desc: "单双面、多层板，FR-4材料，快速打样。",
+                        hdi: "高密度互联板",
+                        hdi_desc: "任意层互连，盲埋孔技术，线宽线距2.5/2.5mil。",
+                        high_layer: "高多层电路板",
+                        high_layer_desc: "10-30层，背板、服务器主板，高可靠性。",
+                        metal_base: "金属基板",
+                        metal_base_desc: "铝基、铜基板，大功率LED、电源模块。",
+                        process_cap: "制程能力",
+                        process_table: { headers: ["项目", "能力"], rows: [
+                                ["最小线宽", "2.5mil"],
+                                ["最小孔径", "0.15mm"],
+                                ["最大板厚", "8.0mm"],
+                                ["表面处理", "沉金/沉银/OSP/镀金"]
+                            ] },
+                        prod_device: "生产设备",
+                        prod_list: ["数字钻孔机", "填孔脉冲电镀线", "真空蚀刻机", "高层压合机", "LDI曝光机"],
+                        test_device: "检测设备",
+                        test_list: ["AOI自动光学检测", "飞针测试机", "X-ray镀层测厚仪", "显微镜", "阻抗测试仪"]
+                    },
+                    news_detail: {
+                        company_news: "公司新闻",
+                        company_news_list: ["井明电子荣获国家级专精特新小巨人", "井明电子通过IATF16949换版审核", "井明电子举办年度供应商大会"],
+                        industry_news: "行业动态",
+                        industry_news_list: ["PCB行业迎来5G+AI新机遇", "新能源汽车带动车用PCB需求增长", "高频高速材料技术研讨会召开"]
+                    },
+                    social_detail: {
+                        environment: "环境保护",
+                        environment_desc: "井明电子坚持绿色制造，严格遵守RoHS、REACH指令，投资建设先进的废水处理系统，实现中水回用，厂区光伏发电覆盖率已达30%。我们采用无铅、无卤素材料，并通过ISO14001环境管理体系认证。"
+                    },
+                    contact_detail: {
+                        offices: "服务据点",
+                        office_list: ["总部：四川省遂宁市经济技术开发区渠河南路188号电子电路标准厂房一期3号楼", "华南办事处：深圳南山区",
+                            "华东办事处：苏州工业园区"
+                        ],
+                        message_title: "在线留言",
+                        name_placeholder: "您的姓名",
+                        email_placeholder: "邮箱地址",
+                        msg_placeholder: "留言内容",
+                        submit: "提交留言"
+                    }
+                },
+                en: {
+                    nav_about: "About",
+                    nav_industry: "Markets",
+                    nav_products: "Products",
+                    nav_news: "News",
+                    nav_social: "Supply Chain",
+                    nav_contact: "Contact",
+                    footer_address: "Address: Building 3, Phase I, Electronic Circuit Standard Plant, No.188 Quhe South Road, Economic Development Zone, Suining City, Sichuan Province | ISO9001 & IATF16949",
+                    statement_title: "🌿 Green Manufacturing for a Sustainable Future",
+                    statement_content: "Kinming Electronics integrates environmental protection and social responsibility into our strategy. We strictly comply with RoHS, REACH, have built advanced wastewater treatment and reuse systems, and achieve 30% solar power coverage. We actively participate in community welfare and care for employee growth.",
+                    form_title: "Get Brochure / Quote",
+                    form_desc: "Customer-centric is one of Kinming's core values. We are committed to providing high-quality and efficient service. Please fill in your name and email address to receive our brochure/quote.",
+                    name_placeholder: "Name*",
+                    email_placeholder: "Email*",
+                    company_placeholder: "Company/Website/Message",
+                    phone_placeholder: "Phone",
+                    submit: "Submit",
+                    thank_you: "Thank you! We will contact you soon.",
+                    overview: {
+                        industry: "Markets",
+                        industry_desc: "Kinming serves multiple strategic industries with high-reliability PCB solutions. Please select a specific market segment from the dropdown menu above to view detailed product information.",
+                        products: "Products & Technology",
+                        products_desc: "We offer a full range of PCBs from standard to high-precision HDI, high-multilayer, and metal core boards. Select a product category from the dropdown menu to learn about capabilities and equipment.",
+                        news: "News Center",
+                        news_desc: "Stay updated with Kinming's latest news, industry trends, and technological breakthroughs. Choose 'Company News' or 'Industry Trends' from the dropdown menu.",
+                        social: "Supply Chain",
+                        social_desc: "Kinming actively fulfills its social responsibilities, adhering to green manufacturing and sustainable development. View 'Environmental Protection' details from the dropdown menu.",
+                        contact: "Contact Us",
+                        contact_desc: "For any inquiries, please find your nearest office via 'Service Locations' or use the 'Online Message' form to get in touch with us."
+                    },
+                    dropdown: {
+                        about: ["Company Profile", "Process Capability", "Management System", "Honors", "Organization",
+                            "Quality Assurance"
+                        ],
+                        industry: ["Telecom & Networking", "Automotive Electronics", "Smart Devices",
+                            "Industrial & Medical", "Power Supply", "Consumer Electronics"
+                        ],
+                        products: ["Standard PCB", "HDI PCB", "High Multilayer", "Metal Core PCB", "Process Capability",
+                            "Production Equipment", "Testing Equipment"
+                        ],
+                        news: ["Company News", "Industry Trends"],
+                        social: ["Environmental Protection"],
+                        contact: ["Service Locations", "Online Message"]
+                    },
+                    footerLinks: {
+                        about: { title: "About", items: ["Company Profile", "Process Capability", "Management System",
+                                "Honors", "Organization", "Quality Assurance"
+                            ] },
+                        industry: { title: "Markets", items: ["Telecom & Networking", "Automotive Electronics",
+                                "Smart Devices", "Industrial & Medical", "Power Supply", "Consumer Electronics"
+                            ] },
+                        products: { title: "Products", items: ["Standard PCB", "HDI PCB", "High Multilayer",
+                                "Metal Core PCB", "Process Capability", "Production Equipment", "Testing Equipment"
+                            ] },
+                        news: { title: "News", items: ["Company News", "Industry Trends"] },
+                        social: { title: "Supply Chain", items: ["Environmental Protection"] },
+                        contact: { title: "Contact", items: ["Service Locations", "Online Message"] }
+                    },
+                    about_detail: {
+                        intro: "Company Profile",
+                        intro_text: "Sichuan Kinming Electronics Co., Ltd. was founded in 2012 (formerly Suining Haoersi Electronic Technology). Located in Suining Economic Development Zone Electronic Circuit Industrial Park, we have over 500 employees, specializing in R&D, design, precision production of PCBs. Main products: multilayer, HDI, high multilayer, metal core, IC substrates. Certifications: IATF16949, ISO9001, ISO14001, UL, CQC, RoHS compliant. Committed to becoming a leading PCB brand with high quality and reliable delivery.",
+                        capability: "Process Capability",
+                        capability_table: { headers: ["Technology", "Standard", "Special"], rows: [
+                                ["Max Layers", "24", "30"],
+                                ["Line/Space", "75/75μm", "60/60μm"],
+                                ["Min Hole", "0.2mm", "0.15mm"],
+                                ["Aspect Ratio", "20:1", "25:1"],
+                                ["Impedance", "±10%", "±7%"],
+                                ["Warpage", "<0.75%", "<0.5%"]
+                            ] },
+                        management: "Management System",
+                        management_text: "Certified IATF16949, ISO9001, ISO14001, UL, CQC. Full digital quality control.",
+                        honor: "Honors",
+                        honor_list: ["National High-tech Enterprise", "Sichuan Specialized & Sophisticated",
+                            "Suining PCB Engineering Center", "CPCA Member"
+                        ],
+                        structure: "Organization",
+                        structure_text: "Departments: Marketing, R&D, Manufacturing, QC, Supply Chain, Overseas.",
+                        quality: "Quality Assurance",
+                        quality_text: "From IQC to reliability test, SPC monitoring. Equipped with AOI, flying probe, X-ray, microscope."
+                    },
+                    industry_detail: {
+                        network: "Telecom & Networking",
+                        network_desc: "High-speed optical modules, routers, base station PCBs.",
+                        auto: "Automotive Electronics",
+                        auto_desc: "IATF16949 certified PCBs for BMS, ECU, infotainment.",
+                        smart: "Smart Devices",
+                        smart_desc: "HDI for smartphones, tablets, wearables.",
+                        medical: "Industrial & Medical",
+                        medical_desc: "High-reliability PCBs for industrial control and medical imaging.",
+                        power: "Power Supply",
+                        power_desc: "Heavy copper, metal core for excellent heat dissipation.",
+                        consumer: "Consumer Electronics",
+                        consumer_desc: "High-integration HDI PCBs for slim devices."
+                    },
+                    products_detail: {
+                        std_pcb: "Standard PCB",
+                        std_pcb_desc: "Single/double/multilayer, FR-4, quick-turn.",
+                        hdi: "HDI PCB",
+                        hdi_desc: "Any-layer, microvias, 2.5/2.5mil line/space.",
+                        high_layer: "High Multilayer",
+                        high_layer_desc: "10-30 layers, backplanes, server boards.",
+                        metal_base: "Metal Core PCB",
+                        metal_base_desc: "Aluminum/Copper base for high-power LEDs.",
+                        process_cap: "Capability",
+                        process_table: { headers: ["Item", "Capability"], rows: [
+                                ["Min Line", "2.5mil"],
+                                ["Min Hole", "0.15mm"],
+                                ["Max Thickness", "8.0mm"],
+                                ["Finishes", "ENIG/ImmAg/OSP/Hard Gold"]
+                            ] },
+                        prod_device: "Production Equipment",
+                        prod_list: ["CNC Drilling", "Pulse Plating", "Vacuum Etching", "High Layer Press", "LDI"],
+                        test_device: "Testing Equipment",
+                        test_list: ["AOI", "Flying Probe", "X-ray", "Microscope", "Impedance Tester"]
+                    },
+                    news_detail: {
+                        company_news: "Company News",
+                        company_news_list: ["Kinming awarded National 'Little Giant'", "Kinming passed IATF16949 recertification",
+                            "Kinming held annual supplier conference"
+                        ],
+                        industry_news: "Industry Trends",
+                        industry_news_list: ["PCB industry embraces 5G+AI", "EV drives automotive PCB demand",
+                            "High-frequency materials seminar"
+                        ]
+                    },
+                    social_detail: {
+                        environment: "Environmental Protection",
+                        environment_desc: "Kinming is committed to green manufacturing, strictly following RoHS and REACH. Advanced wastewater treatment and reuse, 30% solar power, ISO14001 certified."
+                    },
+                    contact_detail: {
+                        offices: "Service Locations",
+                        office_list: ["HQ: Building 3, Phase I, Electronic Circuit Standard Plant, No.188 Quhe South Road, Suining",
+                            "Shenzhen Office: Nanshan District", "Suzhou Office: SIP"
+                        ],
+                        message_title: "Online Message",
+                        name_placeholder: "Your Name",
+                        email_placeholder: "Email",
+                        msg_placeholder: "Message",
+                        submit: "Submit"
+                    }
+                }
+            },
+            carouselData: {
+                about: {
+                    zh: [
+                        { image: "https://picsum.photos/id/20/1600/500", title: "精密智造", desc: "高精度PCB生产线，工业4.0智能工厂" },
+                        { image: "https://picsum.photos/id/26/1600/500", title: "创新驱动", desc: "每年投入营收8%用于研发" },
+                        { image: "https://picsum.photos/id/96/1600/500", title: "全球服务", desc: "产品远销欧美、东南亚" }
+                    ],
+                    en: [
+                        { image: "https://picsum.photos/id/20/1600/500", title: "Precision Manufacturing",
+                        desc: "Industry 4.0 smart factory" },
+                        { image: "https://picsum.photos/id/26/1600/500", title: "Innovation Driven",
+                        desc: "8% revenue in R&D" },
+                        { image: "https://picsum.photos/id/96/1600/500", title: "Global Service",
+                        desc: "Serving worldwide clients" }
+                    ]
+                },
+                industry: {
+                    zh: [
+                        { image: "https://picsum.photos/id/0/1600/500", title: "5G通信", desc: "高速高频PCB" },
+                        { image: "https://picsum.photos/id/106/1600/500", title: "汽车电子", desc: "车规级PCB" },
+                        { image: "https://picsum.photos/id/116/1600/500", title: "医疗设备", desc: "高可靠性" }
+                    ],
+                    en: [
+                        { image: "https://picsum.photos/id/0/1600/500", title: "5G Telecom", desc: "High-speed PCBs" },
+                        { image: "https://picsum.photos/id/106/1600/500", title: "Automotive",
+                        desc: "IATF16949 certified" },
+                        { image: "https://picsum.photos/id/116/1600/500", title: "Medical", desc: "High-reliability" }
+                    ]
+                },
+                products: {
+                    zh: [
+                        { image: "https://picsum.photos/id/91/1600/500", title: "高多层板", desc: "最高30层" },
+                        { image: "https://picsum.photos/id/38/1600/500", title: "HDI板", desc: "任意层互连" }
+                    ],
+                    en: [
+                        { image: "https://picsum.photos/id/91/1600/500", title: "High Multilayer", desc: "Up to 30 layers" },
+                        { image: "https://picsum.photos/id/38/1600/500", title: "HDI PCB", desc: "Any-layer" }
+                    ]
+                },
+                news: {
+                    zh: [
+                        { image: "https://picsum.photos/id/29/1600/500", title: "行业展会", desc: "亮相国际电子电路展" },
+                        { image: "https://picsum.photos/id/43/1600/500", title: "技术突破", desc: "25:1纵横比电镀孔" }
+                    ],
+                    en: [
+                        { image: "https://picsum.photos/id/29/1600/500", title: "Industry Expo",
+                        desc: "Kinming at CPCA Show" },
+                        { image: "https://picsum.photos/id/43/1600/500", title: "Tech Breakthrough",
+                        desc: "25:1 AR plated holes" }
+                    ]
+                },
+                social: {
+                    zh: [
+                        { image: "https://picsum.photos/id/144/1600/500", title: "绿色工厂", desc: "光伏发电覆盖率30%" }
+                    ],
+                    en: [
+                        { image: "https://picsum.photos/id/144/1600/500", title: "Green Factory",
+                        desc: "30% solar power" }
+                    ]
+                },
+                contact: {
+                    zh: [
+                        { image: "https://picsum.photos/id/15/1600/500", title: "全球布局", desc: "总部遂宁" }
+                    ],
+                    en: [
+                        { image: "https://picsum.photos/id/15/1600/500", title: "Global Presence", desc: "HQ in Suining" }
+                    ]
+                }
+            }
+        };
+
+        // ============================================================
+        //  2. 状态 & 工具
+        // ============================================================
+        let config = JSON.parse(JSON.stringify(DEFAULT_CONFIG));
+        let currentTab = 'texts';
+        let isLoggedIn = false;
+        let authToken = sessionStorage.getItem('admin_token') || '';
+
+        function deepClone(o) { return JSON.parse(JSON.stringify(o)); }
+
+        function showToast(msg, type = 'success') {
+            const t = document.getElementById('toast');
+            t.textContent = msg;
+            t.className = 'toast ' + type;
+            requestAnimationFrame(() => t.classList.add('show'));
+            clearTimeout(t._hide);
+            t._hide = setTimeout(() => t.classList.remove('show'), 2800);
+        }
+
+        // ============================================================
+        //  3. API 交互
+        // ============================================================
+        async function loadConfig() {
+            try {
+                const res = await fetch('/api/config');
+                if (!res.ok) throw new Error('加载失败');
+                const data = await res.json();
+                // 合并，保留默认值作为fallback
+                config = deepMerge(DEFAULT_CONFIG, data);
+                return true;
+            } catch (e) {
+                console.warn('加载配置失败，使用默认数据', e);
+                config = deepClone(DEFAULT_CONFIG);
+                return false;
+            }
+        }
+
+        function deepMerge(target, source) {
+            const result = deepClone(target);
+            for (const key in source) {
+                if (source[key] && typeof source[key] === 'object' && !Array.isArray(source[key])) {
+                    result[key] = deepMerge(result[key] || {}, source[key]);
+                } else {
+                    result[key] = source[key];
+                }
+            }
+            return result;
+        }
+
+        async function saveConfig() {
+            try {
+                const res = await fetch('/api/config', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json', 'Authorization': 'Bearer ' + (authToken || '') },
+                    body: JSON.stringify(config)
+                });
+                if (!res.ok) throw new Error('保存失败');
+                showToast('✅ 配置已保存！');
+                return true;
+            } catch (e) {
+                showToast('❌ 保存失败: ' + e.message, 'error');
+                return false;
+            }
+        }
+
+        // ============================================================
+        //  4. 渲染管理界面
+        // ============================================================
+        function renderTab(tab) {
+            currentTab = tab;
+            const container = document.getElementById('adminContent');
+            // 更新侧栏激活
+            document.querySelectorAll('#sidebarNav a').forEach(el => el.classList.toggle('active', el.dataset.tab === tab));
+
+            switch (tab) {
+                case 'texts':
+                    renderTextsTab(container);
+                    break;
+                case 'carousel':
+                    renderCarouselTab(container);
+                    break;
+                case 'company':
+                    renderCompanyTab(container);
+                    break;
+                case 'export':
+                    renderExportTab(container);
+                    break;
+                case 'import':
+                    renderImportTab(container);
+                    break;
+                case 'messages':
+                    renderMessagesTab(container);
+                    break;
+                default:
+                    container.innerHTML = '<p>未知面板</p>';
+            }
+        }
+
+        // ---------- 4.1 文本内容 ----------
+        function renderTextsTab(container) {
+            const lang = 'zh'; // 默认显示中文编辑，但提供切换
+            let html = `
+                <div class="page-title"><i class="fas fa-font" style="color:#2563eb;"></i> 文本内容管理</div>
+                <div class="page-desc">编辑各页面的中英文文本内容。修改后点击「保存全部」生效。</div>
+                <div class="lang-tabs" id="textLangTabs">
+                    <button class="active" data-lang="zh">中文</button>
+                    <button data-lang="en">English</button>
+                </div>
+                <div id="textEditorContainer"></div>
+                <button class="btn-save" id="saveTextBtn"><i class="fas fa-save"></i> 保存全部文本</button>
+            `;
+            container.innerHTML = html;
+
+            // 语言切换
+            document.querySelectorAll('#textLangTabs button').forEach(btn => {
+                btn.addEventListener('click', function() {
+                    document.querySelectorAll('#textLangTabs button').forEach(b => b.classList.remove('active'));
+                    this.classList.add('active');
+                    renderTextEditor(this.dataset.lang);
+                });
+            });
+
+            // 初始渲染中文
+            renderTextEditor('zh');
+
+            // 保存按钮
+            document.getElementById('saveTextBtn').addEventListener('click', async () => {
+                await saveConfig();
+            });
+        }
+
+        function renderTextEditor(lang) {
+            const container = document.getElementById('textEditorContainer');
+            const data = config.langText[lang];
+            if (!data) {
+                container.innerHTML = '<p class="empty-state">该语言数据不存在</p>';
+                return;
+            }
+
+            let html = '';
+
+            // 辅助：生成输入框
+            function input(key, label, rows = 1) {
+                const val = getNested(data, key) || '';
+                if (rows > 1) {
+                    return `<div class="form-group"><label>${label}</label><textarea rows="${rows}" data-key="${key}">${escapeHtml(val)}</textarea></div>`;
+                }
+                return `<div class="form-group"><label>${label}</label><input type="text" data-key="${key}" value="${escapeHtml(val)}" /></div>`;
+            }
+
+            // ---- 导航 ----
+            html += `<div class="section-card"><div class="section-title"><i class="fas fa-bars"></i> 导航菜单</div><div class="form-row">`;
+            html += input('nav_about', '关于井明');
+            html += input('nav_industry', '市场');
+            html += input('nav_products', '产品与服务');
+            html += input('nav_news', '新闻');
+            html += input('nav_social', '供应链');
+            html += input('nav_contact', '联系我们');
+            html += `</div></div>`;
+
+            // ---- 底部声明 ----
+            html += `<div class="section-card"><div class="section-title"><i class="fas fa-leaf"></i> 底部社会责任声明</div>`;
+            html += input('statement_title', '标题', 1);
+            html += input('statement_content', '内容', 4);
+            html += input('footer_address', '地址', 2);
+            html += `</div>`;
+
+            // ---- 首页表单 ----
+            html += `<div class="section-card"><div class="section-title"><i class="fas fa-envelope"></i> 首页表单</div>`;
+            html += input('form_title', '标题', 1);
+            html += input('form_desc', '描述', 3);
+            html += input('name_placeholder', '姓名占位');
+            html += input('email_placeholder', '邮箱占位');
+            html += input('company_placeholder', '公司占位');
+            html += input('phone_placeholder', '电话占位');
+            html += input('submit', '提交按钮');
+            html += input('thank_you', '提交成功提示');
+            html += `</div>`;
+
+            // ---- 概览 ----
+            html += `<div class="section-card"><div class="section-title"><i class="fas fa-th-large"></i> 页面概览</div>`;
+            const overviewKeys = ['industry', 'products', 'news', 'social', 'contact'];
+            overviewKeys.forEach(k => {
+                html += input(`overview.${k}`, `概览 - ${k} 标题`);
+                html += input(`overview.${k}_desc`, `概览 - ${k} 描述`, 3);
+            });
+            html += `</div>`;
+
+            // ---- 关于井明 ----
+            html += `<div class="section-card"><div class="section-title"><i class="fas fa-building"></i> 关于井明</div>`;
+            html += input('about_detail.intro', '公司简介标题');
+            html += input('about_detail.intro_text', '公司简介内容', 6);
+            html += input('about_detail.capability', '制程能力标题');
+            // 表格数据在后台用简化的方式编辑——这里只编辑标题，表格内容在另一处管理
+            html += input('about_detail.management', '管理体系标题');
+            html += input('about_detail.management_text', '管理体系内容', 3);
+            html += input('about_detail.honor', '井明荣誉标题');
+            // honor_list 用文本域
+            const honorVal = (data.about_detail?.honor_list || []).join('\n');
+            html +=
+                `<div class="form-group"><label>荣誉列表 (每行一项)</label><textarea rows="4" data-key="about_detail.honor_list">${escapeHtml(honorVal)}</textarea></div>`;
+            html += input('about_detail.structure', '组织架构标题');
+            html += input('about_detail.structure_text', '组织架构内容', 3);
+            html += input('about_detail.quality', '品质保证标题');
+            html += input('about_detail.quality_text', '品质保证内容', 3);
+            html += `</div>`;
+
+            // ---- 行业市场 ----
+            html += `<div class="section-card"><div class="section-title"><i class="fas fa-chart-pie"></i> 行业市场</div>`;
+            const indKeys = ['network', 'auto', 'smart', 'medical', 'power', 'consumer'];
+            indKeys.forEach(k => {
+                html += input(`industry_detail.${k}`, `${k} 标题`);
+                html += input(`industry_detail.${k}_desc`, `${k} 描述`, 3);
+            });
+            html += `</div>`;
+
+            // ---- 产品技术 ----
+            html += `<div class="section-card"><div class="section-title"><i class="fas fa-microchip"></i> 产品技术</div>`;
+            const prodKeys = ['std_pcb', 'hdi', 'high_layer', 'metal_base', 'process_cap', 'prod_device', 'test_device'];
+            prodKeys.forEach(k => {
+                html += input(`products_detail.${k}`, `${k} 标题`);
+                if (k !== 'process_cap' && k !== 'prod_device' && k !== 'test_device') {
+                    html += input(`products_detail.${k}_desc`, `${k} 描述`, 3);
+                }
+            });
+            // 生产设备列表
+            const prodListVal = (data.products_detail?.prod_list || []).join('\n');
+            html +=
+                `<div class="form-group"><label>生产设备 (每行一项)</label><textarea rows="4" data-key="products_detail.prod_list">${escapeHtml(prodListVal)}</textarea></div>`;
+            const testListVal = (data.products_detail?.test_list || []).join('\n');
+            html +=
+                `<div class="form-group"><label>检测设备 (每行一项)</label><textarea rows="4" data-key="products_detail.test_list">${escapeHtml(testListVal)}</textarea></div>`;
+            // 制程能力表格 简化为文本描述
+            html += input('products_detail.process_table', '制程能力表格描述 (可写为文本)', 4);
+            html += `</div>`;
+
+            // ---- 新闻 ----
+            html += `<div class="section-card"><div class="section-title"><i class="fas fa-newspaper"></i> 新闻中心</div>`;
+            html += input('news_detail.company_news', '公司新闻标题');
+            const cnList = (data.news_detail?.company_news_list || []).join('\n');
+            html +=
+                `<div class="form-group"><label>公司新闻列表 (每行一项)</label><textarea rows="4" data-key="news_detail.company_news_list">${escapeHtml(cnList)}</textarea></div>`;
+            html += input('news_detail.industry_news', '行业动态标题');
+            const inList = (data.news_detail?.industry_news_list || []).join('\n');
+            html +=
+                `<div class="form-group"><label>行业动态列表 (每行一项)</label><textarea rows="4" data-key="news_detail.industry_news_list">${escapeHtml(inList)}</textarea></div>`;
+            html += `</div>`;
+
+            // ---- 社会责任 ----
+            html += `<div class="section-card"><div class="section-title"><i class="fas fa-globe"></i> 社会责任</div>`;
+            html += input('social_detail.environment', '环境保护标题');
+            html += input('social_detail.environment_desc', '环境保护内容', 5);
+            html += `</div>`;
+
+            // ---- 联系我们 ----
+            html += `<div class="section-card"><div class="section-title"><i class="fas fa-phone"></i> 联系我们</div>`;
+            html += input('contact_detail.offices', '服务据点标题');
+            const offList = (data.contact_detail?.office_list || []).join('\n');
+            html +=
+                `<div class="form-group"><label>服务据点 (每行一项)</label><textarea rows="4" data-key="contact_detail.office_list">${escapeHtml(offList)}</textarea></div>`;
+            html += input('contact_detail.message_title', '在线留言标题');
+            html += input('contact_detail.name_placeholder', '姓名占位');
+            html += input('contact_detail.email_placeholder', '邮箱占位');
+            html += input('contact_detail.msg_placeholder', '留言占位');
+            html += input('contact_detail.submit', '提交按钮');
+            html += `</div>`;
+
+            container.innerHTML = html;
+
+            // 绑定输入事件：实时更新 config
+            container.querySelectorAll('input[data-key], textarea[data-key]').forEach(el => {
+                const key = el.dataset.key;
+                el.addEventListener('input', function() {
+                    const val = this.value;
+                    if (this.tagName === 'TEXTAREA' && key.endsWith('_list')) {
+                        // 列表：按行分割
+                        const lines = val.split('\n').filter(s => s.trim());
+                        setNested(config.langText[lang], key, lines);
+                    } else if (this.tagName === 'TEXTAREA') {
+                        setNested(config.langText[lang], key, val);
+                    } else {
+                        setNested(config.langText[lang], key, val);
+                    }
+                });
+                // 如果是textarea且key以_list结尾，初始化时已设置，但需要确保数据正确
+                if (el.tagName === 'TEXTAREA' && key.endsWith('_list')) {
+                    const lines = el.value.split('\n').filter(s => s.trim());
+                    setNested(config.langText[lang], key, lines);
+                }
+            });
+        }
+
+        // ---------- 4.2 轮播图 ----------
+        function renderCarouselTab(container) {
+            const pages = ['about', 'industry', 'products', 'news', 'social', 'contact'];
+            const pageNames = {
+                about: '关于井明',
+                industry: '市场',
+                products: '产品与服务',
+                news: '新闻',
+                social: '供应链',
+                contact: '联系我们'
+            };
+            let html = `
+                <div class="page-title"><i class="fas fa-images" style="color:#2563eb;"></i> 轮播图管理</div>
+                <div class="page-desc">为每个页面配置轮播图（图片URL、标题、描述），支持中英文。</div>
+                <div class="lang-tabs" id="carouselLangTabs">
+                    <button class="active" data-lang="zh">中文</button>
+                    <button data-lang="en">English</button>
+                </div>
+                <div id="carouselEditorContainer"></div>
+                <button class="btn-save" id="saveCarouselBtn"><i class="fas fa-save"></i> 保存轮播图</button>
+            `;
+            container.innerHTML = html;
+
+            let currentLang = 'zh';
+
+            function renderCarouselEditor(lang) {
+                const c = document.getElementById('carouselEditorContainer');
+                let html2 = '';
+                for (const page of pages) {
+                    const items = config.carouselData[page]?.[lang] || [];
+                    html2 += `<div class="section-card" data-page="${page}">
+                        <div class="section-title"><i class="fas fa-image"></i> ${pageNames[page] || page} <span style="font-weight:400;font-size:0.75rem;color:#94a3b8;margin-left:8px;">(${items.length} 张)</span></div>
+                        <div class="carousel-items-container" data-page="${page}" data-lang="${lang}">`;
+                    if (items.length === 0) {
+                        html2 += `<div class="empty-state">暂无轮播图，点击下方添加</div>`;
+                    } else {
+                        items.forEach((item, idx) => {
+                            html2 += `<div class="carousel-item-editor" data-index="${idx}">
+                                <button class="remove-item" data-page="${page}" data-lang="${lang}" data-index="${idx}"><i class="fas fa-times"></i></button>
+                                <div class="form-row">
+                                    <div class="form-group"><label>图片URL</label><input type="text" class="carousel-img" value="${escapeHtml(item.image)}" placeholder="https://picsum.photos/..." /></div>
+                                    <div class="form-group"><label>标题</label><input type="text" class="carousel-title" value="${escapeHtml(item.title)}" /></div>
+                                </div>
+                                <div class="form-group"><label>描述</label><input type="text" class="carousel-desc" value="${escapeHtml(item.desc)}" /></div>
+                            </div>`;
+                        });
+                    }
+                    html2 += `
+                        <button class="btn-add add-carousel-item" data-page="${page}" data-lang="${lang}"><i class="fas fa-plus"></i> 添加图片</button>
+                    </div></div>`;
+                }
+                c.innerHTML = html2;
+
+                // 绑定删除
+                c.querySelectorAll('.remove-item').forEach(btn => {
+                    btn.addEventListener('click', function() {
+                        const page = this.dataset.page;
+                        const lang2 = this.dataset.lang;
+                        const idx = parseInt(this.dataset.index);
+                        if (config.carouselData[page] && config.carouselData[page][lang2]) {
+                            config.carouselData[page][lang2].splice(idx, 1);
+                            renderCarouselEditor(lang2);
+                        }
+                    });
+                });
+
+                // 绑定添加
+                c.querySelectorAll('.add-carousel-item').forEach(btn => {
+                    btn.addEventListener('click', function() {
+                        const page = this.dataset.page;
+                        const lang2 = this.dataset.lang;
+                        if (!config.carouselData[page]) config.carouselData[page] = {};
+                        if (!config.carouselData[page][lang2]) config.carouselData[page][lang2] = [];
+                        config.carouselData[page][lang2].push({ image: 'https://picsum.photos/id/' + Math
+                                .floor(Math.random() * 150) + '/1600/500', title: '新标题', desc: '新描述' });
+                        renderCarouselEditor(lang2);
+                    });
+                });
+
+                // 绑定输入变化
+                c.querySelectorAll('.carousel-item-editor').forEach(editor => {
+                    const page = editor.closest('.section-card').dataset.page;
+                    const lang2 = editor.closest('.carousel-items-container').dataset.lang;
+                    const idx = parseInt(editor.dataset.index);
+                    const imgInput = editor.querySelector('.carousel-img');
+                    const titleInput = editor.querySelector('.carousel-title');
+                    const descInput = editor.querySelector('.carousel-desc');
+                    const update = () => {
+                        if (config.carouselData[page] && config.carouselData[page][lang2] && config
+                            .carouselData[page][lang2][idx]) {
+                            config.carouselData[page][lang2][idx].image = imgInput.value;
+                            config.carouselData[page][lang2][idx].title = titleInput.value;
+                            config.carouselData[page][lang2][idx].desc = descInput.value;
+                        }
+                    };
+                    imgInput.addEventListener('input', update);
+                    titleInput.addEventListener('input', update);
+                    descInput.addEventListener('input', update);
+                });
+            }
+
+            document.querySelectorAll('#carouselLangTabs button').forEach(btn => {
+                btn.addEventListener('click', function() {
+                    document.querySelectorAll('#carouselLangTabs button').forEach(b => b.classList.remove(
+                    'active'));
+                    this.classList.add('active');
+                    currentLang = this.dataset.lang;
+                    renderCarouselEditor(currentLang);
+                });
+            });
+
+            renderCarouselEditor('zh');
+
+            document.getElementById('saveCarouselBtn').addEventListener('click', async () => {
+                await saveConfig();
+            });
+        }
+
+        // ---------- 4.3 公司信息 ----------
+        function renderCompanyTab(container) {
+            let html = `
+                <div class="page-title"><i class="fas fa-building" style="color:#2563eb;"></i> 公司信息</div>
+                <div class="page-desc">修改公司地址、联系方式等基础信息。</div>
+                <div class="section-card">
+                    <div class="section-title"><i class="fas fa-map-pin"></i> 地址与联系</div>
+                    <div class="lang-tabs" id="companyLangTabs">
+                        <button class="active" data-lang="zh">中文</button>
+                        <button data-lang="en">English</button>
+                    </div>
+                    <div id="companyEditorContainer"></div>
+                </div>
+                <button class="btn-save" id="saveCompanyBtn"><i class="fas fa-save"></i> 保存公司信息</button>
+            `;
+            container.innerHTML = html;
+
+            function renderCompanyEditor(lang) {
+                const c = document.getElementById('companyEditorContainer');
+                const addr = config.langText[lang]?.footer_address || '';
+                c.innerHTML = `
+                    <div class="form-group"><label>公司地址</label><textarea rows="3" id="companyAddr">${escapeHtml(addr)}</textarea></div>
+                    <div class="form-group"><label>版权年份 (在footer中显示)</label><input type="text" id="companyYear" value="2025" /></div>
+                    <div class="form-group"><label>公司名称 (footer)</label><input type="text" id="companyName" value="四川井明电子有限公司" /></div>
+                `;
+                const addrInput = document.getElementById('companyAddr');
+                addrInput.addEventListener('input', function() {
+                    if (config.langText[lang]) {
+                        config.langText[lang].footer_address = this.value;
+                    }
+                });
+            }
+
+            document.querySelectorAll('#companyLangTabs button').forEach(btn => {
+                btn.addEventListener('click', function() {
+                    document.querySelectorAll('#companyLangTabs button').forEach(b => b.classList.remove(
+                    'active'));
+                    this.classList.add('active');
+                    renderCompanyEditor(this.dataset.lang);
+                });
+            });
+            renderCompanyEditor('zh');
+
+            document.getElementById('saveCompanyBtn').addEventListener('click', async () => {
+                await saveConfig();
+            });
+        }
+
+        // ---------- 4.4 导出 ----------
+        function renderExportTab(container) {
+            container.innerHTML = `
+                <div class="page-title"><i class="fas fa-download" style="color:#2563eb;"></i> 导出备份</div>
+                <div class="page-desc">将当前所有配置导出为JSON文件，用于备份或迁移。</div>
+                <div class="section-card">
+                    <button class="btn-save" id="exportBtn"><i class="fas fa-download"></i> 下载配置备份 (config.json)</button>
+                </div>
+            `;
+            document.getElementById('exportBtn').addEventListener('click', function() {
+                const blob = new Blob([JSON.stringify(config, null, 2)], { type: 'application/json' });
+                const url = URL.createObjectURL(blob);
+                const a = document.createElement('a');
+                a.href = url;
+                a.download = 'config_backup_' + new Date().toISOString().slice(0, 10) + '.json';
+                a.click();
+                URL.revokeObjectURL(url);
+                showToast('✅ 备份已下载');
+            });
+        }
+
+        // ---------- 4.5 导入 ----------
+        function renderImportTab(container) {
+            container.innerHTML = `
+                <div class="page-title"><i class="fas fa-upload" style="color:#2563eb;"></i> 导入备份</div>
+                <div class="page-desc">上传之前导出的JSON备份文件，恢复配置。<strong style="color:#dc2626;">注意：将覆盖当前所有配置！</strong></div>
+                <div class="section-card">
+                    <div class="form-group">
+                        <label>选择备份文件</label>
+                        <input type="file" id="importFileInput" accept=".json" />
+                    </div>
+                    <button class="btn-save" id="importBtn" style="background:#16a34a;"><i class="fas fa-upload"></i> 导入并覆盖</button>
+                </div>
+            `;
+            document.getElementById('importBtn').addEventListener('click', function() {
+                const fileInput = document.getElementById('importFileInput');
+                if (!fileInput.files || !fileInput.files[0]) {
+                    showToast('请选择文件', 'error');
+                    return;
+                }
+                const reader = new FileReader();
+                reader.onload = async function(e) {
+                    try {
+                        const data = JSON.parse(e.target.result);
+                        // 合并校验
+                        if (!data.langText || !data.carouselData) {
+                            showToast('❌ 无效的备份文件', 'error');
+                            return;
+                        }
+                        config = deepMerge(DEFAULT_CONFIG, data);
+                        await saveConfig();
+                        showToast('✅ 导入成功！');
+                        // 刷新当前面板
+                        renderTab(currentTab);
+                    } catch (err) {
+                        showToast('❌ 解析失败: ' + err.message, 'error');
+                    }
+                };
+                reader.readAsText(fileInput.files[0]);
+            });
+        }
+
+        // ============================================================
+        //  5. 工具函数
+        // ============================================================
+        function getNested(obj, path) {
+            const parts = path.split('.');
+            let current = obj;
+            for (const p of parts) {
+                if (current && typeof current === 'object' && p in current) {
+                    current = current[p];
+                } else {
+                    return undefined;
+                }
+            }
+            return current;
+        }
+
+        function setNested(obj, path, value) {
+            const parts = path.split('.');
+            let current = obj;
+            for (let i = 0; i < parts.length - 1; i++) {
+                const p = parts[i];
+                if (!(p in current) || typeof current[p] !== 'object') {
+                    current[p] = {};
+                }
+                current = current[p];
+            }
+            current[parts[parts.length - 1]] = value;
+        }
+
+        function escapeHtml(str) {
+            if (!str) return '';
+            return String(str).replace(/&/g, '&amp;').replace(/"/g, '&quot;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+        }
+
+        // ============================================================
+        //  6. 登录 & 初始化
+        // ============================================================
+        async function initAdmin() {
+            // 检查是否已登录 (sessionStorage 中同时保存 token)
+            if (sessionStorage.getItem('admin_logged') === 'true' && authToken) {
+                isLoggedIn = true;
+                document.getElementById('loginOverlay').classList.remove('show');
+                document.getElementById('adminApp').style.display = 'flex';
+                await loadConfig();
+                renderTab('texts');
+                return;
+            }
+            // 显示登录
+            document.getElementById('loginOverlay').classList.add('show');
+            document.getElementById('adminApp').style.display = 'none';
+        }
+
+        // 登录逻辑：校验密码并换取后端 token
+        document.getElementById('loginBtn').addEventListener('click', async function() {
+            const pwd = document.getElementById('passwordInput').value;
+            document.getElementById('loginError').style.display = 'none';
+            try {
+                const res = await fetch('/api/login', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ password: pwd })
+                });
+                if (res.ok) {
+                    const data = await res.json();
+                    authToken = data.token;
+                    isLoggedIn = true;
+                    sessionStorage.setItem('admin_logged', 'true');
+                    sessionStorage.setItem('admin_token', authToken);
+                    document.getElementById('loginOverlay').classList.remove('show');
+                    document.getElementById('adminApp').style.display = 'flex';
+                    await loadConfig();
+                    renderTab('texts');
+                } else {
+                    document.getElementById('loginError').style.display = 'block';
+                    document.getElementById('passwordInput').value = '';
+                    document.getElementById('passwordInput').focus();
+                }
+            } catch (e) {
+                const errEl = document.getElementById('loginError');
+                errEl.style.display = 'block';
+                errEl.textContent = '连接服务器失败，请确认后端已启动';
+            }
+        });
+
+        document.getElementById('passwordInput').addEventListener('keydown', function(e) {
+            if (e.key === 'Enter') document.getElementById('loginBtn').click();
+        });
+
+        // 退出：吊销后端 token 并清理本地状态
+        document.getElementById('logoutBtn').addEventListener('click', async function() {
+            try {
+                await fetch('/api/logout', {
+                    method: 'POST',
+                    headers: { 'Authorization': 'Bearer ' + (authToken || '') }
+                });
+            } catch (e) { /* 忽略网络错误 */ }
+            sessionStorage.removeItem('admin_logged');
+            sessionStorage.removeItem('admin_token');
+            authToken = '';
+            isLoggedIn = false;
+            document.getElementById('adminApp').style.display = 'none';
+            document.getElementById('loginOverlay').classList.add('show');
+            document.getElementById('passwordInput').value = '';
+            document.getElementById('loginError').style.display = 'none';
+        });
+
+        // 留言管理：拉取并展示所有留言
+        async function renderMessagesTab(container) {
+            container.innerHTML = '<div class="panel"><h3>📨 在线留言</h3><div id="msgList" class="msg-list">加载中…</div></div>';
+            try {
+                const res = await fetch('/api/contact', {
+                    headers: { 'Authorization': 'Bearer ' + (authToken || '') }
+                });
+                if (!res.ok) throw new Error('读取失败（请确认已登录）');
+                const list = await res.json();
+                const box = document.getElementById('msgList');
+                if (!list.length) {
+                    box.innerHTML = '<p style="color:#888;">暂无留言</p>';
+                    return;
+                }
+                box.innerHTML = list.map(m => `
+                    <div style="border:1px solid #e3e3e3;border-radius:8px;padding:12px 14px;margin-bottom:10px;background:#fff;">
+                        <div style="font-size:13px;color:#888;margin-bottom:6px;">
+                            <strong style="color:#222;font-size:14px;">${escapeHtml(m.name)}</strong>
+                            ${m.company ? '<span style="margin:0 6px;">· ' + escapeHtml(m.company) + '</span>' : ''}
+                            <span>${escapeHtml(m.email)}</span>
+                            <span style="float:right;font-size:12px;">${new Date(m.createdAt).toLocaleString()}</span>
+                        </div>
+                        <div style="white-space:pre-wrap;line-height:1.5;">${escapeHtml(m.message)}</div>
+                    </div>`).join('');
+            } catch (e) {
+                container.innerHTML = '<div class="panel"><h3>📨 在线留言</h3><p style="color:#c62828;">加载失败：' + e.message + '</p></div>';
+            }
+        }
+
+        function escapeHtml(s) {
+            return String(s == null ? '' : s).replace(/[&<>"']/g, c => ({ '&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;' }[c]));
+        }
+
+        // 侧栏切换
+        document.querySelectorAll('#sidebarNav a[data-tab]').forEach(el => {
+            el.addEventListener('click', function() {
+                renderTab(this.dataset.tab);
+            });
+        });
+
+        // 预览按钮
+        document.getElementById('previewBtn').addEventListener('click', function() {
+            window.open('/', '_blank');
+        });
+
+        // ============================================================
+        //  7. 启动
+        // ============================================================
+        initAdmin();
+
+        // 键盘快捷键: Ctrl+S 保存
+        document.addEventListener('keydown', function(e) {
+            if ((e.ctrlKey || e.metaKey) && e.key === 's') {
+                e.preventDefault();
+                if (isLoggedIn) {
+                    saveConfig();
+                }
+            }
+        });
+
+        console.log('🔐 井明电子后台管理已加载');
+        console.log('📌 默认密码: admin123');
+    </script>
+</body>
+</html>
