@@ -604,7 +604,8 @@
                         structure: "组织架构",
                         structure_text: "设有市场中心、研发中心、制造中心、品控中心、供应链管理部及海外事业部。",
                         quality: "品质保证",
-                        quality_text: "从IQC进料检验到成品可靠性测试，全程SPC监控，配备AOI、飞针测试、X-ray、显微镜等先进设备。"
+                        quality_text: "从IQC进料检验到成品可靠性测试，全程SPC监控，配备AOI、飞针测试、X-ray、显微镜等先进设备。",
+                        video_url: "videos/company.mp4"
                     },
                     industry_detail: {
                         network: "网络通信",
@@ -742,7 +743,8 @@
                         structure: "Organization",
                         structure_text: "Departments: Marketing, R&D, Manufacturing, QC, Supply Chain, Overseas.",
                         quality: "Quality Assurance",
-                        quality_text: "From IQC to reliability test, SPC monitoring. Equipped with AOI, flying probe, X-ray, microscope."
+                        quality_text: "From IQC to reliability test, SPC monitoring. Equipped with AOI, flying probe, X-ray, microscope.",
+                        video_url: "videos/company.mp4"
                     },
                     industry_detail: {
                         network: "Telecom & Networking",
@@ -1069,6 +1071,7 @@
             html += `<div class="section-card"><div class="section-title"><i class="fas fa-building"></i> 关于井明</div>`;
             html += input('about_detail.intro', '公司简介标题');
             html += input('about_detail.intro_text', '公司简介内容', 6);
+            html += input('about_detail.video_url', '公司简介视频地址（留空或填 videos/company.mp4 使用默认视频）');
             html += input('about_detail.capability', '制程能力标题');
             // 表格数据在后台用简化的方式编辑——这里只编辑标题，表格内容在另一处管理
             html += input('about_detail.management', '管理体系标题');

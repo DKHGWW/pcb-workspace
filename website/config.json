@@ -179,7 +179,8 @@
         "structure": "组织架构",
         "structure_text": "设有市场中心、研发中心、制造中心、品控中心、供应链管理部及海外事业部。",
         "quality": "品质保证",
-        "quality_text": "从IQC进料检验到成品可靠性测试，全程SPC监控，配备AOI、飞针测试、X-ray、显微镜等先进设备。"
+        "quality_text": "从IQC进料检验到成品可靠性测试，全程SPC监控，配备AOI、飞针测试、X-ray、显微镜等先进设备。",
+        "video_url": "videos/company.mp4"
       },
       "industry_detail": {
         "network": "网络通信",
@@ -457,7 +458,8 @@
         "structure": "Organization",
         "structure_text": "Departments: Marketing, R&D, Manufacturing, QC, Supply Chain, Overseas.",
         "quality": "Quality Assurance",
-        "quality_text": "From IQC to reliability test, SPC monitoring. Equipped with AOI, flying probe, X-ray, microscope."
+        "quality_text": "From IQC to reliability test, SPC monitoring. Equipped with AOI, flying probe, X-ray, microscope.",
+        "video_url": "videos/company.mp4"
       },
       "industry_detail": {
         "network": "Telecom & Networking",

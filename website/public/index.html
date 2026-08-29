@@ -505,7 +505,8 @@
                 structure: "组织架构",
                 structure_text: "设有市场中心、研发中心、制造中心、品控中心、供应链管理部及海外事业部。",
                 quality: "品质保证",
-                quality_text: "从IQC进料检验到成品可靠性测试，全程SPC监控，配备AOI、飞针测试、X-ray、显微镜等先进设备。"
+                quality_text: "从IQC进料检验到成品可靠性测试，全程SPC监控，配备AOI、飞针测试、X-ray、显微镜等先进设备。",
+                video_url: "videos/company.mp4"
             },
             industry_detail: {
                 network: "网络通信", network_desc: "高速光模块、路由器、基站天线PCB，低损耗材料，精准阻抗控制。",
@@ -600,7 +601,8 @@
                 structure: "Organization",
                 structure_text: "Departments: Marketing, R&D, Manufacturing, QC, Supply Chain, Overseas.",
                 quality: "Quality Assurance",
-                quality_text: "From IQC to reliability test, SPC monitoring. Equipped with AOI, flying probe, X-ray, microscope."
+                quality_text: "From IQC to reliability test, SPC monitoring. Equipped with AOI, flying probe, X-ray, microscope.",
+                video_url: "videos/company.mp4"
             },
             industry_detail: {
                 network: "Telecom & Networking", network_desc: "High-speed optical modules, routers, base station PCBs.",
@@ -1043,7 +1045,7 @@
         const d = t('about_detail');
         const cap = d.capability_table;
         const sections = {
-            intro: { title: d.intro, content: `<div class="about-intro-grid"><div class="about-intro-text">${d.intro_text.split('\n\n').map(p=>`<p>${p}</p>`).join('')}</div><div class="about-video-wrap"><video controls poster="e7af5013ff6f7f414c0eff4a6de2f6e4.png"><source src="videos/company.mp4" type="video/mp4">您的浏览器不支持视频播放。</video><div class="video-hint">请将公司宣传视频上传为 website/public/videos/company.mp4</div></div></div>` },
+            intro: { title: d.intro, content: `<div class="about-intro-grid"><div class="about-intro-text">${d.intro_text.split('\n\n').map(p=>`<p>${p}</p>`).join('')}</div><div class="about-video-wrap"><video controls poster="e7af5013ff6f7f414c0eff4a6de2f6e4.png"><source src="${d.video_url || 'videos/company.mp4'}" type="video/mp4">您的浏览器不支持视频播放。</video>${(d.video_url && d.video_url !== 'videos/company.mp4') ? '' : '<div class="video-hint">请将公司宣传视频上传为 website/public/videos/company.mp4（或在后台「关于井明」中填写视频地址）</div>'}</div></div>` },
             capability: { title: d.capability, content: `<div class="table-wrapper"><table class="capability-table"><thead><tr>${cap.headers.map(h=>`<th>${h}</th>`).join('')}</tr></thead><tbody>${cap.rows.map(row=>`<tr>${row.map(cell=>`<td>${cell}</td>`).join('')}</tr>`).join('')}</tbody></table></div></div>` },
             management: { title: d.management, content: `<p>${d.management_text}</p>` },
             honor: { title: d.honor, content: `<ul>${d.honor_list.map(h=>`<li>${h}</li>`).join('')}</ul>` },
@@ -1184,6 +1186,7 @@
                 const sub = link.getAttribute('data-sub');
                 if (page) setActivePage(page, sub);
                 if (isMobile) document.getElementById('navLinks').classList.remove('show');
+                window.scrollTo({ top: 0, behavior: 'smooth' });
             });
         });
     }
