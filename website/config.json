@@ -126,7 +126,7 @@
       },
       "about_detail": {
         "intro": "公司简介",
-        "intro_text": "四川井明电子有限公司始创于2012年，前身为遂宁豪尔思电子科技有限公司，坐落于遂宁经开区电子电路产业园，现有员工500余人，是一家专业从事PCB电路板研发、设计、精密生产与配套服务的综合性制造企业。公司深耕线路板行业十余年，主营多层板、高精密HDI板、高多层板、金属基板、IC载板，产品广泛应用于汽车电子、网络通信、工控医疗、军工配套、智能终端等领域，可提供一站式定制量产解决方案。企业资质齐全，拥有IATF16949、ISO9001、ISO14001、UL、CQC权威认证，产品符合RoHS环保标准，全程严格品控，满足工业、汽车及高端精密设备使用要求。公司持续深耕高端PCB领域，以精工品质与稳定交付，致力打造为全国优质线路板制造品牌。",
+        "intro_text": "四川井明电子有限公司始创于2011年，前身为遂宁豪尔思电子科技有限公司，整合宏安兴盛、豪尔思电子深耕行业近二十年之积淀，坐落于遂宁国家经济技术开发区电子电路产业园。公司现有员工400余人，标准化厂房面积30,000平方米，月生产能力100万平方英尺。\n\n公司专业从事双面及多层高精密HDI、高难度印制线路板的研发、设计、精密生产与配套服务，产品广泛应用于计算机、数据通讯、商业航天、汽车电子、消费类电子、电讯业、AI智能等相关生产企业，远销欧美日韩等国内外市场，服务客户200余家，覆盖30余个地区。企业资质齐全，拥有IATF16949、ISO9001、ISO14001、UL、CQC权威认证，产品符合RoHS环保标准。\n\n公司秉承“诚信、创新、效率、协作、共享”的经营理念，倡导“优质服务、客户满意、互惠互利、持续发展”的价值理念，坚持以人为本、培训考核、激发潜能，致力于不断提高顾客满意度，打造PCB业界特色名牌企业。",
         "capability": "制程能力",
         "capability_table": {
           "headers": [
@@ -404,7 +404,7 @@
       },
       "about_detail": {
         "intro": "Company Profile",
-        "intro_text": "Sichuan Kinming Electronics Co., Ltd. was founded in 2012 (formerly Suining Haoersi Electronic Technology). Located in Suining Economic Development Zone Electronic Circuit Industrial Park, we have over 500 employees, specializing in R&D, design, precision production of PCBs. Main products: multilayer, HDI, high multilayer, metal core, IC substrates. Certifications: IATF16949, ISO9001, ISO14001, UL, CQC, RoHS compliant. Committed to becoming a leading PCB brand with high quality and reliable delivery.",
+        "intro_text": "Sichuan Kinming Electronics Co., Ltd. was founded in 2011 (formerly Suining Haoersi Electronic Technology Co., Ltd.), integrating nearly two decades of industry expertise from Hong'an Xingsheng and Haoersi. Located in Suining National Economic and Technological Development Zone Electronic Circuit Industrial Park, we have over 400 employees, 30,000 m² standardized factory space and monthly capacity of 1 million sq ft.\n\nWe specialize in R&D, design, precision production and supporting services of double-sided and multilayer high-precision HDI and high-difficulty PCBs. Our products are widely used in computers, data communications, commercial aerospace, automotive electronics, consumer electronics, telecommunications, AI and related industries, exported to Europe, America, Japan, Korea and other markets, serving 200+ customers across 30+ regions. We hold IATF16949, ISO9001, ISO14001, UL, CQC and other certifications, with RoHS-compliant products.\n\nUpholding the business philosophy of \"Integrity, Innovation, Efficiency, Collaboration, Sharing\" and the value concept of \"Quality Service, Customer Satisfaction, Mutual Benefit, Sustainable Development\", we are committed to improving customer satisfaction and building a distinctive brand in the PCB industry.",
         "capability": "Process Capability",
         "capability_table": {
           "headers": [
