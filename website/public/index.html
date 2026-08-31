@@ -318,6 +318,21 @@
         .grid-2col { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 24px; margin-top: 24px; }
         .info-card { background: #f8fafc; border-radius: 20px; padding: 20px; }
         .info-card h3 { margin-bottom: 12px; color: #1e4a7a; }
+        .product-detail-wrap { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; align-items: start; }
+        .product-image-col img { width: 100%; height: auto; border-radius: 20px; box-shadow: 0 10px 30px rgba(0,0,0,0.1); }
+        .product-info-col h2 { font-size: 1.8rem; margin-bottom: 16px; }
+        .product-tags { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 24px; }
+        .product-tag { background: #e6efff; color: #1e4a7a; font-size: 0.8rem; padding: 6px 14px; border-radius: 999px; font-weight: 500; }
+        .product-specs { list-style: none; padding: 0; margin: 0; border-top: 1px solid #e2e8f0; }
+        .product-specs li { display: flex; justify-content: space-between; align-items: center; padding: 18px 0; border-bottom: 1px solid #e2e8f0; }
+        .product-specs .spec-label { color: #64748b; font-size: 0.95rem; }
+        .product-specs .spec-value { color: #0f172a; font-weight: 600; font-size: 1.05rem; text-align: right; max-width: 60%; }
+        @media (max-width: 900px) {
+            .product-detail-wrap { grid-template-columns: 1fr; }
+            .product-image-col { margin-bottom: 24px; }
+            .product-specs li { flex-direction: column; align-items: flex-start; gap: 6px; }
+            .product-specs .spec-value { text-align: left; max-width: 100%; }
+        }
         .contact-form input, .contact-form textarea {
             width: 100%; padding: 12px; border: 1px solid #cbd5e1; border-radius: 12px; margin-bottom: 16px;
         }
@@ -469,7 +484,7 @@
                 industry: "市场",
                 industry_desc: "井明电子深度服务多个战略行业，提供高可靠性PCB解决方案。请从上方下拉菜单中选择具体细分市场，查看详细产品信息。",
                 products: "产品与服务",
-                products_desc: "我们提供从常规电路板到高精密HDI、高多层板、金属基板等全系列PCB产品。请从下拉菜单中选择具体产品类别，了解制程能力与设备信息。",
+                products_desc: "精选PPT真实产品展示：无人机用8层HDI板、光模块板、高压快充板、电源主板、AI服务器板、精密医疗仪器主板、移动固态硬盘板等。请从下拉菜单选择具体产品，查看大图与详细参数。",
                 news: "新闻中心",
                 news_desc: "了解井明电子最新动态、行业资讯及技术突破。请从下拉菜单中选择“公司新闻”或“行业动态”。",
                 social: "供应链",
@@ -480,7 +495,7 @@
             dropdown: {
                 about: ["公司简介", "制程能力", "管理体系", "井明荣誉", "组织架构", "品质保证"],
                 industry: ["网络通信", "汽车电子", "智能终端", "工控医疗", "电源", "消费电子"],
-                products: ["常规电路板", "高密度互联板", "高多层电路板", "金属基板", "制程能力", "生产设备", "检测设备"],
+                products: ["无人机用8层HDI板", "光模块用2层沉镍钯金板", "通讯产品展示——4边半孔光模块板", "高压快充用2层板", "电源主板用2层板", "AI服务器用6层板", "精密医疗仪器主板", "移动固态硬盘用2层板"],
                 news: ["公司新闻", "行业动态"],
                 social: ["环境保护"],
                 contact: ["服务据点", "在线留言"]
@@ -488,7 +503,7 @@
             footerLinks: {
                 about: { title: "关于井明", items: ["公司简介", "制程能力", "管理体系", "井明荣誉", "组织架构", "品质保证"] },
                 industry: { title: "市场", items: ["网络通信", "汽车电子", "智能终端", "工控医疗", "电源", "消费电子"] },
-                products: { title: "产品与服务", items: ["常规电路板", "高密度互联板", "高多层电路板", "金属基板", "制程能力", "生产设备", "检测设备"] },
+                products: { title: "产品与服务", items: ["无人机用8层HDI板", "光模块用2层沉镍钯金板", "通讯产品展示——4边半孔光模块板", "高压快充用2层板", "电源主板用2层板", "AI服务器用6层板", "精密医疗仪器主板", "移动固态硬盘用2层板"] },
                 news: { title: "新闻", items: ["公司新闻", "行业动态"] },
                 social: { title: "供应链", items: ["环境保护"] },
                 contact: { title: "联系我们", items: ["服务据点", "在线留言"] }
@@ -517,16 +532,136 @@
                 consumer: "消费电子", consumer_desc: "提供高集成度HDI板，满足轻薄化需求。"
             },
             products_detail: {
-                std_pcb: "常规电路板", std_pcb_desc: "单双面、多层板，FR-4材料，快速打样。",
-                hdi: "高密度互联板", hdi_desc: "任意层互连，盲埋孔技术，线宽线距2.5/2.5mil。",
-                high_layer: "高多层电路板", high_layer_desc: "10-30层，背板、服务器主板，高可靠性。",
-                metal_base: "金属基板", metal_base_desc: "铝基、铜基板，大功率LED、电源模块。",
-                process_cap: "制程能力",
-                process_table: { headers: ["项目", "能力"], rows: [["最小线宽", "2.5mil"], ["最小孔径", "0.15mm"], ["最大板厚", "8.0mm"], ["表面处理", "沉金/沉银/OSP/镀金"]] },
-                prod_device: "生产设备",
-                prod_list: ["数字钻孔机", "填孔脉冲电镀线", "真空蚀刻机", "高层压合机", "LDI曝光机"],
-                test_device: "检测设备",
-                test_list: ["AOI自动光学检测", "飞针测试机", "X-ray镀层测厚仪", "显微镜", "阻抗测试仪"]
+                "spec_labels": {
+                    "type": "产品类型",
+                    "layer": "产品层次",
+                    "material": "产品材料",
+                    "copper": "铜厚",
+                    "application": "应用领域"
+                },
+                "items": [
+                    {
+                        "id": "uav",
+                        "title": "无人机用8层HDI板",
+                        "image": "images/products/prod-uav.jpg",
+                        "tags": [
+                            "智能汽车",
+                            "航空航天"
+                        ],
+                        "specs": {
+                            "type": "沉金+osp+树脂塞孔+盲埋孔工艺",
+                            "layer": "8层",
+                            "material": "生益S1000 TG170",
+                            "copper": "3/3",
+                            "application": "无人机"
+                        }
+                    },
+                    {
+                        "id": "optical1",
+                        "title": "光模块用2层沉镍钯金板",
+                        "image": "images/products/prod-optical1.jpg",
+                        "tags": [
+                            "光模通讯"
+                        ],
+                        "specs": {
+                            "type": "沉镍钯金工艺",
+                            "layer": "2层",
+                            "material": "FR-4 0.9mm 1/1OZ TG135",
+                            "copper": "1/1",
+                            "application": "光模块"
+                        }
+                    },
+                    {
+                        "id": "optical2",
+                        "title": "通讯产品展示——4边半孔光模块板",
+                        "image": "images/products/prod-optical2.jpg",
+                        "tags": [
+                            "光模通讯"
+                        ],
+                        "specs": {
+                            "type": "沉金+4边半孔工艺",
+                            "layer": "4层",
+                            "material": "FR-4 0.8mm TG150",
+                            "copper": "1/1",
+                            "application": "光模块"
+                        }
+                    },
+                    {
+                        "id": "charging",
+                        "title": "高压快充用2层板",
+                        "image": "images/products/prod-charging.jpg",
+                        "tags": [
+                            "智能汽车"
+                        ],
+                        "specs": {
+                            "type": "无铅喷锡工艺",
+                            "layer": "2层",
+                            "material": "FR-4 1.5mm TG135",
+                            "copper": "3/3",
+                            "application": "高压快充"
+                        }
+                    },
+                    {
+                        "id": "power",
+                        "title": "电源主板用2层板",
+                        "image": "images/products/prod-power.jpg",
+                        "tags": [
+                            "消费电子"
+                        ],
+                        "specs": {
+                            "type": "无铝喷锡工艺",
+                            "layer": "2层",
+                            "material": "FR-4 1.9mm TG135",
+                            "copper": "2/2",
+                            "application": "电源主板"
+                        }
+                    },
+                    {
+                        "id": "ai_server",
+                        "title": "AI服务器用6层板",
+                        "image": "images/products/prod-ai_server.jpg",
+                        "tags": [
+                            "AI服务"
+                        ],
+                        "specs": {
+                            "type": "沉金+背钻+树脂塞孔工艺",
+                            "layer": "6层",
+                            "material": "生益S1000-2M 1.6mm TG170",
+                            "copper": "2/2",
+                            "application": "AI服务器"
+                        }
+                    },
+                    {
+                        "id": "medical",
+                        "title": "精密医疗仪器主板",
+                        "image": "images/products/prod-medical.jpg",
+                        "tags": [
+                            "医疗器械"
+                        ],
+                        "specs": {
+                            "type": "沉金工艺",
+                            "layer": "4层",
+                            "material": "FR4 0.8mm TG135",
+                            "copper": "2/2OZ",
+                            "application": "精密医疗仪器主板"
+                        }
+                    },
+                    {
+                        "id": "ssd",
+                        "title": "移动固态硬盘用2层板",
+                        "image": "images/products/prod-ssd.jpg",
+                        "tags": [
+                            "消费电子"
+                        ],
+                        "specs": {
+                            "type": "OSP工艺",
+                            "layer": "2层",
+                            "material": "FR4 0.9mm TG135",
+                            "copper": "1/1OZ",
+                            "application": "移动固态硬盘"
+                        }
+                    }
+                ]
             },
             news_detail: {
                 company_news: "公司新闻",
@@ -565,7 +700,7 @@
                 industry: "Markets",
                 industry_desc: "Kinming serves multiple strategic industries with high-reliability PCB solutions. Please select a specific market segment from the dropdown menu above to view detailed product information.",
                 products: "Products & Technology",
-                products_desc: "We offer a full range of PCBs from standard to high-precision HDI, high-multilayer, and metal core boards. Select a product category from the dropdown menu to learn about capabilities and equipment.",
+                products_desc: "Real product showcases from our PPT portfolio: 8-layer HDI for UAVs, optical module PCBs, high-voltage fast-charging boards, power main boards, AI server boards, precision medical instrument boards, mobile SSD boards and more. Select a product from the dropdown to view the image and detailed specs.",
                 news: "News Center",
                 news_desc: "Stay updated with Kinming's latest news, industry trends, and technological breakthroughs. Choose 'Company News' or 'Industry Trends' from the dropdown menu.",
                 social: "Supply Chain",
@@ -576,7 +711,7 @@
             dropdown: {
                 about: ["Company Profile", "Process Capability", "Management System", "Honors", "Organization", "Quality Assurance"],
                 industry: ["Telecom & Networking", "Automotive Electronics", "Smart Devices", "Industrial & Medical", "Power Supply", "Consumer Electronics"],
-                products: ["Standard PCB", "HDI PCB", "High Multilayer", "Metal Core PCB", "Process Capability", "Production Equipment", "Testing Equipment"],
+                products: ["8-Layer HDI PCB for UAVs", "2-Layer ENIG-Pd PCB for Optical Modules", "Communication Product Display — 4-side Half-hole Optical Module PCB", "2-Layer PCB for High-voltage Fast Charging", "2-Layer PCB for Power Main Board", "6-Layer PCB for AI Servers", "Precision Medical Instrument Main Board", "2-Layer PCB for Mobile SSD"],
                 news: ["Company News", "Industry Trends"],
                 social: ["Environmental Protection"],
                 contact: ["Service Locations", "Online Message"]
@@ -584,7 +719,7 @@
             footerLinks: {
                 about: { title: "About", items: ["Company Profile", "Process Capability", "Management System", "Honors", "Organization", "Quality Assurance"] },
                 industry: { title: "Markets", items: ["Telecom & Networking", "Automotive Electronics", "Smart Devices", "Industrial & Medical", "Power Supply", "Consumer Electronics"] },
-                products: { title: "Products", items: ["Standard PCB", "HDI PCB", "High Multilayer", "Metal Core PCB", "Process Capability", "Production Equipment", "Testing Equipment"] },
+                products: { title: "Products", items: ["8-Layer HDI PCB for UAVs", "2-Layer ENIG-Pd PCB for Optical Modules", "Communication Product Display — 4-side Half-hole Optical Module PCB", "2-Layer PCB for High-voltage Fast Charging", "2-Layer PCB for Power Main Board", "6-Layer PCB for AI Servers", "Precision Medical Instrument Main Board", "2-Layer PCB for Mobile SSD"] },
                 news: { title: "News", items: ["Company News", "Industry Trends"] },
                 social: { title: "Supply Chain", items: ["Environmental Protection"] },
                 contact: { title: "Contact", items: ["Service Locations", "Online Message"] }
@@ -613,16 +748,136 @@
                 consumer: "Consumer Electronics", consumer_desc: "High-integration HDI PCBs for slim devices."
             },
             products_detail: {
-                std_pcb: "Standard PCB", std_pcb_desc: "Single/double/multilayer, FR-4, quick-turn.",
-                hdi: "HDI PCB", hdi_desc: "Any-layer, microvias, 2.5/2.5mil line/space.",
-                high_layer: "High Multilayer", high_layer_desc: "10-30 layers, backplanes, server boards.",
-                metal_base: "Metal Core PCB", metal_base_desc: "Aluminum/Copper base for high-power LEDs.",
-                process_cap: "Capability",
-                process_table: { headers: ["Item", "Capability"], rows: [["Min Line", "2.5mil"], ["Min Hole", "0.15mm"], ["Max Thickness", "8.0mm"], ["Finishes", "ENIG/ImmAg/OSP/Hard Gold"]] },
-                prod_device: "Production Equipment",
-                prod_list: ["CNC Drilling", "Pulse Plating", "Vacuum Etching", "High Layer Press", "LDI"],
-                test_device: "Testing Equipment",
-                test_list: ["AOI", "Flying Probe", "X-ray", "Microscope", "Impedance Tester"]
+                "spec_labels": {
+                    "type": "Product Type",
+                    "layer": "Layer Count",
+                    "material": "Material",
+                    "copper": "Copper Thickness",
+                    "application": "Application"
+                },
+                "items": [
+                    {
+                        "id": "uav",
+                        "title": "8-Layer HDI PCB for UAVs",
+                        "image": "images/products/prod-uav.jpg",
+                        "tags": [
+                            "Automotive",
+                            "Aerospace"
+                        ],
+                        "specs": {
+                            "type": "ENIG + OSP + resin plug + blind/buried via",
+                            "layer": "8 layers",
+                            "material": "Shengyi S1000 TG170",
+                            "copper": "3/3",
+                            "application": "UAVs"
+                        }
+                    },
+                    {
+                        "id": "optical1",
+                        "title": "2-Layer ENIG-Pd PCB for Optical Modules",
+                        "image": "images/products/prod-optical1.jpg",
+                        "tags": [
+                            "Optical Communication"
+                        ],
+                        "specs": {
+                            "type": "Electroless nickel-palladium-gold",
+                            "layer": "2 layers",
+                            "material": "FR-4 0.9mm 1/1OZ TG135",
+                            "copper": "1/1",
+                            "application": "Optical modules"
+                        }
+                    },
+                    {
+                        "id": "optical2",
+                        "title": "Communication Product Display — 4-side Half-hole Optical Module PCB",
+                        "image": "images/products/prod-optical2.jpg",
+                        "tags": [
+                            "Optical Communication"
+                        ],
+                        "specs": {
+                            "type": "ENIG + 4-side half-hole",
+                            "layer": "4 layers",
+                            "material": "FR-4 0.8mm TG150",
+                            "copper": "1/1",
+                            "application": "Optical modules"
+                        }
+                    },
+                    {
+                        "id": "charging",
+                        "title": "2-Layer PCB for High-voltage Fast Charging",
+                        "image": "images/products/prod-charging.jpg",
+                        "tags": [
+                            "Automotive"
+                        ],
+                        "specs": {
+                            "type": "Lead-free HASL",
+                            "layer": "2 layers",
+                            "material": "FR-4 1.5mm TG135",
+                            "copper": "3/3",
+                            "application": "High-voltage fast charging"
+                        }
+                    },
+                    {
+                        "id": "power",
+                        "title": "2-Layer PCB for Power Main Board",
+                        "image": "images/products/prod-power.jpg",
+                        "tags": [
+                            "Consumer Electronics"
+                        ],
+                        "specs": {
+                            "type": "Aluminum-free HASL",
+                            "layer": "2 layers",
+                            "material": "FR-4 1.9mm TG135",
+                            "copper": "2/2",
+                            "application": "Power main board"
+                        }
+                    },
+                    {
+                        "id": "ai_server",
+                        "title": "6-Layer PCB for AI Servers",
+                        "image": "images/products/prod-ai_server.jpg",
+                        "tags": [
+                            "AI Server"
+                        ],
+                        "specs": {
+                            "type": "ENIG + backdrill + resin plug",
+                            "layer": "6 layers",
+                            "material": "Shengyi S1000-2M 1.6mm TG170",
+                            "copper": "2/2",
+                            "application": "AI servers"
+                        }
+                    },
+                    {
+                        "id": "medical",
+                        "title": "Precision Medical Instrument Main Board",
+                        "image": "images/products/prod-medical.jpg",
+                        "tags": [
+                            "Medical Devices"
+                        ],
+                        "specs": {
+                            "type": "ENIG",
+                            "layer": "4 layers",
+                            "material": "FR4 0.8mm TG135",
+                            "copper": "2/2OZ",
+                            "application": "Precision medical instrument main board"
+                        }
+                    },
+                    {
+                        "id": "ssd",
+                        "title": "2-Layer PCB for Mobile SSD",
+                        "image": "images/products/prod-ssd.jpg",
+                        "tags": [
+                            "Consumer Electronics"
+                        ],
+                        "specs": {
+                            "type": "OSP",
+                            "layer": "2 layers",
+                            "material": "FR4 0.9mm TG135",
+                            "copper": "1/1OZ",
+                            "application": "Mobile SSD"
+                        }
+                    }
+                ]
             },
             news_detail: {
                 company_news: "Company News",
@@ -930,7 +1185,7 @@
             const subIds = {
                 about: ["intro","capability","management","honor","structure","quality"],
                 industry: ["network","auto","smart","medical","power","consumer"],
-                products: ["std_pcb","hdi","high_layer","metal_base","process_cap","prod_device","test_device"],
+                products: ["uav","optical1","optical2","charging","power","ai_server","medical","ssd"],
                 news: ["company_news","industry_news"],
                 social: ["environment"],
                 contact: ["offices","message"]
@@ -1076,26 +1331,21 @@
     
     function renderProductsSingle(subId) {
         const d = t('products_detail');
-        const prodMap = {
-            std_pcb: { title: d.std_pcb, desc: d.std_pcb_desc },
-            hdi: { title: d.hdi, desc: d.hdi_desc },
-            high_layer: { title: d.high_layer, desc: d.high_layer_desc },
-            metal_base: { title: d.metal_base, desc: d.metal_base_desc },
-            process_cap: { title: d.process_cap, desc: null, table: d.process_table },
-            prod_device: { title: d.prod_device, desc: null, list: d.prod_list },
-            test_device: { title: d.test_device, desc: null, list: d.test_list }
-        };
-        const item = prodMap[subId];
+        const item = (d.items || []).find(it => it.id === subId);
         if (!item) return renderOverview('products');
-        let content = '';
-        if (item.desc) content = `<p>${item.desc}</p>`;
-        else if (item.table) {
-            const t = item.table;
-            content = `<div class="table-wrapper"><table class="capability-table"><thead><tr>${t.headers.map(h=>`<th>${h}</th>`).join('')}</tr></thead><tbody>${t.rows.map(row=>`<tr>${row.map(cell=>`<td>${cell}</td>`).join('')}</tr>`).join('')}</tbody></table></div>`;
-        } else if (item.list) {
-            content = `<div class="grid-2col">${item.list.map(dev=>`<div class="info-card"><i class="fas fa-microchip"></i> ${dev}</div>`).join('')}</div>`;
-        }
-        return `${renderCarousel('products', currentLang)}<div class="container"><div class="sub-section"><h2>${item.title}</h2>${content}</div></div>`;
+        const labels = d.spec_labels || {};
+        const specsHtml = Object.entries(item.specs || {}).map(([key, val]) =>
+            `<li><span class="spec-label">${labels[key] || key}</span><span class="spec-value">${val}</span></li>`
+        ).join('');
+        const tagsHtml = (item.tags || []).map(tag => `<span class="product-tag">${tag}</span>`).join('');
+        return `${renderCarousel('products', currentLang)}<div class="container"><div class="sub-section product-detail-wrap">
+            <div class="product-image-col"><img src="${item.image}" alt="${item.title}"></div>
+            <div class="product-info-col">
+                <h2>${item.title}</h2>
+                <div class="product-tags">${tagsHtml}</div>
+                <ul class="product-specs">${specsHtml}</ul>
+            </div>
+        </div></div>`;
     }
     
     function renderNewsSingle(subId) {
@@ -1167,7 +1417,7 @@
             const subIds = {
                 about: ["intro","capability","management","honor","structure","quality"],
                 industry: ["network","auto","smart","medical","power","consumer"],
-                products: ["std_pcb","hdi","high_layer","metal_base","process_cap","prod_device","test_device"],
+                products: ["uav","optical1","optical2","charging","power","ai_server","medical","ssd"],
                 news: ["company_news","industry_news"],
                 social: ["environment"],
                 contact: ["offices","message"]
