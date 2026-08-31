@@ -563,36 +563,36 @@
     "about": {
       "zh": [
         {
-          "image": "https://picsum.photos/id/20/1600/500",
+          "image": "images/carousel/company-lobby.jpg",
           "title": "精密智造",
-          "desc": "高精度PCB生产线，工业4.0智能工厂"
+          "desc": "标准化生产基地，高精度PCB生产线"
         },
         {
-          "image": "https://picsum.photos/id/26/1600/500",
-          "title": "创新驱动",
-          "desc": "每年投入营收8%用于研发"
+          "image": "images/carousel/product-aerospace.jpg",
+          "title": "航空航天",
+          "desc": "多层高精密板，广泛应用于无人机与航天航空领域"
         },
         {
-          "image": "https://picsum.photos/id/96/1600/500",
-          "title": "全球服务",
-          "desc": "产品远销欧美、东南亚"
+          "image": "images/carousel/product-ai-server.jpg",
+          "title": "AI服务",
+          "desc": "沉金+背钻+树脂塞孔工艺，应用于AI服务器"
         }
       ],
       "en": [
         {
-          "image": "https://picsum.photos/id/20/1600/500",
+          "image": "images/carousel/company-lobby.jpg",
           "title": "Precision Manufacturing",
-          "desc": "Industry 4.0 smart factory"
+          "desc": "Standardized production base with high-precision PCB lines"
         },
         {
-          "image": "https://picsum.photos/id/26/1600/500",
-          "title": "Innovation Driven",
-          "desc": "8% revenue in R&D"
+          "image": "images/carousel/product-aerospace.jpg",
+          "title": "Aerospace",
+          "desc": "High-precision multilayer PCBs for drones and aerospace"
         },
         {
-          "image": "https://picsum.photos/id/96/1600/500",
-          "title": "Global Service",
-          "desc": "Serving worldwide clients"
+          "image": "images/carousel/product-ai-server.jpg",
+          "title": "AI Server",
+          "desc": "ENIG + backdrill + resin plugging for AI servers"
         }
       ]
     },
