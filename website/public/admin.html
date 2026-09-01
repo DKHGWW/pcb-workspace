@@ -288,6 +288,74 @@
             min-height: 70px;
             resize: vertical;
         }
+        /* ---- 产品技术编辑器 ---- */
+        .prod-edit-card {
+            border: 1px solid #e2e8f0;
+            border-radius: 16px;
+            padding: 16px 18px;
+            margin-bottom: 18px;
+            background: #fff;
+        }
+        .prod-edit-head {
+            font-weight: 600;
+            color: #1e4a7a;
+            margin-bottom: 12px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .prod-edit-head input { width: auto; flex: 1; }
+        .img-preview {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin-top: 8px;
+        }
+        .img-preview img {
+            width: 90px;
+            height: 64px;
+            object-fit: cover;
+            border-radius: 8px;
+            border: 1px solid #e2e8f0;
+            background: #f1f5f9;
+        }
+        table.spec-edit {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 10px;
+        }
+        table.spec-edit th {
+            text-align: left;
+            font-size: 0.75rem;
+            color: #64748b;
+            padding: 6px 8px;
+            border-bottom: 1px solid #e2e8f0;
+        }
+        table.spec-edit td {
+            padding: 4px 8px 4px 0;
+            vertical-align: middle;
+        }
+        table.spec-edit td input { width: 100%; }
+        .spec-add, .prod-del, #prod-add {
+            border: 1px dashed #94a3b8;
+            background: #f8fafc;
+            color: #334155;
+            border-radius: 10px;
+            padding: 6px 14px;
+            cursor: pointer;
+            font-size: 0.82rem;
+            margin-right: 8px;
+        }
+        .spec-del {
+            border: 1px solid #fecaca;
+            background: #fef2f2;
+            color: #dc2626;
+            border-radius: 8px;
+            padding: 4px 10px;
+            cursor: pointer;
+            font-size: 0.78rem;
+        }
+        .spec-add:hover, .prod-del:hover, #prod-add:hover { background: #eef2ff; }
         .form-row {
             display: grid;
             grid-template-columns: 1fr 1fr;
@@ -1045,12 +1113,29 @@
             });
             html += `</div>`;
 
-            // ---- 产品技术 ----
-            html += `<div class="section-card"><div class="section-title"><i class="fas fa-microchip"></i> 产品技术</div>`;
-            const productsJson = JSON.stringify(data.products_detail || {}, null, 2);
-            html +=
-                `<div class="form-group"><label>产品列表 (JSON格式，保存后自动生效)</label><textarea rows="20" data-key="products_detail">${escapeHtml(productsJson)}</textarea></div>`;
-            html += `</div>`;
+            // ---- 产品技术：结构化编辑器（插图 + 参数表格） ----
+            const pdData = data.products_detail || { items: [], spec_labels: {} };
+            const pdLabels = pdData.spec_labels || {};
+            let prodHtml = `<div class="section-card"><div class="section-title"><i class="fas fa-microchip"></i> 产品技术（插图与参数表格）</div>`;
+            (pdData.items || []).forEach((item, idx) => {
+                const imgs = Array.isArray(item.images) ? item.images : (item.image ? [item.image] : []);
+                const specKeys = Object.keys(item.specs || {});
+                prodHtml += `<div class="prod-edit-card" data-id="${escapeHtml(item.id || '')}" data-image="${escapeHtml(item.image || '')}">
+                    <div class="prod-edit-head">产品 ${idx + 1} · <input type="text" data-pf="title" value="${escapeHtml(item.title || '')}"></div>
+                    <div class="form-group"><label>插图图片路径（每行一张，第一张为主图；可填本地路径如 images/products/xxx.jpg 或完整URL）</label><textarea rows="3" data-pf="images">${escapeHtml(imgs.join('\n'))}</textarea><div class="img-preview" data-preview></div></div>
+                    <div class="form-group"><label>标签（每行一个）</label><textarea rows="2" data-pf="tags">${escapeHtml((item.tags || []).join('\n'))}</textarea></div>
+                    <div class="form-group"><label>参数表格（可在后台增删行）</label>
+                        <table class="spec-edit"><thead><tr><th>参数名</th><th>参数值</th><th></th></tr></thead>
+                        <tbody data-specs>`;
+                specKeys.forEach(k => {
+                    prodHtml += `<tr data-sk="${escapeHtml(k)}"><td><input type="text" data-sf="label" value="${escapeHtml(pdLabels[k] || '')}"></td><td><input type="text" data-sf="value" value="${escapeHtml(item.specs[k] || '')}"></td><td><button type="button" class="spec-del">删除</button></td></tr>`;
+                });
+                prodHtml += `</tbody></table><button type="button" class="spec-add">+ 添加参数行</button>
+                        <button type="button" class="prod-del">删除该产品</button></div>
+                </div>`;
+            });
+            prodHtml += `<button type="button" id="prod-add">+ 添加产品</button></div>`;
+            html += prodHtml;
 
             // ---- 新闻 ----
             html += `<div class="section-card"><div class="section-title"><i class="fas fa-newspaper"></i> 新闻中心</div>`;
@@ -1116,6 +1201,65 @@
                     setNested(config.langText[lang], key, lines);
                 }
             });
+
+            // 产品技术：插图与参数表格 结构化编辑
+            function refreshProdPreview(card) {
+                const ta = card.querySelector('[data-pf="images"]');
+                const prev = card.querySelector('[data-preview]');
+                if (!prev || !ta) return;
+                prev.innerHTML = ta.value.split('\n').map(s => s.trim()).filter(Boolean)
+                    .map(src => `<img src="${src}" alt="预览" onerror="this.style.opacity=0.25">`).join('');
+            }
+            function rebuildProductsDetail() {
+                const items = []; const spec_labels = {};
+                container.querySelectorAll('.prod-edit-card').forEach(card => {
+                    const title = card.querySelector('[data-pf="title"]').value.trim();
+                    const imgs = card.querySelector('[data-pf="images"]').value.split('\n').map(s => s.trim()).filter(Boolean);
+                    const tags = card.querySelector('[data-pf="tags"]').value.split('\n').map(s => s.trim()).filter(Boolean);
+                    const specs = {};
+                    card.querySelectorAll('tbody[data-specs] tr[data-sk]').forEach(tr => {
+                        const label = tr.querySelector('[data-sf="label"]').value.trim();
+                        const value = tr.querySelector('[data-sf="value"]').value.trim();
+                        let key = tr.getAttribute('data-sk');
+                        if (!key) { key = 'param_' + Math.random().toString(36).slice(2, 8); tr.setAttribute('data-sk', key); }
+                        if (label || value) { specs[key] = value; spec_labels[key] = label || key; }
+                    });
+                    const item = { id: card.getAttribute('data-id') || title, title, specs };
+                    if (imgs.length) { item.images = imgs; item.image = imgs[0]; }
+                    else { item.image = card.getAttribute('data-image') || ''; }
+                    if (tags.length) item.tags = tags;
+                    items.push(item);
+                });
+                setNested(config.langText[lang], 'products_detail', { spec_labels, items });
+            }
+            function bindDel(btn) { btn.addEventListener('click', () => { btn.closest('tr').remove(); rebuildProductsDetail(); }); }
+            container.querySelectorAll('.prod-edit-card').forEach(card => {
+                refreshProdPreview(card);
+                card.addEventListener('input', e => {
+                    if (e.target.matches('[data-pf="images"]')) refreshProdPreview(card);
+                    rebuildProductsDetail();
+                });
+                card.querySelectorAll('.spec-del').forEach(bindDel);
+            });
+            container.querySelectorAll('.spec-add').forEach(btn => btn.addEventListener('click', () => {
+                const tbody = btn.closest('.prod-edit-card').querySelector('tbody[data-specs]');
+                const tr = document.createElement('tr'); tr.setAttribute('data-sk', '');
+                tr.innerHTML = `<td><input type="text" data-sf="label" placeholder="参数名"></td><td><input type="text" data-sf="value" placeholder="参数值"></td><td><button type="button" class="spec-del">删除</button></td>`;
+                tbody.appendChild(tr); bindDel(tr.querySelector('.spec-del')); rebuildProductsDetail();
+            }));
+            container.querySelectorAll('.prod-del').forEach(btn => btn.addEventListener('click', () => {
+                btn.closest('.prod-edit-card').remove(); rebuildProductsDetail();
+            }));
+            const prodAdd = container.querySelector('#prod-add');
+            if (prodAdd) prodAdd.addEventListener('click', () => {
+                rebuildProductsDetail();
+                const pd = config.langText[lang].products_detail || { items: [], spec_labels: {} };
+                pd.items = pd.items || [];
+                pd.items.push({ id: 'new_' + Date.now(), title: '新产品的标题', image: '', tags: [], specs: {} });
+                setNested(config.langText[lang], 'products_detail', pd);
+                renderTextEditor(lang);
+            });
+
         }
 
         // ---------- 4.2 轮播图 ----------

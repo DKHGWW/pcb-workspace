@@ -319,6 +319,7 @@
         .info-card { background: #f8fafc; border-radius: 20px; padding: 20px; }
         .info-card h3 { margin-bottom: 12px; color: #1e4a7a; }
         .product-detail-wrap { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; align-items: start; }
+        .product-image-col { display: flex; flex-direction: column; gap: 16px; }
         .product-image-col img { width: 100%; height: auto; border-radius: 20px; box-shadow: 0 10px 30px rgba(0,0,0,0.1); }
         .product-info-col h2 { font-size: 1.8rem; margin-bottom: 16px; }
         .product-tags { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 24px; }
@@ -1337,9 +1338,11 @@
         const specsHtml = Object.entries(item.specs || {}).map(([key, val]) =>
             `<li><span class="spec-label">${labels[key] || key}</span><span class="spec-value">${val}</span></li>`
         ).join('');
+        const imgs = Array.isArray(item.images) ? item.images : (item.image ? [item.image] : []);
+        const imgsHtml = imgs.map(src => `<img src="${src}" alt="${item.title}">`).join('');
         const tagsHtml = (item.tags || []).map(tag => `<span class="product-tag">${tag}</span>`).join('');
         return `${renderCarousel('products', currentLang)}<div class="container"><div class="sub-section product-detail-wrap">
-            <div class="product-image-col"><img src="${item.image}" alt="${item.title}"></div>
+            <div class="product-image-col">${imgsHtml}</div>
             <div class="product-info-col">
                 <h2>${item.title}</h2>
                 <div class="product-tags">${tagsHtml}</div>
