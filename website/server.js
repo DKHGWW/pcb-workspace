@@ -126,7 +126,11 @@ const DEFAULT_CONFIG = {
       },
       contact_detail: {
         offices: "服务据点",
-        office_list: ["总部：四川省遂宁市经济技术开发区渠河南路188号电子电路标准厂房一期3号楼", "华南办事处：深圳南山区", "华东办事处：苏州工业园区"],
+        office_list: [
+          { region: "华南服务中心（深圳）", address: "深圳市宝安区沙井西环路2004号 稳盈现代中心602-2", contact: "冯镇", phone: "19909061288" },
+          { region: "四川遂宁总部", address: "四川省遂宁市经济技术开发区渠河南路188号电子电路标准厂房一期3号楼", contact: "刘辉", phone: "19909069888" },
+          { region: "华中服务中心（武汉）", address: "湖北省武汉市江夏经济开发区东方雨林10栋2703", contact: "陈君", phone: "18062717837" }
+        ],
         message_title: "在线留言",
         name_placeholder: "您的姓名",
         email_placeholder: "邮箱地址",
@@ -243,7 +247,11 @@ const DEFAULT_CONFIG = {
       },
       contact_detail: {
         offices: "Service Locations",
-        office_list: ["HQ: Building 3, Phase I, Electronic Circuit Standard Plant, No.188 Quhe South Road, Suining", "Shenzhen Office: Nanshan District", "Suzhou Office: SIP"],
+        office_list: [
+          { region: "South China Service Center (Shenzhen)", address: "Room 602-2, Wenying Modern Center, No.2004 Xihuan Road, Shajing, Bao'an District, Shenzhen", contact: "Feng Zhen", phone: "19909061288" },
+          { region: "Suining HQ (Sichuan)", address: "Building 3, Phase I, Electronic Circuit Standard Plant, No.188 Quhe South Road, Suining Economic Development Zone, Sichuan", contact: "Liu Hui", phone: "19909069888" },
+          { region: "Central China Service Center (Wuhan)", address: "Building 10, Room 2703, Oriental Rainforest, Jiangxia Economic Development Zone, Wuhan, Hubei", contact: "Chen Jun", phone: "18062717837" }
+        ],
         message_title: "Online Message",
         name_placeholder: "Your Name",
         email_placeholder: "Email",

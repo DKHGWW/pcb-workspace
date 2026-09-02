@@ -296,6 +296,8 @@
             margin-bottom: 18px;
             background: #fff;
         }
+        .office-edit-card { border: 1px solid #e2e8f0; border-radius: 16px; padding: 16px 18px; margin-bottom: 18px; background: #fff; }
+        .office-edit-card input { width: 100%; padding: 8px 10px; border: 1px solid #cbd5e1; border-radius: 10px; margin-bottom: 8px; }
         .prod-edit-head {
             font-weight: 600;
             color: #1e4a7a;
@@ -700,8 +702,10 @@
                     },
                     contact_detail: {
                         offices: "服务据点",
-                        office_list: ["总部：四川省遂宁市经济技术开发区渠河南路188号电子电路标准厂房一期3号楼", "华南办事处：深圳南山区",
-                            "华东办事处：苏州工业园区"
+                        office_list: [
+                            { region: "华南服务中心（深圳）", address: "深圳市宝安区沙井西环路2004号 稳盈现代中心602-2", contact: "冯镇", phone: "19909061288" },
+                            { region: "四川遂宁总部", address: "四川省遂宁市经济技术开发区渠河南路188号电子电路标准厂房一期3号楼", contact: "刘辉", phone: "19909069888" },
+                            { region: "华中服务中心（武汉）", address: "湖北省武汉市江夏经济开发区东方雨林10栋2703", contact: "陈君", phone: "18062717837" }
                         ],
                         message_title: "在线留言",
                         name_placeholder: "您的姓名",
@@ -819,8 +823,10 @@
                     },
                     contact_detail: {
                         offices: "Service Locations",
-                        office_list: ["HQ: Building 3, Phase I, Electronic Circuit Standard Plant, No.188 Quhe South Road, Suining",
-                            "Shenzhen Office: Nanshan District", "Suzhou Office: SIP"
+                        office_list: [
+                            { region: "South China Service Center (Shenzhen)", address: "Room 602-2, Wenying Modern Center, No.2004 Xihuan Road, Shajing, Bao'an District, Shenzhen", contact: "Feng Zhen", phone: "19909061288" },
+                            { region: "Suining HQ (Sichuan)", address: "Building 3, Phase I, Electronic Circuit Standard Plant, No.188 Quhe South Road, Suining Economic Development Zone, Sichuan", contact: "Liu Hui", phone: "19909069888" },
+                            { region: "Central China Service Center (Wuhan)", address: "Building 10, Room 2703, Oriental Rainforest, Jiangxia Economic Development Zone, Wuhan, Hubei", contact: "Chen Jun", phone: "18062717837" }
                         ],
                         message_title: "Online Message",
                         name_placeholder: "Your Name",
@@ -1158,9 +1164,7 @@
             // ---- 联系我们 ----
             html += `<div class="section-card"><div class="section-title"><i class="fas fa-phone"></i> 联系我们</div>`;
             html += input('contact_detail.offices', '服务据点标题');
-            const offList = (data.contact_detail?.office_list || []).join('\n');
-            html +=
-                `<div class="form-group"><label>服务据点 (每行一项)</label><textarea rows="4" data-key="contact_detail.office_list">${escapeHtml(offList)}</textarea></div>`;
+            html += `<div class="form-group"><label>服务据点（据点卡片，可增删）</label><div class="office-edit-list" id="office-edit-list"></div><button type="button" class="spec-add" id="office-add">+ 添加据点</button></div>`;
             html += input('contact_detail.message_title', '在线留言标题');
             html += input('contact_detail.name_placeholder', '姓名占位');
             html += input('contact_detail.email_placeholder', '邮箱占位');
@@ -1259,6 +1263,41 @@
                 setNested(config.langText[lang], 'products_detail', pd);
                 renderTextEditor(lang);
             });
+
+            // 服务据点：结构化卡片编辑
+            function rebuildOfficeList() {
+                const list = [];
+                container.querySelectorAll('.office-edit-card').forEach(card => {
+                    const region = card.querySelector('[data-of="region"]').value.trim();
+                    const address = card.querySelector('[data-of="address"]').value.trim();
+                    const contact = card.querySelector('[data-of="contact"]').value.trim();
+                    const phone = card.querySelector('[data-of="phone"]').value.trim();
+                    list.push({ region, address, contact, phone });
+                });
+                setNested(config.langText[lang], 'contact_detail.office_list', list);
+            }
+            function buildOfficeCard(o) {
+                const card = document.createElement('div');
+                card.className = 'office-edit-card';
+                card.innerHTML = `
+                    <div class="office-edit-head"><strong>据点</strong><button type="button" class="spec-del">删除</button></div>
+                    <input type="text" data-of="region" placeholder="区域/名称（如：华南服务中心（深圳））" value="${escapeHtml(o.region || '')}">
+                    <input type="text" data-of="address" placeholder="详细地址" value="${escapeHtml(o.address || '')}">
+                    <input type="text" data-of="contact" placeholder="联系人" value="${escapeHtml(o.contact || '')}">
+                    <input type="text" data-of="phone" placeholder="联系电话" value="${escapeHtml(o.phone || '')}">`;
+                card.addEventListener('input', rebuildOfficeList);
+                card.querySelector('.spec-del').addEventListener('click', () => { card.remove(); rebuildOfficeList(); });
+                return card;
+            }
+            const officeListEl = container.querySelector('#office-edit-list');
+            if (officeListEl) {
+                (config.langText[lang].contact_detail?.office_list || []).forEach(o => officeListEl.appendChild(buildOfficeCard(o)));
+                const officeAdd = container.querySelector('#office-add');
+                if (officeAdd) officeAdd.addEventListener('click', () => {
+                    officeListEl.appendChild(buildOfficeCard({ region: '', address: '', contact: '', phone: '' }));
+                    rebuildOfficeList();
+                });
+            }
 
         }
 

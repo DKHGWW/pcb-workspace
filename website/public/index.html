@@ -340,6 +340,14 @@
         .contact-form button {
             background: #2563eb; color: white; border: none; padding: 12px 24px; border-radius: 40px; cursor: pointer;
         }
+        .office-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 24px; margin-top: 24px; }
+        .office-card { background: #fff; border: 1px solid #e2e8f0; border-radius: 18px; padding: 24px; box-shadow: 0 6px 18px rgba(37,99,235,0.06); transition: transform .2s, box-shadow .2s; }
+        .office-card:hover { transform: translateY(-4px); box-shadow: 0 12px 28px rgba(37,99,235,0.12); }
+        .office-region { font-size: 20px; font-weight: 700; color: #1e3a8a; margin-bottom: 14px; padding-bottom: 12px; border-bottom: 2px solid #eff6ff; }
+        .office-line { display: flex; align-items: flex-start; gap: 10px; margin: 10px 0; color: #334155; line-height: 1.5; }
+        .office-ico { flex: none; }
+        .office-line a { color: #2563eb; text-decoration: none; font-weight: 600; }
+        .office-line a:hover { text-decoration: underline; }
         
         .social-statement {
             background: #eef2ff; border-radius: 28px; padding: 40px 28px; margin: 60px auto 0;
@@ -676,7 +684,11 @@
             },
             contact_detail: {
                 offices: "服务据点",
-                office_list: ["总部：四川省遂宁市经济技术开发区渠河南路188号电子电路标准厂房一期3号楼", "华南办事处：深圳南山区", "华东办事处：苏州工业园区"],
+                office_list: [
+                    { region: "华南服务中心（深圳）", address: "深圳市宝安区沙井西环路2004号 稳盈现代中心602-2", contact: "冯镇", phone: "19909061288" },
+                    { region: "四川遂宁总部", address: "四川省遂宁市经济技术开发区渠河南路188号电子电路标准厂房一期3号楼", contact: "刘辉", phone: "19909069888" },
+                    { region: "华中服务中心（武汉）", address: "湖北省武汉市江夏经济开发区东方雨林10栋2703", contact: "陈君", phone: "18062717837" }
+                ],
                 message_title: "在线留言",
                 name_placeholder: "您的姓名",
                 email_placeholder: "邮箱地址",
@@ -892,7 +904,11 @@
             },
             contact_detail: {
                 offices: "Service Locations",
-                office_list: ["HQ: Building 3, Phase I, Electronic Circuit Standard Plant, No.188 Quhe South Road, Suining", "Shenzhen Office: Nanshan District", "Suzhou Office: SIP"],
+                office_list: [
+                    { region: "South China Service Center (Shenzhen)", address: "Room 602-2, Wenying Modern Center, No.2004 Xihuan Road, Shajing, Bao'an District, Shenzhen", contact: "Feng Zhen", phone: "19909061288" },
+                    { region: "Suining HQ (Sichuan)", address: "Building 3, Phase I, Electronic Circuit Standard Plant, No.188 Quhe South Road, Suining Economic Development Zone, Sichuan", contact: "Liu Hui", phone: "19909069888" },
+                    { region: "Central China Service Center (Wuhan)", address: "Building 10, Room 2703, Oriental Rainforest, Jiangxia Economic Development Zone, Wuhan, Hubei", contact: "Chen Jun", phone: "18062717837" }
+                ],
                 message_title: "Online Message",
                 name_placeholder: "Your Name",
                 email_placeholder: "Email",
@@ -1372,7 +1388,14 @@
     function renderContactSingle(subId) {
         const d = t('contact_detail');
         if (subId === 'offices') {
-            return `${renderCarousel('contact', currentLang)}<div class="container"><div class="sub-section"><h2>${d.offices}</h2><ul>${d.office_list.map(o=>`<li>${o}</li>`).join('')}</ul></div></div>`;
+            const officeCards = (d.office_list || []).map(o => `
+                <div class="office-card">
+                    <div class="office-region">${o.region || ''}</div>
+                    <div class="office-line"><span class="office-ico">📍</span><span>${o.address || ''}</span></div>
+                    <div class="office-line"><span class="office-ico">👤</span><span>联系人：${o.contact || ''}</span></div>
+                    <div class="office-line"><span class="office-ico">📞</span><span>电话：<a href="tel:${o.phone || ''}">${o.phone || ''}</a></span></div>
+                </div>`).join('');
+            return `${renderCarousel('contact', currentLang)}<div class="container"><div class="sub-section"><h2>${d.offices}</h2><div class="office-grid">${officeCards}</div></div></div>`;
         } else if (subId === 'message') {
             const msgHtml = `<div class="sub-section"><h2>${d.message_title}</h2><form class="contact-form" id="contactForm" onsubmit="return submitContact(event)"><input type="text" id="cf_name" placeholder="${d.name_placeholder}" required><input type="email" id="cf_email" placeholder="${d.email_placeholder}" required><input type="text" id="cf_company" placeholder="${d.company_placeholder}"><textarea rows="4" id="cf_msg" placeholder="${d.msg_placeholder}" required></textarea><button type="submit">${d.submit}</button></form><div id="cf_status" class="form-status"></div></div>`;
             return `${renderCarousel('contact', currentLang)}<div class="container">${msgHtml}</div>`;
