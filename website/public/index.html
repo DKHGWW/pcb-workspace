@@ -174,15 +174,6 @@
             color: white;
             background-color: #1e293b;
         }
-        .carousel-caption {
-            background: rgba(0,0,0,0.5);
-            padding: 20px;
-            border-radius: 20px;
-            max-width: 80%;
-            backdrop-filter: blur(4px);
-        }
-        .carousel-caption h3 { font-size: 2rem; margin-bottom: 10px; }
-        .carousel-caption p { font-size: 1rem; }
         .carousel-indicators {
             position: absolute;
             bottom: 20px;
@@ -394,8 +385,6 @@
         
         @media (max-width: 768px) {
             .carousel-inner { height: 280px; }
-            .carousel-caption h3 { font-size: 1.2rem; }
-            .carousel-caption p { font-size: 0.8rem; }
             .carousel-prev, .carousel-next { width: 32px; height: 32px; font-size: 16px; }
             .carousel-prev { left: 8px; }
             .carousel-next { right: 8px; }
@@ -1178,7 +1167,7 @@
         let itemsHtml = '';
         let indicatorsHtml = '';
         itemsData.forEach((item, idx) => {
-            itemsHtml += `<div class="carousel-item" style="background-image: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.4)), url('${item.image}');"><div class="carousel-caption"><h3>${item.title}</h3><p>${item.desc}</p></div></div>`;
+            itemsHtml += `<div class="carousel-item" style="background-image: url('${item.image}');"></div>`;
             indicatorsHtml += `<span class="${idx === 0 ? 'active' : ''}" data-index="${idx}"></span>`;
         });
         return `
