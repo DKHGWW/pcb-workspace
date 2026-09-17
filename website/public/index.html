@@ -301,6 +301,31 @@
             object-fit: cover;
             background: #0f172a;
         }
+        .about-stats {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 16px;
+            margin-top: 28px;
+        }
+        .stat-item {
+            background: linear-gradient(135deg, #0f2b5e 0%, #1e4a7a 100%);
+            color: #fff;
+            border-radius: 14px;
+            padding: 20px 14px;
+            text-align: center;
+            box-shadow: 0 6px 18px rgba(15,43,94,0.15);
+        }
+        .stat-value {
+            font-size: 1.5rem;
+            font-weight: 700;
+            line-height: 1.2;
+            letter-spacing: 0.5px;
+        }
+        .stat-label {
+            margin-top: 8px;
+            font-size: 0.9rem;
+            opacity: 0.9;
+        }
         .video-hint {
             position: absolute;
             bottom: 0; left: 0; right: 0;
@@ -416,6 +441,8 @@
 
             .about-intro-grid { grid-template-columns: 1fr; gap: 24px; }
             .about-video-wrap { margin-top: 8px; }
+            .about-stats { grid-template-columns: repeat(2, 1fr); }
+            @media (max-width: 520px) { .about-stats { grid-template-columns: 1fr; } }
             
             .dropdown { width: 100%; text-align: center; }
             .dropdown-menu {
@@ -519,7 +546,13 @@
             },
             about_detail: {
                 intro: "公司简介",
-                intro_text: "四川井明电子有限公司始创于2011年，前身为遂宁豪尔思电子科技有限公司，整合宏安兴盛、豪尔思电子深耕行业近二十年之积淀，坐落于遂宁国家经济技术开发区电子电路产业园。公司现有员工400余人，标准化厂房面积30,000平方米，月生产能力100万平方英尺。\n\n公司专业从事双面及多层高精密HDI、高难度印制线路板的研发、设计、精密生产与配套服务，产品广泛应用于计算机、数据通讯、商业航天、汽车电子、消费类电子、电讯业、AI智能等相关生产企业，远销欧美日韩等国内外市场，服务客户200余家，覆盖30余个地区。企业资质齐全，拥有IATF16949、ISO9001、ISO14001、UL、CQC权威认证，产品符合RoHS环保标准。\n\n公司秉承“诚信、创新、效率、协作、共享”的经营理念，倡导“优质服务、客户满意、互惠互利、持续发展”的价值理念，坚持以人为本、培训考核、激发潜能，致力于不断提高顾客满意度，打造PCB业界特色名牌企业。",
+                intro_text: "四川井明电子有限公司始创于2011年，前身为遂宁豪尔思电子科技有限公司，整合宏安兴盛、豪尔思电子深耕行业近二十年之积淀，坐落于遂宁国家经济技术开发区电子电路产业园。公司现有员工400余人，标准化厂房面积40,000余平方米，月生产能力10万平方米。\n\n公司专业从事双面及多层高精密HDI、高难度印制线路板的研发、设计、精密生产与配套服务，产品广泛应用于计算机、数据通讯、商业航天、汽车电子、消费类电子、电讯业、AI智能等相关生产企业，远销欧美日韩等国内外市场，服务客户200余家，覆盖30余个地区。企业资质齐全，拥有IATF16949、ISO9001、ISO14001、UL、CQC权威认证，产品符合RoHS环保标准。\n\n公司秉承“诚信、创新、效率、协作、共享”的经营理念，倡导“优质服务、客户满意、互惠互利、持续发展”的价值理念，坚持以人为本、培训考核、激发潜能，致力于不断提高顾客满意度，打造PCB业界特色名牌企业。",
+                stats: [
+                    { value: "40,000⁺ ㎡", label: "厂房面积" },
+                    { value: "10 万㎡", label: "月生产能力" },
+                    { value: "400⁺ 人", label: "员工人数" },
+                    { value: "200⁺ 家", label: "服务客户" }
+                ],
                 capability: "制程能力",
                 capability_table: { headers: ["核心技术项", "井明标准能力", "特级能力"], rows: [["最大生产层数","24层","30层"],["最小线宽/线距","75/75μm","60/60μm"],["最小机械孔径","0.2mm","0.15mm"],["最大纵横比","20:1","25:1"],["阻抗控制公差","±10%","±7%"],["板翘控制","<0.75%","<0.5%"]] },
                 management: "管理体系",
@@ -739,7 +772,13 @@
             },
             about_detail: {
                 intro: "Company Profile",
-                intro_text: "Sichuan Kinming Electronics Co., Ltd. was founded in 2011 (formerly Suining Haoersi Electronic Technology Co., Ltd.), integrating nearly two decades of industry expertise from Hong'an Xingsheng and Haoersi. Located in Suining National Economic and Technological Development Zone Electronic Circuit Industrial Park, we have over 400 employees, 30,000 m² standardized factory space and monthly capacity of 1 million sq ft.\n\nWe specialize in R&D, design, precision production and supporting services of double-sided and multilayer high-precision HDI and high-difficulty PCBs. Our products are widely used in computers, data communications, commercial aerospace, automotive electronics, consumer electronics, telecommunications, AI and related industries, exported to Europe, America, Japan, Korea and other markets, serving 200+ customers across 30+ regions. We hold IATF16949, ISO9001, ISO14001, UL, CQC and other certifications, with RoHS-compliant products.\n\nUpholding the business philosophy of \"Integrity, Innovation, Efficiency, Collaboration, Sharing\" and the value concept of \"Quality Service, Customer Satisfaction, Mutual Benefit, Sustainable Development\", we are committed to improving customer satisfaction and building a distinctive brand in the PCB industry.",
+                intro_text: "Sichuan Kinming Electronics Co., Ltd. was founded in 2011 (formerly Suining Haoersi Electronic Technology Co., Ltd.), integrating nearly two decades of industry expertise from Hong'an Xingsheng and Haoersi. Located in Suining National Economic and Technological Development Zone Electronic Circuit Industrial Park, we have over 400 employees, 40,000⁺ m² standardized factory space and monthly capacity of 100,000 m².\n\nWe specialize in R&D, design, precision production and supporting services of double-sided and multilayer high-precision HDI and high-difficulty PCBs. Our products are widely used in computers, data communications, commercial aerospace, automotive electronics, consumer electronics, telecommunications, AI and related industries, exported to Europe, America, Japan, Korea and other markets, serving 200+ customers across 30+ regions. We hold IATF16949, ISO9001, ISO14001, UL, CQC and other certifications, with RoHS-compliant products.\n\nUpholding the business philosophy of \"Integrity, Innovation, Efficiency, Collaboration, Sharing\" and the value concept of \"Quality Service, Customer Satisfaction, Mutual Benefit, Sustainable Development\", we are committed to improving customer satisfaction and building a distinctive brand in the PCB industry.",
+                stats: [
+                    { value: "40,000⁺ m²", label: "Plant Area" },
+                    { value: "100k m²", label: "Monthly Capacity" },
+                    { value: "400⁺", label: "Employees" },
+                    { value: "200⁺", label: "Clients" }
+                ],
                 capability: "Process Capability",
                 capability_table: { headers: ["Technology", "Standard", "Special"], rows: [["Max Layers","24","30"],["Line/Space","75/75μm","60/60μm"],["Min Hole","0.2mm","0.15mm"],["Aspect Ratio","20:1","25:1"],["Impedance","±10%","±7%"],["Warpage","<0.75%","<0.5%"]] },
                 management: "Management System",
@@ -1317,7 +1356,7 @@
         const d = t('about_detail');
         const cap = d.capability_table;
         const sections = {
-            intro: { title: d.intro, content: `<div class="about-intro-grid"><div class="about-intro-text">${d.intro_text.split('\n\n').map(p=>`<p>${p}</p>`).join('')}</div><div class="about-video-wrap"><video controls poster="e7af5013ff6f7f414c0eff4a6de2f6e4.png"><source src="${d.video_url || 'videos/company.mp4'}" type="video/mp4">您的浏览器不支持视频播放。</video>${(d.video_url && d.video_url !== 'videos/__placeholder__.mp4') ? '' : '<div class="video-hint">请将公司宣传视频上传为 website/public/videos/company.mp4（或在后台「关于井明」中填写视频地址）</div>'}</div></div>` },
+            intro: { title: d.intro, content: `<div class="about-intro-grid"><div class="about-intro-text">${d.intro_text.split('\n\n').map(p=>`<p>${p}</p>`).join('')}</div><div class="about-video-wrap"><video controls poster="e7af5013ff6f7f414c0eff4a6de2f6e4.png"><source src="${d.video_url || 'videos/company.mp4'}" type="video/mp4">您的浏览器不支持视频播放。</video>${(d.video_url && d.video_url !== 'videos/__placeholder__.mp4') ? '' : '<div class="video-hint">请将公司宣传视频上传为 website/public/videos/company.mp4（或在后台「关于井明」中填写视频地址）</div>'}</div></div>${Array.isArray(d.stats) && d.stats.length ? `<div class="about-stats">${d.stats.map(s=>`<div class="stat-item"><div class="stat-value">${s.value}</div><div class="stat-label">${s.label}</div></div>`).join('')}</div>` : ''}` },
             capability: { title: d.capability, content: `<div class="table-wrapper"><table class="capability-table"><thead><tr>${cap.headers.map(h=>`<th>${h}</th>`).join('')}</tr></thead><tbody>${cap.rows.map(row=>`<tr>${row.map(cell=>`<td>${cell}</td>`).join('')}</tr>`).join('')}</tbody></table></div></div>` },
             management: { title: d.management, content: `<p>${d.management_text}</p>` },
             honor: { title: d.honor, content: `<ul>${d.honor_list.map(h=>`<li>${h}</li>`).join('')}</ul>` },
