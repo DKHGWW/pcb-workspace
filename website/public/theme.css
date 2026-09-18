@@ -169,7 +169,7 @@ body {
 }
 .hero-title {
   font-size: 3rem; font-weight: 800; line-height: 1.15; margin-bottom: 18px;
-  letter-spacing: .5px;
+  letter-spacing: .5px; color: #fff;
 }
 .hero-sub { font-size: 1.15rem; color: rgba(255,255,255,.86); max-width: 760px; margin-bottom: 32px; }
 .hero-cta { display: flex; gap: 16px; flex-wrap: wrap; }
