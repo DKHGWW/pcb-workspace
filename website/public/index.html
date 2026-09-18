@@ -446,8 +446,20 @@
             .mobile-lang-wrapper { display: block; margin-top: 10px; }
         }
     </style>
+    <link rel="stylesheet" href="theme.css">
 </head>
 <body>
+<div class="topbar">
+    <div class="container topbar-inner">
+        <div class="topbar-left">
+            <span><i class="fas fa-phone"></i> 服务热线 199 0906 9888</span>
+            <a href="mailto:info@kinming.com"><i class="fas fa-envelope"></i> info@kinming.com</a>
+        </div>
+        <div class="topbar-right">
+            <button class="lang-btn" id="langToggle">ENGLISH</button>
+        </div>
+    </div>
+</div>
 <nav class="navbar">
     <div class="nav-top">
         <div class="logo-group">
@@ -455,11 +467,8 @@
                 <img src="e7af5013ff6f7f414c0eff4a6de2f6e4.png" alt="Sichuan Kinming Electronics Co., Ltd. Logo" style="height: 45px; width: auto; display: block;">
             </div>
         </div>
+        <div class="nav-cta"><a href="#contact/message">获取报价</a></div>
         <div class="menu-icon" id="menuToggle"><i class="fas fa-bars"></i></div>
-        
-        <div class="top-utils">
-            <button class="lang-btn" id="langToggle">ENGLISH</button>
-        </div>
     </div>
     <div class="nav-bottom">
         <ul class="nav-links" id="navLinks"></ul>
@@ -1300,8 +1309,29 @@
     }
 
     function renderHomeSimple() {
+        const d = t('about_detail') || {};
+        const stats = Array.isArray(d.stats) ? d.stats : [];
+        const heroTitle = currentLang === 'zh' ? '精密PCB智造专家' : 'Precision PCB Manufacturing Expert';
+        const heroSub = currentLang === 'zh'
+            ? '四川井明电子 · 专注于高可靠多层HDI与高难度印制线路板的研发与智造'
+            : 'Sichuan Kinming Electronics · R&D and smart manufacturing of high-reliability multilayer HDI PCBs';
+        const quoteText = currentLang === 'zh' ? '获取报价' : 'Get a Quote';
+        const aboutText = currentLang === 'zh' ? '了解企业' : 'About Us';
+        const statsHtml = stats.length ? `<div class="stat-strip">${stats.map(s => `<div class="stat-box"><div class="stat-box-value">${s.value}</div><div class="stat-box-label">${s.label}</div></div>`).join('')}</div>` : '';
         return `
             ${renderCarousel('about', currentLang)}
+            <section class="hero-band">
+                <div class="hero-inner">
+                    <div class="hero-eyebrow">SICHUAN KINMING ELECTRONICS</div>
+                    <h1 class="hero-title">${heroTitle}</h1>
+                    <p class="hero-sub">${heroSub}</p>
+                    <div class="hero-cta">
+                        <a class="btn-primary" href="#contact/message">${quoteText}</a>
+                        <a class="btn-ghost" href="#about/intro">${aboutText}</a>
+                    </div>
+                </div>
+            </section>
+            ${statsHtml}
             <div class="container">
                 <div class="home-form-large">
                     <h3>${t('form_title')}</h3>
@@ -1320,22 +1350,22 @@
 
     function renderOverview(pageKey) {
         const overview = t('overview');
-        let title = '', desc = '';
+        let title = '', desc = '', eyebrow = '';
         switch(pageKey) {
-            case 'industry': title = overview.industry; desc = overview.industry_desc; break;
-            case 'products': title = overview.products; desc = overview.products_desc; break;
-            case 'news': title = overview.news; desc = overview.news_desc; break;
-            case 'social': title = overview.social; desc = overview.social_desc; break;
-            case 'contact': title = overview.contact; desc = overview.contact_desc; break;
+            case 'industry': title = overview.industry; desc = overview.industry_desc; eyebrow = currentLang === 'zh' ? '市场领域' : 'Markets'; break;
+            case 'products': title = overview.products; desc = overview.products_desc; eyebrow = currentLang === 'zh' ? '产品与服务' : 'Products & Technology'; break;
+            case 'news': title = overview.news; desc = overview.news_desc; eyebrow = currentLang === 'zh' ? '新闻中心' : 'News Center'; break;
+            case 'social': title = overview.social; desc = overview.social_desc; eyebrow = currentLang === 'zh' ? '供应链' : 'Supply Chain'; break;
+            case 'contact': title = overview.contact; desc = overview.contact_desc; eyebrow = currentLang === 'zh' ? '联系我们' : 'Contact Us'; break;
             default: break;
         }
         return `
             ${renderCarousel(pageKey, currentLang)}
             <div class="container">
-                <div class="overview-card">
+                <div class="section-head">
+                    <span class="eyebrow">${eyebrow}</span>
                     <h2>${title}</h2>
                     <p>${desc}</p>
-                    <div class="btn-outline" style="cursor:default;">请从上方下拉菜单选择具体内容</div>
                 </div>
             </div>
         `;
@@ -1569,6 +1599,14 @@
         setActivePage(initPage, initSub);
         
         document.getElementById('logoHome').addEventListener('click', () => setActivePage('about', null));
+        
+        // 让英雄区/锚点链接（href="#page/sub"）也能导航
+        window.addEventListener('hashchange', () => {
+            const h = window.location.hash.slice(1);
+            if (!h) { setActivePage('about', null); return; }
+            const parts = h.split('/');
+            setActivePage(parts[0], parts.length > 1 ? parts[1] : null);
+        });
         
         document.getElementById('menuToggle').addEventListener('click', (e) => {
             e.stopPropagation();

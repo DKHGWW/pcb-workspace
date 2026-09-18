@@ -1,0 +1,16 @@
+# 可选：使用 Docker 部署（适合已装 Docker 的云服务器）
+# 用法:  docker compose up -d
+# 说明: 通过 bind 挂载整个项目目录，后台修改的 config.json 会持久化在宿主机磁盘
+services:
+  pcb:
+    build: .
+    container_name: pcb-website
+    ports:
+      - "3000:3000"
+    environment:
+      - NODE_ENV=production
+      - PORT=3000
+      - ADMIN_PASSWORD=${ADMIN_PASSWORD:-admin123}
+    volumes:
+      - ./:/app
+    restart: unless-stopped

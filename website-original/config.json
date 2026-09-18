@@ -1,0 +1,898 @@
+{
+  "langText": {
+    "zh": {
+      "nav_about": "关于井明",
+      "nav_industry": "市场",
+      "nav_products": "产品与服务",
+      "nav_news": "新闻",
+      "nav_social": "供应链",
+      "nav_contact": "联系我们",
+      "footer_address": "地址：四川省遂宁市经济技术开发区渠河南路188号电子电路标准厂房一期3号楼 | 通过ISO9001 & IATF16949",
+      "statement_title": "🌿 践行绿色制造，共创可持续未来",
+      "statement_content": "井明电子始终将环境保护与社会责任融入企业发展战略。我们严格遵守 RoHS、REACH 等国际环保指令，投资建设先进的废水处理与中水回用系统，厂区光伏发电覆盖率已达30%。同时，我们积极参与社区公益，关爱员工成长，致力于成为负责任、有温度的行业标杆。未来，我们将持续加大环保投入，推动低碳生产，与合作伙伴共同守护绿水青山。",
+      "form_title": "获取宣传册/报价",
+      "form_desc": "“以客户为中心”是井明的核心价值观之一，我们致力于为客户提供高质高效的服务。请填写您的姓名和电子邮件地址以获取宣传册/报价。",
+      "name_placeholder": "姓名*",
+      "email_placeholder": "邮箱*",
+      "company_placeholder": "公司名/网址/留言",
+      "phone_placeholder": "电话",
+      "submit": "提交",
+      "thank_you": "感谢您的留言，我们会尽快联系您。",
+      "overview": {
+        "industry": "市场",
+        "industry_desc": "井明电子深度服务多个战略行业，提供高可靠性PCB解决方案。请从上方下拉菜单中选择具体细分市场，查看详细产品信息。",
+        "products": "产品与服务",
+        "products_desc": "精选PPT真实产品展示：无人机用8层HDI板、光模块板、高压快充板、电源主板、AI服务器板、精密医疗仪器主板、移动固态硬盘板等。请从下拉菜单选择具体产品，查看大图与详细参数。",
+        "news": "新闻中心",
+        "news_desc": "了解井明电子最新动态、行业资讯及技术突破。请从下拉菜单中选择“公司新闻”或“行业动态”。",
+        "social": "供应链",
+        "social_desc": "井明电子积极履行社会责任，坚持绿色制造与可持续发展。请从下拉菜单查看“环境保护”详细举措。",
+        "contact": "联系我们",
+        "contact_desc": "如您有任何需求或疑问，欢迎通过“服务据点”查找离您最近的办事处，或使用“在线留言”功能与我们取得联系。"
+      },
+      "dropdown": {
+        "about": [
+          "公司简介",
+          "制程能力",
+          "管理体系",
+          "井明荣誉",
+          "组织架构",
+          "品质保证"
+        ],
+        "industry": [
+          "网络通信",
+          "汽车电子",
+          "智能终端",
+          "工控医疗",
+          "电源",
+          "消费电子"
+        ],
+        "products": [
+          "无人机用8层HDI板",
+          "光模块用2层沉镍钯金板",
+          "通讯产品展示——4边半孔光模块板",
+          "高压快充用2层板",
+          "电源主板用2层板",
+          "AI服务器用6层板",
+          "精密医疗仪器主板",
+          "移动固态硬盘用2层板"
+        ],
+        "news": [
+          "公司新闻",
+          "行业动态"
+        ],
+        "social": [
+          "环境保护"
+        ],
+        "contact": [
+          "服务据点",
+          "在线留言"
+        ]
+      },
+      "footerLinks": {
+        "about": {
+          "title": "关于井明",
+          "items": [
+            "公司简介",
+            "制程能力",
+            "管理体系",
+            "井明荣誉",
+            "组织架构",
+            "品质保证"
+          ]
+        },
+        "industry": {
+          "title": "市场",
+          "items": [
+            "网络通信",
+            "汽车电子",
+            "智能终端",
+            "工控医疗",
+            "电源",
+            "消费电子"
+          ]
+        },
+        "products": {
+          "title": "产品与服务",
+          "items": [
+            "无人机用8层HDI板",
+            "光模块用2层沉镍钯金板",
+            "通讯产品展示——4边半孔光模块板",
+            "高压快充用2层板",
+            "电源主板用2层板",
+            "AI服务器用6层板",
+            "精密医疗仪器主板",
+            "移动固态硬盘用2层板"
+          ]
+        },
+        "news": {
+          "title": "新闻",
+          "items": [
+            "公司新闻",
+            "行业动态"
+          ]
+        },
+        "social": {
+          "title": "供应链",
+          "items": [
+            "环境保护"
+          ]
+        },
+        "contact": {
+          "title": "联系我们",
+          "items": [
+            "服务据点",
+            "在线留言"
+          ]
+        }
+      },
+      "about_detail": {
+        "intro": "公司简介",
+        "intro_text": "四川井明电子有限公司始创于2011年，前身为遂宁豪尔思电子科技有限公司，整合宏安兴盛、豪尔思电子深耕行业近二十年之积淀，坐落于遂宁国家经济技术开发区电子电路产业园。公司现有员工400余人，标准化厂房面积40,000余平方米，月生产能力10万平方米。\n\n公司专业从事双面及多层高精密HDI、高难度印制线路板的研发、设计、精密生产与配套服务，产品广泛应用于计算机、数据通讯、商业航天、汽车电子、消费类电子、电讯业、AI智能等相关生产企业，远销欧美日韩等国内外市场，服务客户200余家，覆盖30余个地区。企业资质齐全，拥有IATF16949、ISO9001、ISO14001、UL、CQC权威认证，产品符合RoHS环保标准。\n\n公司秉承“诚信、创新、效率、协作、共享”的经营理念，倡导“优质服务、客户满意、互惠互利、持续发展”的价值理念，坚持以人为本、培训考核、激发潜能，致力于不断提高顾客满意度，打造PCB业界特色名牌企业。",
+        "stats": [
+          { "value": "40,000⁺ ㎡", "label": "厂房面积" },
+          { "value": "10 万㎡", "label": "月生产能力" },
+          { "value": "400⁺ 人", "label": "员工人数" },
+          { "value": "200⁺ 家", "label": "服务客户" }
+        ],
+        "capability": "制程能力",
+        "capability_table": {
+          "headers": [
+            "核心技术项",
+            "井明标准能力",
+            "特级能力"
+          ],
+          "rows": [
+            [
+              "最大生产层数",
+              "24层",
+              "30层"
+            ],
+            [
+              "最小线宽/线距",
+              "75/75μm",
+              "60/60μm"
+            ],
+            [
+              "最小机械孔径",
+              "0.2mm",
+              "0.15mm"
+            ],
+            [
+              "最大纵横比",
+              "20:1",
+              "25:1"
+            ],
+            [
+              "阻抗控制公差",
+              "±10%",
+              "±7%"
+            ],
+            [
+              "板翘控制",
+              "<0.75%",
+              "<0.5%"
+            ]
+          ]
+        },
+        "management": "管理体系",
+        "management_text": "通过IATF16949、ISO9001、ISO14001、UL、CQC等权威认证，实施全流程数字化质量管控。",
+        "honor": "井明荣誉",
+        "honor_list": [
+          "国家高新技术企业",
+          "四川省专精特新企业",
+          "遂宁市PCB工程技术研究中心",
+          "中国电子电路行业协会理事单位"
+        ],
+        "structure": "组织架构",
+        "structure_text": "设有市场中心、研发中心、制造中心、品控中心、供应链管理部及海外事业部。",
+        "quality": "品质保证",
+        "quality_text": "从IQC进料检验到成品可靠性测试，全程SPC监控，配备AOI、飞针测试、X-ray、显微镜等先进设备。",
+        "video_url": "videos/company.mp4"
+      },
+      "industry_detail": {
+        "network": "网络通信",
+        "network_desc": "高速光模块、路由器、基站天线PCB，低损耗材料，精准阻抗控制。",
+        "auto": "汽车电子",
+        "auto_desc": "车规级PCB，满足IATF16949，应用于BMS、ECU、车载娱乐系统。",
+        "smart": "智能终端",
+        "smart_desc": "智能手机、平板、可穿戴设备高密度互连板，薄型化设计。",
+        "medical": "工控医疗",
+        "medical_desc": "工业控制主板、医疗影像设备PCB，高可靠性长寿命。",
+        "power": "电源",
+        "power_desc": "厚铜电源板、金属基板，优异散热性能。",
+        "consumer": "消费电子",
+        "consumer_desc": "提供高集成度HDI板，满足轻薄化需求。"
+      },
+      "products_detail": {
+        "spec_labels": {
+          "type": "产品类型",
+          "layer": "产品层次",
+          "material": "产品材料",
+          "copper": "铜厚",
+          "application": "应用领域"
+        },
+        "items": [
+          {
+            "id": "uav",
+            "title": "无人机用8层HDI板",
+            "image": "images/products/prod-uav.jpg",
+            "tags": [
+              "智能汽车",
+              "航空航天"
+            ],
+            "specs": {
+              "type": "沉金+osp+树脂塞孔+盲埋孔工艺",
+              "layer": "8层",
+              "material": "生益S1000 TG170",
+              "copper": "3/3",
+              "application": "无人机"
+            }
+          },
+          {
+            "id": "optical1",
+            "title": "光模块用2层沉镍钯金板",
+            "image": "images/products/prod-optical1.jpg",
+            "tags": [
+              "光模通讯"
+            ],
+            "specs": {
+              "type": "沉镍钯金工艺",
+              "layer": "2层",
+              "material": "FR-4 0.9mm 1/1OZ TG135",
+              "copper": "1/1",
+              "application": "光模块"
+            }
+          },
+          {
+            "id": "optical2",
+            "title": "通讯产品展示——4边半孔光模块板",
+            "image": "images/products/prod-optical2.jpg",
+            "tags": [
+              "光模通讯"
+            ],
+            "specs": {
+              "type": "沉金+4边半孔工艺",
+              "layer": "4层",
+              "material": "FR-4 0.8mm TG150",
+              "copper": "1/1",
+              "application": "光模块"
+            }
+          },
+          {
+            "id": "charging",
+            "title": "高压快充用2层板",
+            "image": "images/products/prod-charging.jpg",
+            "tags": [
+              "智能汽车"
+            ],
+            "specs": {
+              "type": "无铅喷锡工艺",
+              "layer": "2层",
+              "material": "FR-4 1.5mm TG135",
+              "copper": "3/3",
+              "application": "高压快充"
+            }
+          },
+          {
+            "id": "power",
+            "title": "电源主板用2层板",
+            "image": "images/products/prod-power.jpg",
+            "tags": [
+              "消费电子"
+            ],
+            "specs": {
+              "type": "无铝喷锡工艺",
+              "layer": "2层",
+              "material": "FR-4 1.9mm TG135",
+              "copper": "2/2",
+              "application": "电源主板"
+            }
+          },
+          {
+            "id": "ai_server",
+            "title": "AI服务器用6层板",
+            "image": "images/products/prod-ai_server.jpg",
+            "tags": [
+              "AI服务"
+            ],
+            "specs": {
+              "type": "沉金+背钻+树脂塞孔工艺",
+              "layer": "6层",
+              "material": "生益S1000-2M 1.6mm TG170",
+              "copper": "2/2",
+              "application": "AI服务器"
+            }
+          },
+          {
+            "id": "medical",
+            "title": "精密医疗仪器主板",
+            "image": "images/products/prod-medical.jpg",
+            "tags": [
+              "医疗器械"
+            ],
+            "specs": {
+              "type": "沉金工艺",
+              "layer": "4层",
+              "material": "FR4 0.8mm TG135",
+              "copper": "2/2OZ",
+              "application": "精密医疗仪器主板"
+            }
+          },
+          {
+            "id": "ssd",
+            "title": "移动固态硬盘用2层板",
+            "image": "images/products/prod-ssd.jpg",
+            "tags": [
+              "消费电子"
+            ],
+            "specs": {
+              "type": "OSP工艺",
+              "layer": "2层",
+              "material": "FR4 0.9mm TG135",
+              "copper": "1/1OZ",
+              "application": "移动固态硬盘"
+            }
+          }
+        ]
+      },
+      "news_detail": {
+        "company_news": "公司新闻",
+        "company_news_list": [
+          "井明电子荣获国家级专精特新小巨人",
+          "井明电子通过IATF16949换版审核",
+          "井明电子举办年度供应商大会"
+        ],
+        "industry_news": "行业动态",
+        "industry_news_list": [
+          "PCB行业迎来5G+AI新机遇",
+          "新能源汽车带动车用PCB需求增长",
+          "高频高速材料技术研讨会召开"
+        ]
+      },
+      "social_detail": {
+        "environment": "环境保护",
+        "environment_desc": "井明电子坚持绿色制造，严格遵守RoHS、REACH指令，投资建设先进的废水处理系统，实现中水回用，厂区光伏发电覆盖率已达30%。我们采用无铅、无卤素材料，并通过ISO14001环境管理体系认证。"
+      },
+      "contact_detail": {
+        "offices": "服务据点",
+        "office_list": [
+          { "region": "华南服务中心（深圳）", "address": "深圳市宝安区沙井西环路2004号 稳盈现代中心602-2", "contact": "冯镇", "phone": "19909061288" },
+          { "region": "四川遂宁总部", "address": "四川省遂宁市经济技术开发区渠河南路188号电子电路标准厂房一期3号楼", "contact": "刘辉", "phone": "19909069888" },
+          { "region": "华中服务中心（武汉）", "address": "湖北省武汉市江夏经济开发区东方雨林10栋2703", "contact": "陈君", "phone": "18062717837" }
+        ],
+        "message_title": "在线留言",
+        "name_placeholder": "您的姓名",
+        "email_placeholder": "邮箱地址",
+        "msg_placeholder": "留言内容",
+        "submit": "提交留言"
+      }
+    },
+    "en": {
+      "nav_about": "About",
+      "nav_industry": "Markets",
+      "nav_products": "Products",
+      "nav_news": "News",
+      "nav_social": "Supply Chain",
+      "nav_contact": "Contact",
+      "footer_address": "Address: Building 3, Phase I, Electronic Circuit Standard Plant, No.188 Quhe South Road, Economic Development Zone, Suining City, Sichuan Province | ISO9001 & IATF16949",
+      "statement_title": "🌿 Green Manufacturing for a Sustainable Future",
+      "statement_content": "Kinming Electronics integrates environmental protection and social responsibility into our strategy. We strictly comply with RoHS, REACH, have built advanced wastewater treatment and reuse systems, and achieve 30% solar power coverage. We actively participate in community welfare and care for employee growth.",
+      "form_title": "Get Brochure / Quote",
+      "form_desc": "Customer-centric is one of Kinming's core values. We are committed to providing high-quality and efficient service. Please fill in your name and email address to receive our brochure/quote.",
+      "name_placeholder": "Name*",
+      "email_placeholder": "Email*",
+      "company_placeholder": "Company/Website/Message",
+      "phone_placeholder": "Phone",
+      "submit": "Submit",
+      "thank_you": "Thank you! We will contact you soon.",
+      "overview": {
+        "industry": "Markets",
+        "industry_desc": "Kinming serves multiple strategic industries with high-reliability PCB solutions. Please select a specific market segment from the dropdown menu above to view detailed product information.",
+        "products": "Products & Technology",
+        "products_desc": "Real product showcases from our PPT portfolio: 8-layer HDI for UAVs, optical module PCBs, high-voltage fast-charging boards, power main boards, AI server boards, precision medical instrument boards, mobile SSD boards and more. Select a product from the dropdown to view the image and detailed specs.",
+        "news": "News Center",
+        "news_desc": "Stay updated with Kinming's latest news, industry trends, and technological breakthroughs. Choose 'Company News' or 'Industry Trends' from the dropdown menu.",
+        "social": "Supply Chain",
+        "social_desc": "Kinming actively fulfills its social responsibilities, adhering to green manufacturing and sustainable development. View 'Environmental Protection' details from the dropdown menu.",
+        "contact": "Contact Us",
+        "contact_desc": "For any inquiries, please find your nearest office via 'Service Locations' or use the 'Online Message' form to get in touch with us."
+      },
+      "dropdown": {
+        "about": [
+          "Company Profile",
+          "Process Capability",
+          "Management System",
+          "Honors",
+          "Organization",
+          "Quality Assurance"
+        ],
+        "industry": [
+          "Telecom & Networking",
+          "Automotive Electronics",
+          "Smart Devices",
+          "Industrial & Medical",
+          "Power Supply",
+          "Consumer Electronics"
+        ],
+        "products": [
+          "8-Layer HDI PCB for UAVs",
+          "2-Layer ENIG-Pd PCB for Optical Modules",
+          "Communication Product Display — 4-side Half-hole Optical Module PCB",
+          "2-Layer PCB for High-voltage Fast Charging",
+          "2-Layer PCB for Power Main Board",
+          "6-Layer PCB for AI Servers",
+          "Precision Medical Instrument Main Board",
+          "2-Layer PCB for Mobile SSD"
+        ],
+        "news": [
+          "Company News",
+          "Industry Trends"
+        ],
+        "social": [
+          "Environmental Protection"
+        ],
+        "contact": [
+          "Service Locations",
+          "Online Message"
+        ]
+      },
+      "footerLinks": {
+        "about": {
+          "title": "About",
+          "items": [
+            "Company Profile",
+            "Process Capability",
+            "Management System",
+            "Honors",
+            "Organization",
+            "Quality Assurance"
+          ]
+        },
+        "industry": {
+          "title": "Markets",
+          "items": [
+            "Telecom & Networking",
+            "Automotive Electronics",
+            "Smart Devices",
+            "Industrial & Medical",
+            "Power Supply",
+            "Consumer Electronics"
+          ]
+        },
+        "products": {
+          "title": "Products",
+          "items": [
+            "8-Layer HDI PCB for UAVs",
+            "2-Layer ENIG-Pd PCB for Optical Modules",
+            "Communication Product Display — 4-side Half-hole Optical Module PCB",
+            "2-Layer PCB for High-voltage Fast Charging",
+            "2-Layer PCB for Power Main Board",
+            "6-Layer PCB for AI Servers",
+            "Precision Medical Instrument Main Board",
+            "2-Layer PCB for Mobile SSD"
+          ]
+        },
+        "news": {
+          "title": "News",
+          "items": [
+            "Company News",
+            "Industry Trends"
+          ]
+        },
+        "social": {
+          "title": "Supply Chain",
+          "items": [
+            "Environmental Protection"
+          ]
+        },
+        "contact": {
+          "title": "Contact",
+          "items": [
+            "Service Locations",
+            "Online Message"
+          ]
+        }
+      },
+      "about_detail": {
+        "intro": "Company Profile",
+        "intro_text": "Sichuan Kinming Electronics Co., Ltd. was founded in 2011 (formerly Suining Haoersi Electronic Technology Co., Ltd.), integrating nearly two decades of industry expertise from Hong'an Xingsheng and Haoersi. Located in Suining National Economic and Technological Development Zone Electronic Circuit Industrial Park, we have over 400 employees, 40,000⁺ m² standardized factory space and monthly capacity of 100,000 m².\n\nWe specialize in R&D, design, precision production and supporting services of double-sided and multilayer high-precision HDI and high-difficulty PCBs. Our products are widely used in computers, data communications, commercial aerospace, automotive electronics, consumer electronics, telecommunications, AI and related industries, exported to Europe, America, Japan, Korea and other markets, serving 200+ customers across 30+ regions. We hold IATF16949, ISO9001, ISO14001, UL, CQC and other certifications, with RoHS-compliant products.\n\nUpholding the business philosophy of \"Integrity, Innovation, Efficiency, Collaboration, Sharing\" and the value concept of \"Quality Service, Customer Satisfaction, Mutual Benefit, Sustainable Development\", we are committed to improving customer satisfaction and building a distinctive brand in the PCB industry.",
+        "stats": [
+          { "value": "40,000⁺ m²", "label": "Plant Area" },
+          { "value": "100k m²", "label": "Monthly Capacity" },
+          { "value": "400⁺", "label": "Employees" },
+          { "value": "200⁺", "label": "Clients" }
+        ],
+        "capability": "Process Capability",
+        "capability_table": {
+          "headers": [
+            "Technology",
+            "Standard",
+            "Special"
+          ],
+          "rows": [
+            [
+              "Max Layers",
+              "24",
+              "30"
+            ],
+            [
+              "Line/Space",
+              "75/75μm",
+              "60/60μm"
+            ],
+            [
+              "Min Hole",
+              "0.2mm",
+              "0.15mm"
+            ],
+            [
+              "Aspect Ratio",
+              "20:1",
+              "25:1"
+            ],
+            [
+              "Impedance",
+              "±10%",
+              "±7%"
+            ],
+            [
+              "Warpage",
+              "<0.75%",
+              "<0.5%"
+            ]
+          ]
+        },
+        "management": "Management System",
+        "management_text": "Certified IATF16949, ISO9001, ISO14001, UL, CQC. Full digital quality control.",
+        "honor": "Honors",
+        "honor_list": [
+          "National High-tech Enterprise",
+          "Sichuan Specialized & Sophisticated",
+          "Suining PCB Engineering Center",
+          "CPCA Member"
+        ],
+        "structure": "Organization",
+        "structure_text": "Departments: Marketing, R&D, Manufacturing, QC, Supply Chain, Overseas.",
+        "quality": "Quality Assurance",
+        "quality_text": "From IQC to reliability test, SPC monitoring. Equipped with AOI, flying probe, X-ray, microscope.",
+        "video_url": "videos/company.mp4"
+      },
+      "industry_detail": {
+        "network": "Telecom & Networking",
+        "network_desc": "High-speed optical modules, routers, base station PCBs.",
+        "auto": "Automotive Electronics",
+        "auto_desc": "IATF16949 certified PCBs for BMS, ECU, infotainment.",
+        "smart": "Smart Devices",
+        "smart_desc": "HDI for smartphones, tablets, wearables.",
+        "medical": "Industrial & Medical",
+        "medical_desc": "High-reliability PCBs for industrial control and medical imaging.",
+        "power": "Power Supply",
+        "power_desc": "Heavy copper, metal core for excellent heat dissipation.",
+        "consumer": "Consumer Electronics",
+        "consumer_desc": "High-integration HDI PCBs for slim devices."
+      },
+      "products_detail": {
+        "spec_labels": {
+          "type": "Product Type",
+          "layer": "Layer Count",
+          "material": "Material",
+          "copper": "Copper Thickness",
+          "application": "Application"
+        },
+        "items": [
+          {
+            "id": "uav",
+            "title": "8-Layer HDI PCB for UAVs",
+            "image": "images/products/prod-uav.jpg",
+            "tags": [
+              "Automotive",
+              "Aerospace"
+            ],
+            "specs": {
+              "type": "ENIG + OSP + resin plug + blind/buried via",
+              "layer": "8 layers",
+              "material": "Shengyi S1000 TG170",
+              "copper": "3/3",
+              "application": "UAVs"
+            }
+          },
+          {
+            "id": "optical1",
+            "title": "2-Layer ENIG-Pd PCB for Optical Modules",
+            "image": "images/products/prod-optical1.jpg",
+            "tags": [
+              "Optical Communication"
+            ],
+            "specs": {
+              "type": "Electroless nickel-palladium-gold",
+              "layer": "2 layers",
+              "material": "FR-4 0.9mm 1/1OZ TG135",
+              "copper": "1/1",
+              "application": "Optical modules"
+            }
+          },
+          {
+            "id": "optical2",
+            "title": "Communication Product Display — 4-side Half-hole Optical Module PCB",
+            "image": "images/products/prod-optical2.jpg",
+            "tags": [
+              "Optical Communication"
+            ],
+            "specs": {
+              "type": "ENIG + 4-side half-hole",
+              "layer": "4 layers",
+              "material": "FR-4 0.8mm TG150",
+              "copper": "1/1",
+              "application": "Optical modules"
+            }
+          },
+          {
+            "id": "charging",
+            "title": "2-Layer PCB for High-voltage Fast Charging",
+            "image": "images/products/prod-charging.jpg",
+            "tags": [
+              "Automotive"
+            ],
+            "specs": {
+              "type": "Lead-free HASL",
+              "layer": "2 layers",
+              "material": "FR-4 1.5mm TG135",
+              "copper": "3/3",
+              "application": "High-voltage fast charging"
+            }
+          },
+          {
+            "id": "power",
+            "title": "2-Layer PCB for Power Main Board",
+            "image": "images/products/prod-power.jpg",
+            "tags": [
+              "Consumer Electronics"
+            ],
+            "specs": {
+              "type": "Aluminum-free HASL",
+              "layer": "2 layers",
+              "material": "FR-4 1.9mm TG135",
+              "copper": "2/2",
+              "application": "Power main board"
+            }
+          },
+          {
+            "id": "ai_server",
+            "title": "6-Layer PCB for AI Servers",
+            "image": "images/products/prod-ai_server.jpg",
+            "tags": [
+              "AI Server"
+            ],
+            "specs": {
+              "type": "ENIG + backdrill + resin plug",
+              "layer": "6 layers",
+              "material": "Shengyi S1000-2M 1.6mm TG170",
+              "copper": "2/2",
+              "application": "AI servers"
+            }
+          },
+          {
+            "id": "medical",
+            "title": "Precision Medical Instrument Main Board",
+            "image": "images/products/prod-medical.jpg",
+            "tags": [
+              "Medical Devices"
+            ],
+            "specs": {
+              "type": "ENIG",
+              "layer": "4 layers",
+              "material": "FR4 0.8mm TG135",
+              "copper": "2/2OZ",
+              "application": "Precision medical instrument main board"
+            }
+          },
+          {
+            "id": "ssd",
+            "title": "2-Layer PCB for Mobile SSD",
+            "image": "images/products/prod-ssd.jpg",
+            "tags": [
+              "Consumer Electronics"
+            ],
+            "specs": {
+              "type": "OSP",
+              "layer": "2 layers",
+              "material": "FR4 0.9mm TG135",
+              "copper": "1/1OZ",
+              "application": "Mobile SSD"
+            }
+          }
+        ]
+      },
+      "news_detail": {
+        "company_news": "Company News",
+        "company_news_list": [
+          "Kinming awarded National 'Little Giant'",
+          "Kinming passed IATF16949 recertification",
+          "Kinming held annual supplier conference"
+        ],
+        "industry_news": "Industry Trends",
+        "industry_news_list": [
+          "PCB industry embraces 5G+AI",
+          "EV drives automotive PCB demand",
+          "High-frequency materials seminar"
+        ]
+      },
+      "social_detail": {
+        "environment": "Environmental Protection",
+        "environment_desc": "Kinming is committed to green manufacturing, strictly following RoHS and REACH. Advanced wastewater treatment and reuse, 30% solar power, ISO14001 certified."
+      },
+      "contact_detail": {
+        "offices": "Service Locations",
+        "office_list": [
+          { "region": "South China Service Center (Shenzhen)", "address": "Room 602-2, Wenying Modern Center, No.2004 Xihuan Road, Shajing, Bao'an District, Shenzhen", "contact": "Feng Zhen", "phone": "19909061288" },
+          { "region": "Suining HQ (Sichuan)", "address": "Building 3, Phase I, Electronic Circuit Standard Plant, No.188 Quhe South Road, Suining Economic Development Zone, Sichuan", "contact": "Liu Hui", "phone": "19909069888" },
+          { "region": "Central China Service Center (Wuhan)", "address": "Building 10, Room 2703, Oriental Rainforest, Jiangxia Economic Development Zone, Wuhan, Hubei", "contact": "Chen Jun", "phone": "18062717837" }
+        ],
+        "message_title": "Online Message",
+        "name_placeholder": "Your Name",
+        "email_placeholder": "Email",
+        "msg_placeholder": "Message",
+        "submit": "Submit"
+      }
+    }
+  },
+  "carouselData": {
+    "about": {
+      "zh": [
+        {
+          "image": "images/carousel/factory-gate.jpg",
+          "title": "井明电子",
+          "desc": "四川井明电子有限公司——专业化高可靠PCB制造企业"
+        },
+        {
+          "image": "images/carousel/smt-workshop.jpg",
+          "title": "洁净车间",
+          "desc": "万级无尘车间，高精度PCB生产线"
+        }
+      ],
+      "en": [
+        {
+          "image": "images/carousel/factory-gate.jpg",
+          "title": "Kinming Electronics",
+          "desc": "Sichuan Kinming Electronics — professional high-reliability PCB manufacturer"
+        },
+        {
+          "image": "images/carousel/smt-workshop.jpg",
+          "title": "Clean Workshop",
+          "desc": "Class-10000 cleanroom with high-precision PCB lines"
+        }
+      ]
+    },
+    "industry": {
+      "zh": [
+        {
+          "image": "images/carousel/product-optical.jpg",
+          "title": "5G通信",
+          "desc": "高速光模块PCB，支持5G与数据中心"
+        },
+        {
+          "image": "images/carousel/product-automotive.jpg",
+          "title": "汽车电子",
+          "desc": "高压快充与电源主板，满足车规级可靠性"
+        },
+        {
+          "image": "images/carousel/product-medical.jpg",
+          "title": "医疗设备",
+          "desc": "精密医疗仪器控制主板，高可靠性保障"
+        }
+      ],
+      "en": [
+        {
+          "image": "images/carousel/product-optical.jpg",
+          "title": "5G Telecom",
+          "desc": "High-speed optical module PCBs for 5G and data centers"
+        },
+        {
+          "image": "images/carousel/product-automotive.jpg",
+          "title": "Automotive",
+          "desc": "High-voltage fast charging and power boards for automotive"
+        },
+        {
+          "image": "images/carousel/product-medical.jpg",
+          "title": "Medical",
+          "desc": "Precision medical instrument control boards"
+        }
+      ]
+    },
+    "products": {
+      "zh": [
+        {
+          "image": "images/carousel/product-power.jpg",
+          "title": "高多层板",
+          "desc": "最高支持30层，适用于电源与服务器主板"
+        },
+        {
+          "image": "images/carousel/product-consumer.jpg",
+          "title": "HDI板",
+          "desc": "高密度互连，满足消费类电子产品轻薄化需求"
+        }
+      ],
+      "en": [
+        {
+          "image": "images/carousel/product-power.jpg",
+          "title": "High Multilayer",
+          "desc": "Up to 30 layers for power and server boards"
+        },
+        {
+          "image": "images/carousel/product-consumer.jpg",
+          "title": "HDI PCB",
+          "desc": "High-density interconnect for compact consumer electronics"
+        }
+      ]
+    },
+    "news": {
+      "zh": [
+        {
+          "image": "images/carousel/equipment-drill.jpg",
+          "title": "行业展会",
+          "desc": "亮相国际电子电路展，展示先进制程能力"
+        },
+        {
+          "image": "images/carousel/equipment-ldi.jpg",
+          "title": "技术突破",
+          "desc": "精细LDI曝光与自动化测试，持续提升制程精度"
+        },
+        {
+          "image": "images/carousel/team-building.jpg",
+          "title": "团队风采",
+          "desc": "登高祈福，聚力同行，共建井明企业文化"
+        }
+      ],
+      "en": [
+        {
+          "image": "images/carousel/equipment-drill.jpg",
+          "title": "Industry Expo",
+          "desc": "Showcasing advanced process capabilities at international exhibitions"
+        },
+        {
+          "image": "images/carousel/equipment-ldi.jpg",
+          "title": "Tech Breakthrough",
+          "desc": "Fine-pitch LDI exposure and automated testing for higher precision"
+        },
+        {
+          "image": "images/carousel/team-building.jpg",
+          "title": "Team Spirit",
+          "desc": "Climbing together, united as one, building Kinming culture"
+        }
+      ]
+    },
+    "social": {
+      "zh": [
+        {
+          "image": "images/carousel/production-line.jpg",
+          "title": "绿色工厂",
+          "desc": "洁净车间与规范作业，践行可持续发展"
+        }
+      ],
+      "en": [
+        {
+          "image": "images/carousel/production-line.jpg",
+          "title": "Green Factory",
+          "desc": "Clean workshop and standardized operations for sustainable development"
+        }
+      ]
+    },
+    "contact": {
+      "zh": [
+        {
+          "image": "images/carousel/company-lobby.jpg",
+          "title": "全球布局",
+          "desc": "总部遂宁，服务欧美日韩等国内外市场"
+        }
+      ],
+      "en": [
+        {
+          "image": "images/carousel/company-lobby.jpg",
+          "title": "Global Presence",
+          "desc": "Headquartered in Suining, serving clients worldwide"
+        }
+      ]
+    }
+  }
+}
