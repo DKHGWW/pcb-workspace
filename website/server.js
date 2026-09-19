@@ -19,7 +19,6 @@ const DEFAULT_CONFIG = {
   langText: {
     zh: {
       nav_about: "关于井明",
-      nav_industry: "市场",
       nav_products: "产品技术",
       nav_news: "新闻",
       nav_social: "供应链",
@@ -37,7 +36,7 @@ const DEFAULT_CONFIG = {
       thank_you: "感谢您的留言，我们会尽快联系您。",
       overview: {
         products: "产品技术",
-        products_desc: "井明电子产品技术体系覆盖网络通信、汽车电子、智能终端、工控医疗、电源、消费电子等多个应用领域，并落地于无人机HDI、光模块、AI服务器等真实产品。请从下拉菜单选择“涉及领域”或“具体产品”查看详情。",
+        products_desc: "井明电子产品技术体系覆盖网络通信、汽车电子、智能终端、工控医疗、电源、消费电子等多个应用领域。请从下拉菜单选择“涉及领域”，点击后查看该领域的典型产品。",
         news: "新闻中心",
         news_desc: "了解井明电子最新动态、行业资讯及技术突破。请从下拉菜单中选择“公司新闻”或“行业动态”。",
         social: "供应链",
@@ -48,8 +47,7 @@ const DEFAULT_CONFIG = {
       dropdown: {
         about: ["公司简介", "制程能力", "管理体系", "井明荣誉", "组织架构", "品质保证"],
         products: {
-          "涉及领域": ["网络通信", "汽车电子", "智能终端", "工控医疗", "电源", "消费电子"],
-          "具体产品": ["无人机用8层HDI板", "光模块用2层沉镍钯金板", "通讯产品展示——4边半孔光模块板", "高压快充用2层板", "电源主板用2层板", "AI服务器用6层板", "精密医疗仪器主板", "移动固态硬盘用2层板"]
+          "涉及领域": ["网络通信", "汽车电子", "智能终端", "工控医疗", "电源", "消费电子"]
         },
         news: ["公司新闻", "行业动态"],
         social: ["环境保护"],
@@ -58,8 +56,7 @@ const DEFAULT_CONFIG = {
       footerLinks: {
         about: { title: "关于井明", items: ["公司简介", "制程能力", "管理体系", "井明荣誉", "组织架构", "品质保证"] },
         products: {
-          "涉及领域": ["网络通信", "汽车电子", "智能终端", "工控医疗", "电源", "消费电子"],
-          "具体产品": ["无人机用8层HDI板", "光模块用2层沉镍钯金板", "通讯产品展示——4边半孔光模块板", "高压快充用2层板", "电源主板用2层板", "AI服务器用6层板", "精密医疗仪器主板", "移动固态硬盘用2层板"]
+          "涉及领域": ["网络通信", "汽车电子", "智能终端", "工控医疗", "电源", "消费电子"]
         },
         news: { title: "新闻", items: ["公司新闻", "行业动态"] },
         social: { title: "供应链", items: ["环境保护"] },
@@ -148,7 +145,6 @@ const DEFAULT_CONFIG = {
     },
     en: {
       nav_about: "About",
-      nav_industry: "Markets",
       nav_products: "Product Technology",
       nav_news: "News",
       nav_social: "Supply Chain",
@@ -166,7 +162,7 @@ const DEFAULT_CONFIG = {
       thank_you: "Thank you! We will contact you soon.",
       overview: {
         products: "Product Technology",
-        products_desc: "Kinming's product technology spans telecom, automotive, smart devices, industrial & medical, power and consumer electronics, realized in real products such as UAV HDI, optical modules and AI server boards. Choose 'Fields Served' or 'Specific Products' from the dropdown.",
+        products_desc: "Kinming's product technology spans telecom, automotive, smart devices, industrial & medical, power and consumer electronics. Choose 'Fields Served' from the dropdown, then click a field to see its typical products.",
         news: "News Center",
         news_desc: "Stay updated with Kinming's latest news, industry trends, and technological breakthroughs. Choose 'Company News' or 'Industry Trends' from the dropdown menu.",
         social: "Supply Chain",
@@ -177,8 +173,7 @@ const DEFAULT_CONFIG = {
       dropdown: {
         about: ["Company Profile", "Process Capability", "Management System", "Honors", "Organization", "Quality Assurance"],
         products: {
-          "Fields Served": ["Telecom & Networking", "Automotive Electronics", "Smart Devices", "Industrial & Medical", "Power Supply", "Consumer Electronics"],
-          "Specific Products": ["8-Layer HDI PCB for UAVs", "2-Layer ENIG-Pd PCB for Optical Modules", "Communication Product Display — 4-side Half-hole Optical Module PCB", "2-Layer PCB for High-voltage Fast Charging", "2-Layer PCB for Power Main Board", "6-Layer PCB for AI Servers", "Precision Medical Instrument Main Board", "2-Layer PCB for Mobile SSD"]
+          "Fields Served": ["Telecom & Networking", "Automotive Electronics", "Smart Devices", "Industrial & Medical", "Power Supply", "Consumer Electronics"]
         },
         news: ["Company News", "Industry Trends"],
         social: ["Environmental Protection"],
@@ -187,8 +182,7 @@ const DEFAULT_CONFIG = {
       footerLinks: {
         about: { title: "About", items: ["Company Profile", "Process Capability", "Management System", "Honors", "Organization", "Quality Assurance"] },
         products: {
-          "Fields Served": ["Telecom & Networking", "Automotive Electronics", "Smart Devices", "Industrial & Medical", "Power Supply", "Consumer Electronics"],
-          "Specific Products": ["8-Layer HDI PCB for UAVs", "2-Layer ENIG-Pd PCB for Optical Modules", "Communication Product Display — 4-side Half-hole Optical Module PCB", "2-Layer PCB for High-voltage Fast Charging", "2-Layer PCB for Power Main Board", "6-Layer PCB for AI Servers", "Precision Medical Instrument Main Board", "2-Layer PCB for Mobile SSD"]
+          "Fields Served": ["Telecom & Networking", "Automotive Electronics", "Smart Devices", "Industrial & Medical", "Power Supply", "Consumer Electronics"]
         },
         news: { title: "News", items: ["Company News", "Industry Trends"] },
         social: { title: "Supply Chain", items: ["Environmental Protection"] },
