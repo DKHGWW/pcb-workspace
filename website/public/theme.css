@@ -260,7 +260,7 @@ body {
   content: ""; position: absolute; left: 0; top: 6px; bottom: 6px; width: 5px;
   border-radius: 2px; background: linear-gradient(var(--blue), var(--blue-2));
 }
-.field-products { margin-top: 32px; }
+.field-products { margin-top: 40px; }
 .field-products-heading {
   font-size: 1.15rem; font-weight: 800; color: var(--navy); margin-bottom: 18px;
   position: relative; padding-left: 16px;
@@ -269,22 +269,21 @@ body {
   content: ""; position: absolute; left: 0; top: 4px; bottom: 4px; width: 4px;
   border-radius: 2px; background: var(--blue);
 }
-.field-products-grid {
-  display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 18px;
+.field-product-detail {
+  display: grid; grid-template-columns: 1fr 1fr; gap: 44px; align-items: start;
+  padding: 32px 0; border-bottom: 1px solid var(--line);
 }
-.field-product-card {
-  display: block; text-decoration: none; background: #FBFCFE; border: 1px solid var(--line);
-  border-radius: var(--radius); overflow: hidden; transition: .2s;
+.field-product-detail:last-child { border-bottom: none; }
+.field-product-detail .product-info-col h3 {
+  font-size: 1.35rem; font-weight: 800; color: var(--navy); margin-bottom: 14px;
+  padding-left: 14px; position: relative;
 }
-.field-product-card:hover {
-  transform: translateY(-4px); box-shadow: var(--shadow); border-color: rgba(17,71,138,.4);
+.field-product-detail .product-info-col h3::before {
+  content: ""; position: absolute; left: 0; top: 5px; bottom: 5px; width: 5px;
+  border-radius: 2px; background: var(--blue);
 }
-.field-product-thumb {
-  width: 100%; aspect-ratio: 4/3; background-size: cover; background-position: center;
-  background-color: #E9EDF2; border-bottom: 1px solid var(--line);
-}
-.field-product-title {
-  padding: 14px 14px; font-size: .92rem; font-weight: 600; color: var(--ink); line-height: 1.4;
+@media (max-width: 768px) {
+  .field-product-detail { grid-template-columns: 1fr; gap: 20px; }
 }
 .about-intro-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 36px; align-items: start; }
 .about-intro-text p { color: var(--muted); line-height: 1.9; margin-bottom: 16px; text-align: justify; }

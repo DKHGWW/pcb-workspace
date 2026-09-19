@@ -1424,13 +1424,25 @@
         const ids = FIELD_PRODUCTS[fieldId] || [];
         const items = (pd.items || []).filter(it => ids.includes(it.id));
         if (!items.length) return '';
+        const labels = pd.spec_labels || {};
         const heading = currentLang === 'zh' ? '相关产品' : 'Related Products';
-        const cards = items.map(it => `
-            <a class="field-product-card" href="#products/${it.id}">
-                <div class="field-product-thumb" style="background-image:url('${it.image || ''}')"></div>
-                <div class="field-product-title">${it.title}</div>
-            </a>`).join('');
-        return `<div class="field-products"><h3 class="field-products-heading">${heading}</h3><div class="field-products-grid">${cards}</div></div>`;
+        const blocks = items.map(it => {
+            const specsHtml = Object.entries(it.specs || {}).map(([key, val]) =>
+                `<li><span class="spec-label">${labels[key] || key}</span><span class="spec-value">${val}</span></li>`
+            ).join('');
+            const imgs = Array.isArray(it.images) ? it.images : (it.image ? [it.image] : []);
+            const imgsHtml = imgs.map(src => `<img src="${src}" alt="${it.title}">`).join('');
+            const tagsHtml = (it.tags || []).map(tag => `<span class="product-tag">${tag}</span>`).join('');
+            return `<div class="field-product-detail">
+                <div class="product-image-col">${imgsHtml}</div>
+                <div class="product-info-col">
+                    <h3>${it.title}</h3>
+                    <div class="product-tags">${tagsHtml}</div>
+                    <ul class="product-specs">${specsHtml}</ul>
+                </div>
+            </div>`;
+        }).join('');
+        return `<div class="field-products"><h3 class="field-products-heading">${heading}</h3>${blocks}</div>`;
     }
 
     function renderIndustrySingle(subId) {
