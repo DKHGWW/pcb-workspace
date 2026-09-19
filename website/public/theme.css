@@ -87,6 +87,10 @@ body {
 .dropdown:hover .dropdown-menu {
   opacity: 1; visibility: visible; transform: translateX(-50%) translateY(4px);
 }
+.dropdown-group { padding: 4px 6px; }
+.dropdown-group + .dropdown-group { border-top: 1px solid var(--line); }
+.dropdown-group-label { font-size: .72rem; font-weight: 700; color: var(--muted); letter-spacing: .5px; padding: 8px 10px 4px; text-transform: uppercase; }
+.footer-group-label { font-size: .78rem; font-weight: 700; color: var(--muted); padding: 10px 0 4px; }
 .dropdown-menu a {
   display: block; padding: 10px 16px; margin: 2px 0; color: var(--ink);
   font-size: .88rem; font-weight: 500; text-decoration: none;
