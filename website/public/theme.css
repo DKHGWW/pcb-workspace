@@ -301,6 +301,13 @@ body {
 }
 .stat-value { font-size: 1.5rem; font-weight: 800; line-height: 1.2; }
 .stat-label { margin-top: 8px; font-size: .9rem; opacity: .85; }
+.equipment-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 22px; margin-top: 26px; }
+.equipment-item { margin: 0; background: #FBFCFE; border: 1px solid var(--line); border-radius: var(--radius); overflow: hidden; box-shadow: var(--shadow-sm); transition: transform .2s, box-shadow .2s; }
+.equipment-item:hover { transform: translateY(-4px); box-shadow: var(--shadow); }
+.equipment-thumb { width: 100%; aspect-ratio: 4/3; overflow: hidden; background: #E9EDF2; }
+.equipment-thumb img { width: 100%; height: 100%; object-fit: cover; display: block; }
+.equipment-caption { padding: 14px 16px; font-size: .95rem; font-weight: 600; color: var(--navy); text-align: center; border-top: 1px solid var(--line); }
+@media (max-width: 768px) { .equipment-grid { grid-template-columns: repeat(auto-fill, minmax(160px, 1fr)); gap: 14px; } }
 .video-hint {
   position: absolute; bottom: 0; left: 0; right: 0; background: rgba(11,31,58,.78);
   color: #fff; font-size: .8rem; padding: 10px 14px; text-align: center; pointer-events: none;

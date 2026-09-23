@@ -45,7 +45,7 @@ const DEFAULT_CONFIG = {
         contact_desc: "如您有任何需求或疑问，欢迎通过“服务据点”查找离您最近的办事处，或使用“在线留言”功能与我们取得联系。"
       },
       dropdown: {
-        about: ["公司简介", "制程能力", "管理体系", "井明荣誉", "组织架构", "品质保证"],
+        about: ["公司简介", "制程能力", "管理体系", "井明荣誉", "组织架构", "品质保证", "设备展示"],
         products: {
           "涉及领域": ["网络通信", "汽车电子", "智能终端", "工控医疗", "电源", "消费电子"]
         },
@@ -54,7 +54,7 @@ const DEFAULT_CONFIG = {
         contact: ["服务据点", "在线留言"]
       },
       footerLinks: {
-        about: { title: "关于井明", items: ["公司简介", "制程能力", "管理体系", "井明荣誉", "组织架构", "品质保证"] },
+        about: { title: "关于井明", items: ["公司简介", "制程能力", "管理体系", "井明荣誉", "组织架构", "品质保证", "设备展示"] },
         products: {
           "涉及领域": ["网络通信", "汽车电子", "智能终端", "工控医疗", "电源", "消费电子"]
         },
@@ -90,7 +90,21 @@ const DEFAULT_CONFIG = {
         structure: "组织架构",
         structure_text: "设有市场中心、研发中心、制造中心、品控中心、供应链管理部及海外事业部。",
         quality: "品质保证",
-        quality_text: "从IQC进料检验到成品可靠性测试，全程SPC监控，配备AOI、飞针测试、X-ray、显微镜等先进设备。"
+        quality_text: "从IQC进料检验到成品可靠性测试，全程SPC监控，配备AOI、飞针测试、X-ray、显微镜等先进设备。",
+        equipment: "设备展示",
+        equipment_list: [
+          { image: "images/equipment/yi-tong-vcp.jpg", caption: "一铜VCP" },
+          { image: "images/equipment/er-tong-vcp.jpg", caption: "二铜VCP" },
+          { image: "images/equipment/er-tong-vcp-2.jpg", caption: "二铜VCP 2" },
+          { image: "images/equipment/er-tong-vcp-3.jpg", caption: "二铜VCP 3" },
+          { image: "images/equipment/er-tong-longmen.jpg", caption: "二铜龙门线" },
+          { image: "images/equipment/hua-jin-pretreat.jpg", caption: "化金前处理" },
+          { image: "images/equipment/chen-tong.jpg", caption: "沉铜线" },
+          { image: "images/equipment/vacuum-etch.jpg", caption: "真空蚀刻机" },
+          { image: "images/equipment/vacuum-etch-2.jpg", caption: "真空蚀刻机 2" },
+          { image: "images/equipment/auto-pulse.jpg", caption: "自动脉冲线" },
+          { image: "images/equipment/auto-longmen.jpg", caption: "自动龙门线" }
+        ]
       },
       industry_detail: {
         network: "网络通信",
@@ -171,7 +185,7 @@ const DEFAULT_CONFIG = {
         contact_desc: "For any inquiries, please find your nearest office via 'Service Locations' or use the 'Online Message' form to get in touch with us."
       },
       dropdown: {
-        about: ["Company Profile", "Process Capability", "Management System", "Honors", "Organization", "Quality Assurance"],
+        about: ["Company Profile", "Process Capability", "Management System", "Honors", "Organization", "Quality Assurance", "Equipment"],
         products: {
           "Fields Served": ["Telecom & Networking", "Automotive Electronics", "Smart Devices", "Industrial & Medical", "Power Supply", "Consumer Electronics"]
         },
@@ -180,7 +194,7 @@ const DEFAULT_CONFIG = {
         contact: ["Service Locations", "Online Message"]
       },
       footerLinks: {
-        about: { title: "About", items: ["Company Profile", "Process Capability", "Management System", "Honors", "Organization", "Quality Assurance"] },
+        about: { title: "About", items: ["Company Profile", "Process Capability", "Management System", "Honors", "Organization", "Quality Assurance", "Equipment"] },
         products: {
           "Fields Served": ["Telecom & Networking", "Automotive Electronics", "Smart Devices", "Industrial & Medical", "Power Supply", "Consumer Electronics"]
         },
@@ -216,7 +230,21 @@ const DEFAULT_CONFIG = {
         structure: "Organization",
         structure_text: "Departments: Marketing, R&D, Manufacturing, QC, Supply Chain, Overseas.",
         quality: "Quality Assurance",
-        quality_text: "From IQC to reliability test, SPC monitoring. Equipped with AOI, flying probe, X-ray, microscope."
+        quality_text: "From IQC to reliability test, SPC monitoring. Equipped with AOI, flying probe, X-ray, microscope.",
+        equipment: "Equipment",
+        equipment_list: [
+          { image: "images/equipment/yi-tong-vcp.jpg", caption: "First Copper VCP" },
+          { image: "images/equipment/er-tong-vcp.jpg", caption: "Second Copper VCP" },
+          { image: "images/equipment/er-tong-vcp-2.jpg", caption: "Second Copper VCP 2" },
+          { image: "images/equipment/er-tong-vcp-3.jpg", caption: "Second Copper VCP 3" },
+          { image: "images/equipment/er-tong-longmen.jpg", caption: "Second Copper Gantry Line" },
+          { image: "images/equipment/hua-jin-pretreat.jpg", caption: "Gold Flash Pretreatment" },
+          { image: "images/equipment/chen-tong.jpg", caption: "Copper Deposition Line" },
+          { image: "images/equipment/vacuum-etch.jpg", caption: "Vacuum Etching Machine" },
+          { image: "images/equipment/vacuum-etch-2.jpg", caption: "Vacuum Etching Machine 2" },
+          { image: "images/equipment/auto-pulse.jpg", caption: "Automatic Pulse Line" },
+          { image: "images/equipment/auto-longmen.jpg", caption: "Automatic Gantry Line" }
+        ]
       },
       industry_detail: {
         network: "Telecom & Networking",

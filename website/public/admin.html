@@ -680,7 +680,21 @@
                         structure_text: "设有市场中心、研发中心、制造中心、品控中心、供应链管理部及海外事业部。",
                         quality: "品质保证",
                         quality_text: "从IQC进料检验到成品可靠性测试，全程SPC监控，配备AOI、飞针测试、X-ray、显微镜等先进设备。",
-                        video_url: "videos/company.mp4"
+                        video_url: "videos/company.mp4",
+                        equipment: "设备展示",
+                        equipment_list: [
+                            { image: "images/equipment/yi-tong-vcp.jpg", caption: "一铜VCP" },
+                            { image: "images/equipment/er-tong-vcp.jpg", caption: "二铜VCP" },
+                            { image: "images/equipment/er-tong-vcp-2.jpg", caption: "二铜VCP 2" },
+                            { image: "images/equipment/er-tong-vcp-3.jpg", caption: "二铜VCP 3" },
+                            { image: "images/equipment/er-tong-longmen.jpg", caption: "二铜龙门线" },
+                            { image: "images/equipment/hua-jin-pretreat.jpg", caption: "化金前处理" },
+                            { image: "images/equipment/chen-tong.jpg", caption: "沉铜线" },
+                            { image: "images/equipment/vacuum-etch.jpg", caption: "真空蚀刻机" },
+                            { image: "images/equipment/vacuum-etch-2.jpg", caption: "真空蚀刻机 2" },
+                            { image: "images/equipment/auto-pulse.jpg", caption: "自动脉冲线" },
+                            { image: "images/equipment/auto-longmen.jpg", caption: "自动龙门线" }
+                        ]
                     },
                     industry_detail: {
                         network: "网络通信",
@@ -802,7 +816,21 @@
                         structure_text: "Departments: Marketing, R&D, Manufacturing, QC, Supply Chain, Overseas.",
                         quality: "Quality Assurance",
                         quality_text: "From IQC to reliability test, SPC monitoring. Equipped with AOI, flying probe, X-ray, microscope.",
-                        video_url: "videos/company.mp4"
+                        video_url: "videos/company.mp4",
+                        equipment: "Equipment",
+                        equipment_list: [
+                            { image: "images/equipment/yi-tong-vcp.jpg", caption: "First Copper VCP" },
+                            { image: "images/equipment/er-tong-vcp.jpg", caption: "Second Copper VCP" },
+                            { image: "images/equipment/er-tong-vcp-2.jpg", caption: "Second Copper VCP 2" },
+                            { image: "images/equipment/er-tong-vcp-3.jpg", caption: "Second Copper VCP 3" },
+                            { image: "images/equipment/er-tong-longmen.jpg", caption: "Second Copper Gantry Line" },
+                            { image: "images/equipment/hua-jin-pretreat.jpg", caption: "Gold Flash Pretreatment" },
+                            { image: "images/equipment/chen-tong.jpg", caption: "Copper Deposition Line" },
+                            { image: "images/equipment/vacuum-etch.jpg", caption: "Vacuum Etching Machine" },
+                            { image: "images/equipment/vacuum-etch-2.jpg", caption: "Vacuum Etching Machine 2" },
+                            { image: "images/equipment/auto-pulse.jpg", caption: "Automatic Pulse Line" },
+                            { image: "images/equipment/auto-longmen.jpg", caption: "Automatic Gantry Line" }
+                        ]
                     },
                     industry_detail: {
                         network: "Telecom & Networking",
@@ -1119,6 +1147,8 @@
             html += input('about_detail.quality_text', '品质保证内容', 3);
             // 关键数据看板（结构化卡片，可增删）
             html += `<div class="form-group"><label>关键数据看板（卡片，可增删）</label><div class="office-edit-list" id="stats-edit-list"></div><button type="button" class="spec-add" id="stats-add">+ 添加数据</button></div>`;
+            // 设备展示（图片 + 说明）
+            html += `<div class="form-group"><label>设备展示（图片路径 + 说明，可增删）</label><div class="office-edit-list" id="equipment-edit-list"></div><button type="button" class="spec-add" id="equipment-add">+ 添加设备</button></div>`;
             html += `</div>`;
 
             // ---- 涉及领域（原行业市场） ----
@@ -1338,6 +1368,37 @@
                 if (statsAdd) statsAdd.addEventListener('click', () => {
                     statsListEl.appendChild(buildStatCard({ value: '', label: '' }));
                     rebuildStats();
+                });
+            }
+
+            // 设备展示：结构化卡片编辑
+            function rebuildEquipment() {
+                const list = [];
+                container.querySelectorAll('.equipment-edit-card').forEach(card => {
+                    const image = card.querySelector('[data-ef="image"]').value.trim();
+                    const caption = card.querySelector('[data-ef="caption"]').value.trim();
+                    if (image || caption) list.push({ image, caption });
+                });
+                setNested(config.langText[lang], 'about_detail.equipment_list', list);
+            }
+            function buildEquipmentCard(it) {
+                const card = document.createElement('div');
+                card.className = 'equipment-edit-card';
+                card.innerHTML = `
+                    <div class="office-edit-head"><strong>设备</strong><button type="button" class="spec-del">删除</button></div>
+                    <input type="text" data-ef="image" placeholder="图片路径（images/equipment/xxx.jpg 或完整URL）" value="${escapeHtml(it.image || '')}">
+                    <input type="text" data-ef="caption" placeholder="说明文字（如：一铜VCP）" value="${escapeHtml(it.caption || '')}">`;
+                card.addEventListener('input', rebuildEquipment);
+                card.querySelector('.spec-del').addEventListener('click', () => { card.remove(); rebuildEquipment(); });
+                return card;
+            }
+            const equipmentListEl = container.querySelector('#equipment-edit-list');
+            if (equipmentListEl) {
+                (config.langText[lang].about_detail?.equipment_list || []).forEach(it => equipmentListEl.appendChild(buildEquipmentCard(it)));
+                const equipmentAdd = container.querySelector('#equipment-add');
+                if (equipmentAdd) equipmentAdd.addEventListener('click', () => {
+                    equipmentListEl.appendChild(buildEquipmentCard({ image: '', caption: '' }));
+                    rebuildEquipment();
                 });
             }
 

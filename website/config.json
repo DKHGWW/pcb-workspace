@@ -34,7 +34,8 @@
           "管理体系",
           "井明荣誉",
           "组织架构",
-          "品质保证"
+          "品质保证",
+          "设备展示"
         ],
         "products": {
           "涉及领域": [
@@ -67,7 +68,8 @@
             "管理体系",
             "井明荣誉",
             "组织架构",
-            "品质保证"
+            "品质保证",
+            "设备展示"
           ]
         },
         "products": {
@@ -176,7 +178,21 @@
         "structure_text": "设有市场中心、研发中心、制造中心、品控中心、供应链管理部及海外事业部。",
         "quality": "品质保证",
         "quality_text": "从IQC进料检验到成品可靠性测试，全程SPC监控，配备AOI、飞针测试、X-ray、显微镜等先进设备。",
-        "video_url": "videos/company.mp4"
+        "video_url": "videos/company.mp4",
+        "equipment": "设备展示",
+        "equipment_list": [
+          { "image": "images/equipment/yi-tong-vcp.jpg", "caption": "一铜VCP" },
+          { "image": "images/equipment/er-tong-vcp.jpg", "caption": "二铜VCP" },
+          { "image": "images/equipment/er-tong-vcp-2.jpg", "caption": "二铜VCP 2" },
+          { "image": "images/equipment/er-tong-vcp-3.jpg", "caption": "二铜VCP 3" },
+          { "image": "images/equipment/er-tong-longmen.jpg", "caption": "二铜龙门线" },
+          { "image": "images/equipment/hua-jin-pretreat.jpg", "caption": "化金前处理" },
+          { "image": "images/equipment/chen-tong.jpg", "caption": "沉铜线" },
+          { "image": "images/equipment/vacuum-etch.jpg", "caption": "真空蚀刻机" },
+          { "image": "images/equipment/vacuum-etch-2.jpg", "caption": "真空蚀刻机 2" },
+          { "image": "images/equipment/auto-pulse.jpg", "caption": "自动脉冲线" },
+          { "image": "images/equipment/auto-longmen.jpg", "caption": "自动龙门线" }
+        ]
       },
       "industry_detail": {
         "network": "网络通信",
@@ -405,7 +421,8 @@
           "Management System",
           "Honors",
           "Organization",
-          "Quality Assurance"
+          "Quality Assurance",
+          "Equipment"
         ],
         "products": {
           "Fields Served": [
@@ -438,7 +455,8 @@
             "Management System",
             "Honors",
             "Organization",
-            "Quality Assurance"
+            "Quality Assurance",
+            "Equipment"
           ]
         },
         "products": {
@@ -547,7 +565,21 @@
         "structure_text": "Departments: Marketing, R&D, Manufacturing, QC, Supply Chain, Overseas.",
         "quality": "Quality Assurance",
         "quality_text": "From IQC to reliability test, SPC monitoring. Equipped with AOI, flying probe, X-ray, microscope.",
-        "video_url": "videos/company.mp4"
+        "video_url": "videos/company.mp4",
+        "equipment": "Equipment",
+        "equipment_list": [
+          { "image": "images/equipment/yi-tong-vcp.jpg", "caption": "First Copper VCP" },
+          { "image": "images/equipment/er-tong-vcp.jpg", "caption": "Second Copper VCP" },
+          { "image": "images/equipment/er-tong-vcp-2.jpg", "caption": "Second Copper VCP 2" },
+          { "image": "images/equipment/er-tong-vcp-3.jpg", "caption": "Second Copper VCP 3" },
+          { "image": "images/equipment/er-tong-longmen.jpg", "caption": "Second Copper Gantry Line" },
+          { "image": "images/equipment/hua-jin-pretreat.jpg", "caption": "Gold Flash Pretreatment" },
+          { "image": "images/equipment/chen-tong.jpg", "caption": "Copper Deposition Line" },
+          { "image": "images/equipment/vacuum-etch.jpg", "caption": "Vacuum Etching Machine" },
+          { "image": "images/equipment/vacuum-etch-2.jpg", "caption": "Vacuum Etching Machine 2" },
+          { "image": "images/equipment/auto-pulse.jpg", "caption": "Automatic Pulse Line" },
+          { "image": "images/equipment/auto-longmen.jpg", "caption": "Automatic Gantry Line" }
+        ]
       },
       "industry_detail": {
         "network": "Telecom & Networking",
